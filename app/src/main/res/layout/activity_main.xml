@@ -1,0 +1,291 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/active"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/white2"
+    android:gravity="center" >
+
+    <TextView
+        android:id="@+id/textViewDescrActState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:text="@string/actual"
+        android:textSize="30dp" />
+    
+    <TextView
+        android:id="@+id/textViewActState"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewDescrActState"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="22dp"
+        android:text="@string/ActStateValue"
+        android:textSize="20dp" />
+        <Button
+        android:id="@+id/buttonActStateStartStop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewActState"
+        android:layout_marginLeft="85dp"
+        android:layout_marginTop="10dp"
+        android:onClick="buttonActStateStartStopClicked"
+        android:text="@string/ButtonActStateStartStopDescr" />
+    
+    <Button
+        android:id="@+id/REC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewActState"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@id/buttonActStateStartStop"
+        android:text="@string/RECORD"
+        android:onClick="recording" />
+
+       <TextView
+        android:id="@+id/textViewDescrHeartRate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textViewDescrRotZ"
+        android:layout_marginLeft="175dp"
+        android:layout_marginTop="10dp"
+        android:text="HRate: " />
+  
+    <TextView
+        android:id="@+id/textViewHeartRate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewDescrAccZ"
+        android:layout_marginLeft="2dp"
+        android:layout_marginTop="10dp"
+        android:layout_toRightOf="@+id/textViewDescrHeartRate"
+        android:text="0.0" />
+    
+       
+    <TextView
+        android:id="@+id/textViewDescrAccX"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/buttonActStateStartStop"
+        android:layout_marginLeft="175dp"
+        android:layout_marginTop="48dp"
+        android:text="ACC_X: " />
+
+    <TextView
+        android:id="@+id/textViewDescrAccY"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textViewDescrAccX"
+        android:layout_marginLeft="175dp"
+        android:layout_marginTop="2dp"
+        android:text="ACC_Y: " />
+    
+    <TextView
+        android:id="@+id/textViewDescrAccZ"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textViewDescrAccY"
+        android:layout_marginLeft="175dp"
+        android:layout_marginTop="2dp"
+        android:text="ACC_Z: " />
+    
+  	<TextView
+        android:id="@+id/textViewAccX"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textViewDescrAccY"
+        android:layout_marginLeft="2dp"
+        android:layout_toRightOf="@+id/textViewDescrAccX"
+        android:text="0.0" />
+  	
+    <TextView
+        android:id="@+id/textViewAccY"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textViewDescrAccY"
+        android:layout_alignBottom="@+id/textViewDescrAccY"
+        android:layout_marginLeft="2dp"
+        android:layout_toRightOf="@+id/textViewDescrAccY"
+        android:text="0.0" />
+
+    <TextView
+        android:id="@+id/textViewAccZ"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textViewDescrAccZ"
+        android:layout_alignBottom="@+id/textViewDescrAccZ"
+        android:layout_marginLeft="2dp"
+        android:layout_toRightOf="@+id/textViewDescrAccZ"
+        android:text="0.0" />
+
+    <TextView
+        android:id="@+id/textViewDescrGPSAlt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textViewDescrAccZ"
+        android:layout_marginLeft="21dp"
+        android:layout_marginTop="10dp"
+        android:text="GPS-Alt: " />
+        <TextView
+        android:id="@+id/textViewGPSAlt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textViewDescrGPSAlt"
+        android:layout_alignBottom="@+id/textViewDescrGPSAlt"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/textViewDescrGPSAlt"
+        android:text="0.0" />
+    
+    <TextView
+        android:id="@+id/textViewDescrGPSLon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textViewDescrGPSAlt"
+        android:layout_marginLeft="21dp"
+        android:layout_marginTop="2dp"
+        android:text="GPS-Lon: " />
+    
+    <TextView
+        android:id="@+id/textViewGPSLon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textViewDescrGPSLon"
+        android:layout_alignBottom="@+id/textViewDescrGPSLon"
+        android:layout_marginLeft="2dp"
+        android:layout_toRightOf="@+id/textViewDescrGPSLon"
+        android:text="0.0" />
+    
+    <TextView
+        android:id="@+id/textViewDescrGPSLat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textViewDescrGPSLon"
+        android:layout_marginLeft="21dp"
+        android:layout_marginTop="2dp"
+        android:text="GPS-Lat: " />
+    
+    <TextView
+        android:id="@+id/textViewGPSLat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textViewDescrGPSLat"
+        android:layout_alignBottom="@+id/textViewDescrGPSLat"
+        android:layout_marginLeft="2dp"
+        android:layout_toRightOf="@+id/textViewDescrGPSLat"
+        android:text="0.0" />
+    
+     <TextView
+        android:id="@+id/textViewDescrMicMaxAmpl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textViewDescrGPSLat"
+        android:layout_marginLeft="21dp"
+        android:layout_marginTop="10dp"
+        android:text="Mic-Max-Amplitude: " />
+    
+    <TextView
+        android:id="@+id/textViewMicMaxAmpl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textViewDescrMicMaxAmpl"
+        android:layout_alignBottom="@+id/textViewDescrMicMaxAmpl"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/textViewDescrMicMaxAmpl"
+        android:text="0.0" />
+    
+     <TextView
+         android:id="@+id/textViewRotX"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignBaseline="@+id/textViewDescrRotX"
+         android:layout_alignBottom="@+id/textViewDescrRotX"
+         android:layout_alignRight="@+id/textViewRotY"
+         android:layout_marginLeft="2dp"
+         android:layout_marginTop="48dp"
+         android:layout_toRightOf="@+id/textViewDescrRotX"
+         android:text="0.0 " />
+
+    <TextView
+        android:id="@+id/textViewDescrRotX"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/textViewDescrRotY"
+        android:layout_below="@+id/buttonActStateStartStop"
+        android:layout_marginLeft="21dp"
+        android:layout_marginTop="48dp"
+        android:text="ROTX: " />
+    
+    <TextView
+        android:id="@+id/textViewRotY"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textViewDescrRotY"
+        android:layout_alignBottom="@+id/textViewDescrRotY"
+        android:layout_alignRight="@+id/textViewAccX"
+        android:layout_marginLeft="2dp"
+        android:layout_toRightOf="@+id/textViewDescrRotY"
+        android:text="0.0 " />
+
+    <TextView
+        android:id="@+id/textViewDescrRotY"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textViewDescrRotX"
+        android:layout_marginLeft="21dp"
+        android:layout_marginTop="2dp"
+        android:text="ROTY: " />
+
+    <TextView
+        android:id="@+id/textViewRotZ"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textViewDescrRotZ"
+        android:layout_alignBottom="@+id/textViewDescrRotZ"
+        android:layout_marginLeft="2dp"
+        android:layout_toRightOf="@+id/textViewDescrRotZ"
+        android:text="0.0 " />
+
+    <TextView
+        android:id="@+id/textViewDescrRotZ"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textViewDescrRotY"
+        android:layout_marginLeft="21dp"
+        android:layout_marginTop="2dp"
+        android:text="ROTZ: " />
+
+     
+    
+    <FrameLayout
+        android:id="@+id/frame"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true" >
+
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/change"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:onClick="changeMode"
+        android:text="@string/buttonChange" />
+
+</RelativeLayout>

@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">MMA-edu</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">MMA-edu</string>
+    <string name="Mail">Send File</string>
+    <string name="textCap">Press the button to send the data via E-Mail</string>
+    <string name="ActStateDescr">Active State</string>
+    <string name="CapturedStatesDescr">Captured States</string>
+    <string name="ActStateValue">UNKNOWN</string>
+    <string name="ButtonActStateStartStopDescr">Start</string>
+	<string name="actual">Actual State</string>
+	<string name ="buttonChange">Change Mode</string>
+	<string name ="refresh">Refresh List</string>
+	<string name = "RECORD">REC</string>
+	<string name="DrawStatesDescr">Draw State</string>
+</resources>
