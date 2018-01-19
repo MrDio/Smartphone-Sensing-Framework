@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">RapidDisruption</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="button">Start</string>
+    <string name="title_activity_accelerometer">accelerometer</string>
+</resources>
