@@ -1,5 +1,5 @@
 # Smartphone-Sensing-Framework 2.0
-Sensing Framework for android smartphones developed by D. Satikidis and used for academic lectures.
+Sensing Framework for android smartphones developed by D. Satikidis and D. Lagamtzis used for academic lectures.
 
 ## Documentation
 [Wiki] Put link here
