@@ -202,8 +202,6 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         });
         //Buttons & Toggle Buttons
 
-
-        stateMachineHandler=new StateMachineHandler(this);
     }
 
     @Override
@@ -214,6 +212,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // Hardware
                     hw = new HardwareFactory(this);
+                    stateMachineHandler=new StateMachineHandler(this);
                 } else {
                 }
         }
