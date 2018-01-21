@@ -200,11 +200,6 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         });
         //Buttons & Toggle Buttons
 
-<<<<<<< HEAD:app/src/main/java/edu/example/ssf/mma/MainActivity.java
-
-
-=======
->>>>>>> d027383b4890cd0ddb7ba5e3422ae8033342db6d:app/src/main/java/com/example/ldg8fe/rapiddisruption/MainActivity.java
     }
 
     @Override
