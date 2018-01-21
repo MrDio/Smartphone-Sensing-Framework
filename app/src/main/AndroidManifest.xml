@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.ldg8fe.rapiddisruption">
+    package="edu.example.ssf.mma">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
@@ -17,15 +17,15 @@
         android:theme="@style/AppTheme"
         >
 
-        <activity android:name=".MainActivity">
+        <activity android:name="edu.example.ssf.mma.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".userInterface.ListFileActivity" > </activity>
-        <activity android:name=".charts.AccChart" > </activity>
+        <activity android:name="edu.example.ssf.mma.userInterface.ListFileActivity" > </activity>
+        <activity android:name="edu.example.ssf.mma.charts.AccChart" > </activity>
 
     </application>
 
