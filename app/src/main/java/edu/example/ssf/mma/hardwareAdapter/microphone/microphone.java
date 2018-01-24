@@ -38,6 +38,9 @@ public class microphone extends Activity implements IMicrophone {
     private File audiofile = null;
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd_hh_mm_ss");
 
+    protected Double maxAmplitude = 0.0d;
+
+
     /**
      * 	create the new media recorder in order to record the audio.
      */
@@ -115,7 +118,8 @@ public class microphone extends Activity implements IMicrophone {
                         @Override
                         public void run() {
                             if(isRecording){
-                                CurrentTickData.micMaxAmpl = MathCalculations.getDB(mediaRecorder.getMaxAmplitude());
+                                maxAmplitude = MathCalculations.getDB(mediaRecorder.getMaxAmplitude());
+                                CurrentTickData.micMaxAmpl = maxAmplitude;
                                 Log.d("AmpliMax", CurrentTickData.micMaxAmpl+ "");
                             }
                         }
@@ -152,17 +156,11 @@ public class microphone extends Activity implements IMicrophone {
 
     }
 
-    @Override
-    public void micUI(int v1, TextView... tvs) {
-        /** TODO with function getMaxAmplitude
-         *
-         * */
-        tvs[0].setText("Max Amplitude : " + String.format("%.2f", v1));
-    }
+
 
     @Override
     public Double getMaxAmplitude() {
-        return null;
+        return this.maxAmplitude;
     }
 
 }

@@ -58,8 +58,5 @@ public class microSim implements IMicrophone {
 
     }
 
-    @Override
-    public void micUI(int v1, TextView... tvs) {
-        tvs[0].setText("Max Amplitude : " + String.format("%.2f", v1));
-    }
+
 }

@@ -24,6 +24,9 @@ public class proximity implements SensorEventListener, IProximity {
     private Sensor proxi;
     private static final int SENSOR_SENSITIVITY = 4;
 
+    private Float x = 0.0f;
+    private String proxState = " ";
+
     public proximity(){}
 
     public proximity(Context context) {
@@ -46,30 +49,28 @@ public class proximity implements SensorEventListener, IProximity {
             //getProximity(event);
             if (event.values[0] >= -SENSOR_SENSITIVITY && event.values[0] <= SENSOR_SENSITIVITY) {
                 //near
-                CurrentTickData.proxState = "near";
-                //CurrentTickData.proximity = event.values[0];
+                this.proxState = "near";
+                CurrentTickData.proxState = this.proxState;
             } else {
                 //far
-                CurrentTickData.proxState = "far";
-                //CurrentTickData.proximity = event.values[0];
+                this.proxState = "far";
+                CurrentTickData.proxState = this.proxState;
             }
-            long actualTime = System.currentTimeMillis();
-            CurrentTickData.curTimestamp = MathCalculations.convertDate(actualTime,"hh:mm:ss:SSS");
+
         }
 
     }
 
     private void getProximity(SensorEvent event) {
 
+        /** Not in use
+         * works only with mobile phones supporting distance proximity!!!
+         * thatfor no getter --> use proxState or write a function same pattern
+         * */
 
-        float x = event.values[0];
-
-        long actualTime = event.timestamp;
+        this.x = event.values[0];
 
 
-        CurrentTickData.proximity = x;
-        CurrentTickData.curTimestamp = actualTime + "";
-        Log.d("ProximitxVal",CurrentTickData.proximity +"");
     }
 
     @Override
@@ -91,7 +92,7 @@ public class proximity implements SensorEventListener, IProximity {
 
     @Override
     public String getProximity() {
-        return null;
+        return this.proxState;
     }
 
 

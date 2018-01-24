@@ -93,11 +93,4 @@ public class accelerometerSim implements IAccelerometer {
 
 	}
 
-	@Override
-	public void accUI(double v1, double v2, double v3, double v4, TextView... tvs) {
-		tvs[0].setText("X: " + String.format("%.2f", v1));
-		tvs[1].setText("Y: " + String.format("%.2f", v2));
-		tvs[2].setText("Z: " + String.format("%.2f", v3));
-		tvs[3].setText("AccV: " + String.format("%.2f", v4));
-	}
 }

@@ -84,11 +84,5 @@ public class gyroSim implements IGyroscope {
 
 	}
 
-	@Override
-	public void gyroUI(float v1, float v2, float v3, TextView... tvs) {
-		tvs[0].setText("Rot. X: " + String.format("%.2f", v1));
-		tvs[1].setText("Rot. Y: " + String.format("%.2f", v2));
-		tvs[2].setText("Rot. Z: " + String.format("%.2f", v3));
-	}
 
 }

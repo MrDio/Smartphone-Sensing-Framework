@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://C:\Users\iCoac\Smartphone-Sensing-Framework\SSF2.0.iml" filepath="C:\Users\iCoac\Smartphone-Sensing-Framework\SSF2.0.iml" />
       <module fileurl="file://$PROJECT_DIR$/Smartphone-Sensing-Framework.iml" filepath="$PROJECT_DIR$/Smartphone-Sensing-Framework.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>

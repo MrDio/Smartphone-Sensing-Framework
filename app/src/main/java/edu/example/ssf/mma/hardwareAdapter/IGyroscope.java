@@ -33,15 +33,14 @@ public interface IGyroscope {
 	/**
 	 * Initialise the accelerometer.
 	 */
-	public void initGyro(Context context);
+	 void initGyro(Context context);
 
-	public void start();
-	public void stop();
+	 void start();
+	 void stop();
 
-	public void gyroUI(float v1, float v2, float v3, TextView... tvs);
-	public Float getRotX();
+	 Float getRotX();
 
-	public Float getRotY();
+	 Float getRotY();
 
-	public Float getRotZ();
+	 Float getRotZ();
 }

@@ -85,12 +85,6 @@ public class magnetoSim implements IMagneto {
 
 	}
 
-	@Override
-	public void magnUI(float v1, float v2, float v3, TextView... tvs) {
-		tvs[0].setText("Magn. X: " + String.format("%.2f", v1));
-		tvs[1].setText("Magn. Y: " + String.format("%.2f", v2));
-		tvs[2].setText("Magn. Z: " + String.format("%.2f", v3));
-	}
 
 
 }

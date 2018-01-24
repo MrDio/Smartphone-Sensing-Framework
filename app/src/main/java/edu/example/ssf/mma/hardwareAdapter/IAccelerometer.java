@@ -33,14 +33,13 @@ public interface IAccelerometer {
 	/**
 	 * Initialise the accelerometer.
 	 */
-	public void initAccelerometer(Context context);
+	 void initAccelerometer(Context context);
 
-	public void start();
-	public void stop();
+	 void start();
+	 void stop();
 
-	public void accUI(double v1, double v2, double v3, double v4,TextView... tvs);
-	public Float getAccX();
-	public Float getAccY();
-	public Float getAccZ();
-	public Double getAccA();
+	 Float getAccX();
+	 Float getAccY();
+	 Float getAccZ();
+	 Double getAccA();
 }

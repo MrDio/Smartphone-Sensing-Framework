@@ -23,6 +23,10 @@ public class gyro implements SensorEventListener, IGyroscope {
     private SensorManager sensorManager;
     private Sensor gyr;
 
+    private Float x = 0.0f;
+    private Float y = 0.0f;
+    private Float z = 0.0f;
+
     public gyro(){}
 
     public gyro(Context context) {
@@ -52,15 +56,14 @@ public class gyro implements SensorEventListener, IGyroscope {
 
         float[] values = event.values;
         // Movement
-        float x = values[0];
-        float y = values[1];
-        float z = values[2];
+        this.x = values[0];
+        this.y = values[1];
+        this.z = values[2];
 
-        CurrentTickData.rotationX = x;
-        CurrentTickData.rotationY = y;
-        CurrentTickData.rotationZ = z;
-        long actualTime = System.currentTimeMillis();
-        CurrentTickData.curTimestamp = MathCalculations.convertDate(actualTime,"hh:mm:ss:SSS");
+        CurrentTickData.rotationX = this.x;
+        CurrentTickData.rotationY = this.y;
+        CurrentTickData.rotationZ = this.z;
+
         Log.d("GyroVal",CurrentTickData.rotationX +"");
     }
 
@@ -76,27 +79,20 @@ public class gyro implements SensorEventListener, IGyroscope {
         gyr = sensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
     }
 
-    @Override
-    public void gyroUI(float v1, float v2, float v3, TextView... tvs){
-        Log.d("gyro","gyro");
-        tvs[0].setText("Rot. X: " + String.format("%.2f", v1));
-        tvs[1].setText("Rot. Y: " + String.format("%.2f", v2));
-        tvs[2].setText("Rot. Z: " + String.format("%.2f", v3));
-    }
 
     @Override
     public Float getRotX() {
-        return null;
+        return this.x;
     }
 
     @Override
     public Float getRotY() {
-        return null;
+        return this.y;
     }
 
     @Override
     public Float getRotZ() {
-        return null;
+        return this.z;
     }
 
 }

@@ -105,12 +105,4 @@ public class gpsSim implements IGPS {
 
 	}
 
-	@Override
-	public void gpsUI(double v1, double v2, double v3, float v4, float v5, TextView... tvs) {
-		tvs[0].setText("GPS Alt: " + String.format("%.2f", v1));
-		tvs[1].setText("GPS Lat: " + String.format("%.6f", v2));
-		tvs[2].setText("GPS Lon: "  + String.format("%.6f", v3));
-		tvs[3].setText("GPS Bear: " + String.format("%.2f", v4));
-		tvs[4].setText("GPS Speed: " + String.format("%.2f", v5));
-	}
 }

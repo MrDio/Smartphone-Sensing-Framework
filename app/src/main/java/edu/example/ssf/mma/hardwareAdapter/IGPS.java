@@ -33,20 +33,18 @@ public interface IGPS {
 	/**
 	 * Initialise the accelerometer.
 	 */
-	public void initGPS(Context context);
+	 void initGPS(Context context);
 
-	public void start();
-	public void stop();
+	 void start();
+	 void stop();
 
-	public void gpsUI(double v1,double v2,double v3,float v4, float v5,TextView... tvs);
+	 Double getAltitude();
+	 Double getLatitude();
 
-	public Double getAltitude();
-	public Double getLatitude();
+	 Double getLongitude();
 
-	public Double getLongitude();
-
-	public Float getBearing();
+	 Float getBearing();
 
 
-	public Float getSpeed();
+	 Float getSpeed();
 }

@@ -33,17 +33,15 @@ public interface IMagneto {
 	/**
 	 * Initialise the accelerometer.
 	 */
-	public void initMagneto(Context context);
+	 void initMagneto(Context context);
 
-	public void start();
-	public void stop();
+	 void start();
+	 void stop();
 
-	public void magnUI(float v1, float v2, float v3, TextView... tvs);
+	 Float getMagnetoX();
 
-	public Float getMagnetoX();
+	 Float getMagnetoY();
 
-	public Float getMagnetoY();
-
-	public Float getMagnetoZ();
+	 Float getMagnetoZ();
 
 }

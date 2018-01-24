@@ -46,7 +46,16 @@ public class gps extends AppCompatActivity implements LocationListener, IGPS {
 
 	private Location location;
 	private LocationManager locationManager;
-	private static final String TAG = "BOOMBOOMTESTGPS";
+
+	//GPS Sensor Data
+	private  Double GPSalt = 0.0d;
+	private  Double GPSlat = 0.0d;
+	private  Double GPSlon = 0.0d;
+	private  Float GPSbearing = 0.0f;
+	private  Float GPSspeed = 0.0f;
+
+
+
 	// The minimum distance to change Updates in meters
 	private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
 
@@ -96,8 +105,7 @@ public class gps extends AppCompatActivity implements LocationListener, IGPS {
 				onLocationChanged(location);
 			} else {
 				getGPS(location);
-				long actualTime = System.currentTimeMillis();
-				CurrentTickData.curTimestamp = MathCalculations.convertDate(actualTime,"hh:mm:ss:SSS");
+
 			}
 		}catch (Exception e){
 			e.printStackTrace();
@@ -139,50 +147,38 @@ public class gps extends AppCompatActivity implements LocationListener, IGPS {
 	}
 
 
-	@Override
-	public void gpsUI(double v1, double v2, double v3, float v4, float v5,TextView... tvs){
-		tvs[0].setText("GPS Alt: " + String.format("%.2f", v1));
-		tvs[1].setText("GPS Lat: " + String.format("%.6f", v2));
-		tvs[2].setText("GPS Lon: "  + String.format("%.6f", v3));
-		tvs[3].setText("GPS Bear: " + String.format("%.2f", v4));
-		tvs[4].setText("GPS Speed: " + String.format("%.2f", v5));
-
-	}
 
 	@Override
 	public Double getAltitude() {
-		return null;
+		return this.GPSalt;
 	}
 
 	@Override
 	public Double getLatitude() {
-		return null;
-	}
+		return this.GPSlat;	}
 
 	@Override
 	public Double getLongitude() {
-		return null;
+		return this.GPSlon;
 	}
 
 	@Override
 	public Float getBearing() {
-		return null;
-	}
+		return this.GPSbearing;	}
 
 	@Override
 	public Float getSpeed() {
-		return null;
+		return this.GPSspeed;
 	}
 
 	private void getGPS(Location location){
 
 		location.set(location);
-		CurrentTickData.GPSalt = location.getAltitude();
-		CurrentTickData.GPSbearing = location.getBearing();
-		CurrentTickData.GPSlat = location.getLatitude();
-		CurrentTickData.GPSlon = location.getLongitude();
-		CurrentTickData.GPSspeed = location.getSpeed();
-		CurrentTickData.curTimestamp = location.getTime() +"";
+		this.GPSalt = location.getAltitude();
+		this.GPSbearing = location.getBearing();
+		this.GPSlat = location.getLatitude();
+		this.GPSlon = location.getLongitude();
+		this.GPSspeed = location.getSpeed();
 	}
 
 }

@@ -26,6 +26,11 @@ public class accelerometer implements SensorEventListener, IAccelerometer {
     private SensorManager sensorManager;
     private Sensor acc;
 
+    private Float x = 0.0f;
+    private Float y = 0.0f;
+    private Float z = 0.0f;
+    private Double accelationSquareRoot = 0.0d;
+
     public accelerometer(){}
 
     public accelerometer(Context context) {
@@ -69,8 +74,6 @@ public class accelerometer implements SensorEventListener, IAccelerometer {
         CurrentTickData.accZ = z;
         CurrentTickData.accVecA = accelationSquareRoot;
 
-        long actualTime = System.currentTimeMillis();
-        CurrentTickData.curTimestamp = MathCalculations.convertDate(actualTime,"hh:mm:ss:SSS");
         Log.d("AccValues",CurrentTickData.accVecA +"");
 
 
@@ -88,31 +91,24 @@ public class accelerometer implements SensorEventListener, IAccelerometer {
         acc = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
     }
 
-    @Override
-    public void accUI(double v1, double v2, double v3, double v4,TextView... tvs){
-        tvs[0].setText("X: " + String.format("%.2f", v1));
-        tvs[1].setText("Y: " + String.format("%.2f", v2));
-        tvs[2].setText("Z: " + String.format("%.2f", v3));
-        tvs[3].setText("AccV: " + String.format("%.2f", v4));
-    }
 
     @Override
     public Float getAccX() {
-        return null;
+        return this.x;
     }
 
     @Override
     public Float getAccY() {
-        return null;
+        return this.y;
     }
 
     @Override
     public Float getAccZ() {
-        return null;
+        return this.z;
     }
 
     @Override
     public Double getAccA() {
-        return null;
+        return this.accelationSquareRoot;
     }
 }

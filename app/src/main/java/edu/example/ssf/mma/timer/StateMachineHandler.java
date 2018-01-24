@@ -132,8 +132,8 @@ public class StateMachineHandler extends Handler{
 
 
 
-		if(MainActivity.checked) {
-			Log.d("getAccX", "StateMachineHandler.MainActivity.checked");
+		if(MainActivity.mmaCallBackBool) {
+			Log.d("getAccX", "StateMachineHandler.MainActivity.mmaCallBackBool");
 				if(ConfigApp.isSimulation){
 					//Fetch data from acceleration sensor
 
@@ -150,7 +150,7 @@ public class StateMachineHandler extends Handler{
 					CurrentTickData.GPSspeed=this.gps.getSpeed();
 
 					//Fetch data from microphone
-					CurrentTickData.micMaxAmpl=(double)microphone.getMaxAmplitude();
+					CurrentTickData.micMaxAmpl=microphone.getMaxAmplitude();
 
 					//Fetch data from gyros
 					CurrentTickData.rotationX=this.gyroscope.getRotX();
@@ -165,11 +165,11 @@ public class StateMachineHandler extends Handler{
 					
 
 				}
-				else {
-					Log.d("getAccX", "StateMachineHandler.MainActivity.checked");
+			else {
+					Log.d("getAccX", "StateMachineHandler.MainActivity.mmaCallBackBool");
 					// Try with direct usage of sensor data :)
 					CsvFileWriter.writeLine(CurrentTickData.curTick.toString(),
-							CurrentTickData.curTimestamp.toString(),
+							CurrentTickData.curTimestamp,
 							CurrentTickData.accX.toString(),
 							CurrentTickData.accY.toString(),
 							CurrentTickData.accZ.toString(),
@@ -184,13 +184,13 @@ public class StateMachineHandler extends Handler{
 							CurrentTickData.magneticX.toString(),
 							CurrentTickData.magneticY.toString(),
 							CurrentTickData.magneticZ.toString(),
-							CurrentTickData.proxState.toString(),
-							CurrentTickData.event.toString()
+							CurrentTickData.proxState,
+							CurrentTickData.event
 					);
-					Log.d("Time", CurrentTickData.curTimestamp.toString());
+					Log.d("Time", CurrentTickData.curTimestamp);
 				}
 		}
-		Log.d("getAccX", "NOT StateMachineHandler.MainActivity.checked");
+		Log.d("getAccX", "NOT StateMachineHandler.MainActivity.mmaCallBackBool");
     	//Call daddy and say everything is ok, by forwarding received message
     	//super.handleMessage(msg);
     }

@@ -33,14 +33,12 @@ import edu.example.ssf.mma.timer.StateMachineHandler;
 import edu.example.ssf.mma.userInterface.ListFileActivity;
 
 public class MainActivity extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener{
-    /** Declaration of the attribute for the String that is used as the TAG, when working with LOGs. String is "ActiveStateUIActivity" */
-
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
-    public static boolean checked = false;
+    public static boolean mmaCallBackBool = false;
     private boolean navigationBool = false;
-    private int id;
+    private int idOfNavObj;
 
     // Init HW-Factory
     HardwareFactory hw;
@@ -49,19 +47,19 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
     public  static final int PERMISSIONS_MULTIPLE_REQUEST = 123;
 
     // UI
-    private TextView tv;
-    private TextView val1;
-    private TextView val2;
-    private TextView val3;
-    private TextView val4;
-    private TextView val5;
+    private TextView headerTextView;
+    private TextView textView1;
+    private TextView textView2;
+    private TextView textView3;
+    private TextView textView4;
+    private TextView textView5;
     private static TextView textViewActState;
-    private EditText et;
+    private EditText eventEditText;
     private ToggleButton recButton, mmaButton, eventButton;
-    private Button file,showChart;
+    private Button fileBrowserButton, showChartButton;
 
     //Text View Result
-    private String deafault = "Please Choose your Sensor to Display!";
+    private String defaultMessage = "Please Choose your Sensor to Display!";
 
 
     /** Declaration of the state machine. */
@@ -75,18 +73,19 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
 
         ActivityCompat.requestPermissions(MainActivity.this, new  String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.RECORD_AUDIO,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSIONS_MULTIPLE_REQUEST);
 
-        //UI -- Textviews
-        et   = findViewById(R.id.editText);
-        tv = findViewById(R.id.test);tv.setText(deafault);
-        val1 = findViewById(R.id.TextOne);
-        val2 = findViewById(R.id.TextTwo);
-        val3 = findViewById(R.id.TextThree);
-        val4 = findViewById(R.id.TextFour);
-        val5 =  findViewById(R.id.TextFive);
+        //UI -- Textviews init
+        eventEditText = findViewById(R.id.editText);
+        headerTextView = findViewById(R.id.test);
+        headerTextView.setText(defaultMessage);
+        textView1 = findViewById(R.id.TextOne);
+        textView2 = findViewById(R.id.TextTwo);
+        textView3 = findViewById(R.id.TextThree);
+        textView4 = findViewById(R.id.TextFour);
+        textView5 =  findViewById(R.id.TextFive);
         textViewActState=findViewById(R.id.textViewActState);
         textViewActState.setText("");
 
-        // NavigationView
+        // NavigationView init
         mDrawerLayout = findViewById(R.id.drawerLayout);
         mToggle = new ActionBarDrawerToggle(this, mDrawerLayout,R.string.open,R.string.close);
         NavigationView navigationView = findViewById(R.id.nav_view);
@@ -97,8 +96,8 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
 
 
         //Buttons & Toggle Buttons
-        file = findViewById(R.id.fileexplorer);
-        file.setOnClickListener(new View.OnClickListener() {
+        fileBrowserButton = findViewById(R.id.fileexplorer);
+        fileBrowserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent =  new Intent(MainActivity.this, ListFileActivity.class);
@@ -111,14 +110,14 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
             @Override
             public void onClick(View view) {
                 if(ConfigApp.isSimulation){
-                        checked = true;
+                        mmaCallBackBool = true;
                     Log.d("CHECKED", "called");
                 }
                 else {
-                    if (recButton.isChecked() == true) {
+                    if (recButton.isChecked()) {
                         onClickMicREC();
                         CsvFileWriter.crtFile();
-                        checked = true;
+                        mmaCallBackBool = true;
                     } else {
                         onClickMicREC();
                         CurrentTickData.resetValues();
@@ -133,14 +132,14 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         eventButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if((mmaButton.isChecked() == true) || (recButton.isChecked() == true )){
+                if((mmaButton.isChecked()) || (recButton.isChecked())){
 
-                    if (eventButton.isChecked() == true) {
-                        if(et.getText().toString().trim().length() == 0){
+                    if (eventButton.isChecked()) {
+                        if(eventEditText.getText().toString().trim().length() == 0){
                             CurrentTickData.event = "Event Occured";
                         }
                         else{
-                            CurrentTickData.event = et.getText().toString();
+                            CurrentTickData.event = eventEditText.getText().toString();
                         }
 
                     } else {
@@ -153,8 +152,8 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
                     Toast.makeText(MainActivity.this,"Please first start the MMA", Toast.LENGTH_LONG).show();
                     eventButton.setChecked(false);
                 }
-                if(eventButton.isChecked() == false){
-                    et.setText(null);
+                if(eventButton.isChecked()){
+                    eventEditText.setText(null);
                 }
             }
         });
@@ -162,7 +161,9 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         mmaButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (t.isAlive()){}
+                if (t.isAlive()){
+                    // Do Nothing
+                }
                 else{
                     t.start();}
                 if (mmaButton.isChecked()) {
@@ -173,7 +174,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
                     HardwareFactory.hwMagn.start();
                     HardwareFactory.hwProxi.start();
                     stateMachineHandler.startStateMachine();
-                    showChart.setVisibility(View.VISIBLE);
+                    showChartButton.setVisibility(View.VISIBLE);
                 }else{
                     HardwareFactory.hwAcc.stop();
                     HardwareFactory.hwGPS.stop();
@@ -185,14 +186,16 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
 
             }
         });
-        showChart = findViewById(R.id.showChart);
-        showChart.setOnClickListener(new View.OnClickListener() {
+        showChartButton = findViewById(R.id.showChart);
+        showChartButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (t.isAlive()){}
+                if (t.isAlive()){
+                    // Do Nothing
+                }
                 else{
                     t.start();}
-                if(showChart.isPressed()){
+                if(showChartButton.isPressed()){
                     Intent intent = new Intent(MainActivity.this, AccChart.class);
                     startActivity(intent);
                 }
@@ -212,6 +215,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
                     hw = new HardwareFactory(this);
                     stateMachineHandler=new StateMachineHandler(this);
                 } else {
+                    // Do Nothing
                 }
         }
     }
@@ -226,33 +230,33 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
-        id = item.getItemId();
-        if (navigationBool == true) {
+        idOfNavObj = item.getItemId();
+        if (navigationBool) {
             navigationBool = false;
             onClickUI();
         }
-            if (id == R.id.nav_acc) {
-                tv.setText("Accelerometer");
+            if (idOfNavObj == R.id.nav_acc) {
+                headerTextView.setText(R.string.acce);
                 navigationBool = true;
                 onClickUI();
-            } else if (id == R.id.nav_gyro) {
-                tv.setText("Gyroscope");
+            } else if (idOfNavObj == R.id.nav_gyro) {
+                headerTextView.setText(R.string.gyro);
                 navigationBool = true;
                 onClickUI();
-            } else if (id == R.id.nav_magn) {
-                tv.setText("Magnetic Field Sensor");
+            } else if (idOfNavObj == R.id.nav_magn) {
+                headerTextView.setText(R.string.magn);
                 navigationBool = true;
                 onClickUI();
-            } else if (id == R.id.nav_mic) {
-                tv.setText("Microphone");
+            } else if (idOfNavObj == R.id.nav_mic) {
+                headerTextView.setText(R.string.mic);
                 navigationBool = true;
                 onClickUI();
-            } else if (id == R.id.nav_gps) {
-                tv.setText("GPS");
+            } else if (idOfNavObj == R.id.nav_gps) {
+                headerTextView.setText(R.string.gps);
                 navigationBool = true;
                 onClickUI();
-            } else if (id == R.id.nav_proximity) {
-                tv.setText("Proximity");
+            } else if (idOfNavObj == R.id.nav_proximity) {
+                headerTextView.setText(R.string.proximity);
                 navigationBool = true;
                 onClickUI();
             }
@@ -262,10 +266,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if(mToggle.onOptionsItemSelected(item)){
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+        return mToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
     }
 
     public static void actState(String state){
@@ -280,29 +281,46 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if (id == R.id.nav_acc) {
-                            val5.setVisibility(View.INVISIBLE);
-                            HardwareFactory.hwAcc.accUI(CurrentTickData.accX, CurrentTickData.accY, CurrentTickData.accZ, CurrentTickData.accVecA,val1,val2,val3,val4);
-                        } else if (id == R.id.nav_gps) {
-                            HardwareFactory.hwGPS.gpsUI(CurrentTickData.GPSalt, CurrentTickData.GPSlat, CurrentTickData.GPSlon,  CurrentTickData.GPSbearing, CurrentTickData.GPSspeed, val1, val2, val3, val4, val5);
+                        if (idOfNavObj == R.id.nav_acc) {
+                            textView5.setVisibility(View.INVISIBLE);
+                            textView1.setText("X: " + String.format("%.2f", CurrentTickData.accX));
+                            textView2.setText("Y: " + String.format("%.2f", CurrentTickData.accY));
+                            textView3.setText("Z: " + String.format("%.2f", CurrentTickData.accZ));
+                            textView4.setText("AccV: " + String.format("%.2f", CurrentTickData.accVecA));
+                        } else if (idOfNavObj == R.id.nav_gps) {
+                            textView1.setText("GPS Alt: " + String.format("%.2f", CurrentTickData.GPSalt));
+                            textView2.setText("GPS Lat: " + String.format("%.6f", CurrentTickData.GPSlat));
+                            textView3.setText("GPS Lon: "  + String.format("%.6f", CurrentTickData.GPSlon));
+                            textView4.setText("GPS Bear: " + String.format("%.2f", CurrentTickData.GPSbearing));
+                            textView5.setText("GPS Speed: " + String.format("%.2f", CurrentTickData.GPSspeed));
                             Log.d("GPS", "lat : " + CurrentTickData.GPSlat + "---" + "lon : " + CurrentTickData.GPSlon );
-                        } else if (id == R.id.nav_gyro){
-                            val4.setVisibility(View.INVISIBLE);
-                            val5.setVisibility(View.INVISIBLE);
-                            HardwareFactory.hwGyro.gyroUI(CurrentTickData.rotationX, CurrentTickData.rotationY, CurrentTickData.rotationZ, val1, val2, val3);
+                        } else if (idOfNavObj == R.id.nav_gyro){
+                            textView4.setVisibility(View.INVISIBLE);
+                            textView5.setVisibility(View.INVISIBLE);
+                            textView1.setText("Rot. X: " + String.format("%.2f", CurrentTickData.rotationX));
+                            textView2.setText("Rot. Y: " + String.format("%.2f", CurrentTickData.rotationY));
+                            textView3.setText("Rot. Z: " + String.format("%.2f", CurrentTickData.rotationZ));
                             // Log.d("GPS", "lat : " + CurrentTickData. + "---" + "lon : " + CurrentTickData. );
-                        } else if (id == R.id.nav_mic) {
-                            val2.setVisibility(View.INVISIBLE);val3.setVisibility(View.INVISIBLE);val4.setVisibility(View.INVISIBLE);val5.setVisibility(View.INVISIBLE);
-                            val1.setText("Max Aplitude : " + CurrentTickData.micMaxAmpl);
+                        } else if (idOfNavObj == R.id.nav_mic) {
+                            textView2.setVisibility(View.INVISIBLE);
+                            textView3.setVisibility(View.INVISIBLE);
+                            textView4.setVisibility(View.INVISIBLE);
+                            textView5.setVisibility(View.INVISIBLE);
+                            textView1.setText("Max Aplitude : " + CurrentTickData.micMaxAmpl);
 
-                        } else if (id == R.id.nav_magn){
-                            val4.setVisibility(View.INVISIBLE);
-                            val5.setVisibility(View.INVISIBLE);
-                            HardwareFactory.hwMagn.magnUI(CurrentTickData.magneticX, CurrentTickData.magneticY, CurrentTickData.magneticZ, val1, val2, val3);
+                        } else if (idOfNavObj == R.id.nav_magn){
+                            textView4.setVisibility(View.INVISIBLE);
+                            textView5.setVisibility(View.INVISIBLE);
+                            textView1.setText("Magn. X: " + String.format("%.2f", CurrentTickData.magneticX));
+                            textView2.setText("Magn. Y: " + String.format("%.2f", CurrentTickData.magneticY));
+                            textView3.setText("Magn. Z: " + String.format("%.2f", CurrentTickData.magneticZ));
                             // Log.d("GPS", "lat : " + CurrentTickData. + "---" + "lon : " + CurrentTickData. );
-                        }else if (id == R.id.nav_proximity) {
-                            val2.setVisibility(View.INVISIBLE);val3.setVisibility(View.INVISIBLE);val4.setVisibility(View.INVISIBLE);val5.setVisibility(View.INVISIBLE);
-                            HardwareFactory.hwProxi.proxiUI(CurrentTickData.proxState, val1);
+                        }else if (idOfNavObj == R.id.nav_proximity) {
+                            textView2.setVisibility(View.INVISIBLE);
+                            textView3.setVisibility(View.INVISIBLE);
+                            textView4.setVisibility(View.INVISIBLE);
+                            textView5.setVisibility(View.INVISIBLE);
+                            textView1.setText("Proximity: " + CurrentTickData.proxState);
                         }
 
 
@@ -311,7 +329,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
                 try {
                     Thread.sleep(1000);
                 } catch (Exception e) {
-
+                    // Do Nothing
                 }
             }
         }
@@ -321,9 +339,11 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
      *  onClick Handlers for different Sensors + UI (later non textual but graphical )
      */
     public void onClickUI(){
-        if(navigationBool == true) {
+        if(navigationBool) {
             //Thread
-            if (t.isAlive()){}
+            if (t.isAlive()){
+                //Do Nothing
+            }
             else{
                 t.start();}
             // UI
@@ -331,7 +351,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
 
         } else {
             //UI
-            tv.setText(deafault);
+            headerTextView.setText(defaultMessage);
             show_hideUI();
 
         }
@@ -354,18 +374,18 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         }
     }
     public void show_hideUI(){
-        if(val1.getVisibility() == View.VISIBLE){
-            val1.setVisibility(View.INVISIBLE);
-            val2.setVisibility(View.INVISIBLE);
-            val3.setVisibility(View.INVISIBLE);
-            val4.setVisibility(View.INVISIBLE);
-            val5.setVisibility(View.INVISIBLE);
-        }else if(val1.getVisibility() == View.INVISIBLE){
-            val1.setVisibility(View.VISIBLE);
-            val2.setVisibility(View.VISIBLE);
-            val3.setVisibility(View.VISIBLE);
-            val4.setVisibility(View.VISIBLE);
-            val5.setVisibility(View.VISIBLE);
+        if(textView1.getVisibility() == View.VISIBLE){
+            textView1.setVisibility(View.INVISIBLE);
+            textView2.setVisibility(View.INVISIBLE);
+            textView3.setVisibility(View.INVISIBLE);
+            textView4.setVisibility(View.INVISIBLE);
+            textView5.setVisibility(View.INVISIBLE);
+        }else if(textView1.getVisibility() == View.INVISIBLE){
+            textView1.setVisibility(View.VISIBLE);
+            textView2.setVisibility(View.VISIBLE);
+            textView3.setVisibility(View.VISIBLE);
+            textView4.setVisibility(View.VISIBLE);
+            textView5.setVisibility(View.VISIBLE);
 
         }
     }

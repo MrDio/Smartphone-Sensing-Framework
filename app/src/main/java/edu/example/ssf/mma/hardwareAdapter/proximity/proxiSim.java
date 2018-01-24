@@ -63,9 +63,5 @@ public class proxiSim implements IProximity {
 
 	}
 
-	@Override
-	public void proxiUI(String s1, TextView... tvs) {
-		tvs[0].setText("Proximity: " + s1);
-	}
 
 }

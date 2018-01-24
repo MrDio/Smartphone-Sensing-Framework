@@ -23,6 +23,10 @@ public class magneto implements SensorEventListener, IMagneto {
     private SensorManager sensorManager;
     private Sensor magn;
 
+    private Float x = 0.0f;
+    private Float y = 0.0f;
+    private Float z = 0.0f;
+
     public magneto(){}
 
     public magneto(Context context) {
@@ -52,17 +56,13 @@ public class magneto implements SensorEventListener, IMagneto {
 
         float[] values = event.values;
         // Movement
-        float x = values[0];
-        float y = values[1];
-        float z = values[2];
+        this.x = values[0];
+        this.y = values[1];
+        this.z = values[2];
 
-
-        CurrentTickData.magneticX = x;
-        CurrentTickData.magneticY = y;
-        CurrentTickData.magneticZ = z;
-        long actualTime = System.currentTimeMillis();
-        CurrentTickData.curTimestamp = MathCalculations.convertDate(actualTime,"hh:mm:ss:SSS");
-        Log.d("MagnetoVal",CurrentTickData.magneticX +"");
+        CurrentTickData.magneticX = this.x;
+        CurrentTickData.magneticY = this.y;
+        CurrentTickData.magneticZ = this.z;
     }
 
     @Override
@@ -77,13 +77,6 @@ public class magneto implements SensorEventListener, IMagneto {
         magn = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
     }
 
-    @Override
-    public void magnUI(float v1, float v2, float v3, TextView... tvs){
-        Log.d("magneto","magneto");
-        tvs[0].setText("Magn. X: " + String.format("%.2f", v1));
-        tvs[1].setText("Magn. Y: " + String.format("%.2f", v2));
-        tvs[2].setText("Magn. Z: " + String.format("%.2f", v3));
-    }
 
     @Override
     public Float getMagnetoX() {

@@ -33,11 +33,10 @@ public interface IProximity {
 	/**
 	 * Initialise the accelerometer.
 	 */
-	public void initProximity(Context context);
+	 void initProximity(Context context);
 
-	public void start();
-	public void stop();
+	 void start();
+	 void stop();
 
-	public void proxiUI(String s1, TextView... tvs);
-	public String getProximity();
+	 String getProximity();
 }

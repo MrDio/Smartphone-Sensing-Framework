@@ -33,11 +33,10 @@ public interface IMicrophone {
 	/**
 	 * Initialise the accelserometer.
 	 */
-	public void initMicrophone(Context context);
+	 void initMicrophone(Context context);
 
-	public void start();
-	public void stop();
+	 void start();
+	 void stop();
 
-	public void micUI(int v1, TextView... tvs);
-	public Double getMaxAmplitude();
+	 Double getMaxAmplitude();
 }
