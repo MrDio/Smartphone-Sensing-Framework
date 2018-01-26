@@ -24,6 +24,10 @@ public class AccChart extends Activity {
     private LineGraphSeries<DataPoint> series;
     private int lastX = 0;
 
+    /** Will be created as a new Intent
+     * --> run by button click; own thread architecture
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
