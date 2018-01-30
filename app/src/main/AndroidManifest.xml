@@ -26,7 +26,7 @@
         </activity>
         <activity android:name="edu.example.ssf.mma.userInterface.ListFileActivity" > </activity>
         <activity android:name="edu.example.ssf.mma.charts.AccChart" > </activity>
-
+        <activity android:name="edu.example.ssf.mma.hardwareAdapter.GPS.gps" > </activity>
     </application>
 
 </manifest>

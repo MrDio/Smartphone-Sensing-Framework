@@ -19,6 +19,7 @@ package edu.example.ssf.mma.timer;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimerTask;
 
 
@@ -52,7 +53,7 @@ public class StateMachineTimerTask extends TimerTask{
     
     //The format of the timestamp
     /** The format of the timestamp */
-    private SimpleDateFormat timestampFormat = new SimpleDateFormat("hh:mm:ss:SSS");
+    private SimpleDateFormat timestampFormat = new SimpleDateFormat("hh:mm:ss:SSS", Locale.GERMAN);
     
     /** Message queue tags for the communication with the handler. */
     public static final String actStateMsgTag = "ACT_STATE";
@@ -103,12 +104,13 @@ public class StateMachineTimerTask extends TimerTask{
 		bundle.putString(actStateMsgTag, this.stateMachine.getStateLabel());
 		bundle.putInt(curTickMsgTag, this.cnt);
 		bundle.putString(curTimestampMsgTag, this.timestampFormat.format(new Date()));
-		Log.d("Timestamp", bundle.getString(curTimestampMsgTag));
+
 		msg.setData(bundle);
 		
 		this.stateMachineHandler.sendMessage(msg); // (2)
-		
-		Log.d("RUN", cnt.toString());
+
+		//Log.d("Timestamp", bundle.getString(curTimestampMsgTag));
+		//Log.d("RUN", cnt.toString());
 	}
 
 	/**

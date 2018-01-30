@@ -60,7 +60,7 @@ public class gps extends AppCompatActivity implements LocationListener, IGPS {
 	private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
 
 	// The minimum time between updates in milliseconds
-	private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
+	private static final long MIN_TIME_BW_UPDATES = 1000 * 60 /* * 1 */; // 1 minute
 	public gps(){}
 
 	public gps(Context context ) {
@@ -140,6 +140,7 @@ public class gps extends AppCompatActivity implements LocationListener, IGPS {
 
 	@Override
 	public void onProviderEnabled(String provider) {
+
 	}
 
 	@Override
@@ -179,6 +180,12 @@ public class gps extends AppCompatActivity implements LocationListener, IGPS {
 		this.GPSlat = location.getLatitude();
 		this.GPSlon = location.getLongitude();
 		this.GPSspeed = location.getSpeed();
+
+		CurrentTickData.GPSalt = GPSalt;
+		CurrentTickData.GPSbearing = GPSbearing;
+		CurrentTickData.GPSlat = GPSlat;
+		CurrentTickData.GPSlon = GPSlon;
+		CurrentTickData.GPSspeed = GPSspeed;
 	}
 
 }

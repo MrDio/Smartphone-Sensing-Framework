@@ -62,19 +62,17 @@ public class accelerometer implements SensorEventListener, IAccelerometer {
 
         float[] values = event.values;
         // Movement
-        float x = values[0];
-        float y = values[1];
-        float z = values[2];
+        x = values[0];
+        y = values[1];
+        z = values[2];
         double accelationSquareRoot = MathCalculations.calculatePythagoras(x,y,z);
-        //long actualTime = event.timestamp;
-
 
         CurrentTickData.accX = x;
         CurrentTickData.accY = y;
         CurrentTickData.accZ = z;
         CurrentTickData.accVecA = accelationSquareRoot;
 
-        Log.d("AccValues",CurrentTickData.accVecA +"");
+        //Log.d("AccValues",CurrentTickData.accVecA +"");
 
 
     }

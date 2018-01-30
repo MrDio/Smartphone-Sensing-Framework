@@ -64,7 +64,7 @@ public class gyro implements SensorEventListener, IGyroscope {
         CurrentTickData.rotationY = this.y;
         CurrentTickData.rotationZ = this.z;
 
-        Log.d("GyroVal",CurrentTickData.rotationX +"");
+       // Log.d("GyroVal",CurrentTickData.rotationX +"");
     }
 
     @Override

@@ -133,7 +133,7 @@ public class StateMachineHandler extends Handler{
 
 
 		if(MainActivity.mmaCallBackBool) {
-			Log.d("getAccX", "StateMachineHandler.MainActivity.mmaCallBackBool");
+			//Log.d("getAccX", "StateMachineHandler.MainActivity.mmaCallBackBool");
 				if(ConfigApp.isSimulation){
 					//Fetch data from acceleration sensor
 
@@ -141,7 +141,7 @@ public class StateMachineHandler extends Handler{
 					CurrentTickData.accY=this.accelerometer.getAccY();
 					CurrentTickData.accZ=this.accelerometer.getAccZ();
 					CurrentTickData.accVecA=this.accelerometer.getAccA();
-					Log.d("getAccX", CurrentTickData.accX + " ");
+					//Log.d("getAccX", CurrentTickData.accX + " ");
 					//Fetch data from GPS-Sensor
 					CurrentTickData.GPSalt=this.gps.getAltitude();
 					CurrentTickData.GPSlon=this.gps.getLongitude();
@@ -166,7 +166,7 @@ public class StateMachineHandler extends Handler{
 
 				}
 			else {
-					Log.d("getAccX", "StateMachineHandler.MainActivity.mmaCallBackBool");
+					//Log.d("getAccX", "StateMachineHandler.MainActivity.mmaCallBackBool");
 					// Try with direct usage of sensor data :)
 					CsvFileWriter.writeLine(CurrentTickData.curTick.toString(),
 							CurrentTickData.curTimestamp,
@@ -187,10 +187,10 @@ public class StateMachineHandler extends Handler{
 							CurrentTickData.proxState,
 							CurrentTickData.event
 					);
-					Log.d("Time", CurrentTickData.curTimestamp);
+					//Log.d("Time", CurrentTickData.curTimestamp);
 				}
 		}
-		Log.d("getAccX", "NOT StateMachineHandler.MainActivity.mmaCallBackBool");
+		//Log.d("getAccX", "NOT StateMachineHandler.MainActivity.mmaCallBackBool");
     	//Call daddy and say everything is ok, by forwarding received message
     	//super.handleMessage(msg);
     }
