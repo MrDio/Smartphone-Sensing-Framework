@@ -36,6 +36,6 @@ public interface IParentStateMachine {
 	 *
 	 * @param label the new state label
 	 */
-	public void setStateLabel(String label);
+	 void setStateLabel(String label);
 	
 }

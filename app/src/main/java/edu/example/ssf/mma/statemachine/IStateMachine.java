@@ -32,23 +32,23 @@ public interface IStateMachine {
 	/**
 	 * checks if a transition occurred.
 	 */
-	public void transisionCheck();
+	void transisionCheck();
 	
 	/**
 	 * checks if a transition occurred.
 	 */
-	public void stateCheck();
+	void stateCheck();
 	
 	/**
 	 * Gets the state label.
 	 *
 	 * @return the state label
 	 */
-	public String getStateLabel();
+	String getStateLabel();
 
 	/**
 	 * initialises the state machine.
 	 */
-	public void initStateMachine();
+	void initStateMachine();
 	
 }

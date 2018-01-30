@@ -45,8 +45,8 @@ import edu.example.ssf.mma.hardwareAdapter.IProximity;
  * startStateMachine and stopStateMachine. Furthermore it extends the android.os.Handler class,
  * and implements the message queue endpoint to the statemachine-timer-task. 
  * 
- * @author Dionysios Satikidis (dionysios.satikidis@yahoo.de)
- * @version 1.0
+ * @author D. Lagamtzis
+ * @version 2.0
  */
 
 public class StateMachineHandler extends Handler{
