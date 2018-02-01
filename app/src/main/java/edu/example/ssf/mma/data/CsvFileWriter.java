@@ -32,8 +32,11 @@ import java.util.Date;
 /**
  * This class is responsible for creating a new csv File, writing the data into the file and to close it,
  * if the recording has finished.
+ * @version 2.0
  * @author Dionysios Satikidis (dionysios.satikidis@yahoo.de)
  * @version 1.0
+ * @author D. Lagamtzis
+ * @version 2.0
  */
 
 public class CsvFileWriter {

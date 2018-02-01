@@ -28,9 +28,12 @@ import edu.example.ssf.mma.data.CsvFileReader;
 import edu.example.ssf.mma.hardwareAdapter.IGyroscope;
 
 /**
- * Simulated GPS sensor with data input from a saved CSV file 
+ * Simulated Gyro sensor with data input from a saved CSV file
+ * @version 2.0
  * @author Dionysios Satikidis (dionysios.satikidis@yahoo.de)
  * @version 1.0
+ * @author D. Lagamtzis
+ * @version 2.0
  */
 
 public class gyroSim implements IGyroscope {

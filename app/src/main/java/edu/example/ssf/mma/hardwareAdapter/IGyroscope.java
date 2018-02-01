@@ -22,9 +22,12 @@ import android.content.Context;
 import android.widget.TextView;
 
 /**
- * Interface calss to Instantiate the Accelerometer , get the x-/y-/z-axis value and the buffer
+ * Interface class to Instantiate the Accelerometer , get the x-/y-/z-axis value
+ * @version 2.0
  * @author Dionysios Satikidis (dionysios.satikidis@yahoo.de)
  * @version 1.0
+ * @author D. Lagamtzis
+ * @version 2.0
  */
 
 public interface IGyroscope {

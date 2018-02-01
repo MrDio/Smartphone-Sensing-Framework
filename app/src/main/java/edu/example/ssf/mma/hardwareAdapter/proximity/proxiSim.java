@@ -28,8 +28,8 @@ import edu.example.ssf.mma.data.CsvFileReader;
 import edu.example.ssf.mma.hardwareAdapter.IProximity;
 
 /**
- * Simulated GPS sensor with data input from a saved CSV file 
- * @author Dionysios Satikidis (dionysios.satikidis@yahoo.de)
+ * Simulated Proximity sensor with data input from a saved CSV file
+ * @author D. Lagamtzis
  * @version 1.0
  */
 

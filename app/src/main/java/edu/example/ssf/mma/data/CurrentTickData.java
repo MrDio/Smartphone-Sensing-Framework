@@ -20,8 +20,11 @@ package edu.example.ssf.mma.data;
 
 /**
  * The Class CurrentTickData saves all values from the current tick, in order to write and display the same values from the the same tick.
+ * @version 2.0
  * @author Dionysios Satikidis (dionysios.satikidis@yahoo.de)
  * @version 1.0
+ * @author D. Lagamtzis
+ * @version 2.0
  */
 
 public class CurrentTickData {

@@ -32,9 +32,12 @@ import java.io.IOException;
 
 /**
  * The Class CsvFileReader reads the saved csv-file and gets the data from the file for the simulated sensors..
+ *
+ * @version 2.0
  * @author Dionysios Satikidis (dionysios.satikidis@yahoo.de)
  * @version 1.0
- * @image jpg data_details.jpg
+ * @author D. Lagamtzis
+ * @version 2.0
  * 
  */
 

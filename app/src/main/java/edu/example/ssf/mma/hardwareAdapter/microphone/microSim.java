@@ -31,8 +31,11 @@ import edu.example.ssf.mma.hardwareAdapter.IMicrophone;
 /**
  * Simulated microphone with data input from a saved CSV file .
  *
- * @author Dionysios Satikidis (dionysios.satikidis@gmail.com)
+ * @version 2.0
+ * @author Dionysios Satikidis (dionysios.satikidis@yahoo.de)
  * @version 1.0
+ * @author D. Lagamtzis
+ * @version 2.0
  */
 
 public class microSim implements IMicrophone {

@@ -44,7 +44,10 @@ import edu.example.ssf.mma.hardwareAdapter.IProximity;
  * This class provides functions to control the state machine of the application, like
  * startStateMachine and stopStateMachine. Furthermore it extends the android.os.Handler class,
  * and implements the message queue endpoint to the statemachine-timer-task. 
- * 
+ *
+ * @version 2.0
+ * @author Dionysios Satikidis (dionysios.satikidis@yahoo.de)
+ * @version 1.0
  * @author D. Lagamtzis
  * @version 2.0
  */

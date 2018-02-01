@@ -24,8 +24,11 @@ import android.widget.TextView;
 
 /**
  * Interface class to initialise the GPS-sensor , get the altitude, longitude, latitude, bearing and speed.
+ * @version 2.0
  * @author Dionysios Satikidis (dionysios.satikidis@yahoo.de)
  * @version 1.0
+ * @author D. Lagamtzis
+ * @version 2.0
  */
 
 public interface IGPS {

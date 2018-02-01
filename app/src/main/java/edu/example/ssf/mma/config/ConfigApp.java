@@ -23,9 +23,12 @@ package edu.example.ssf.mma.config;
  * This class contains the application configuration like the sensor-sampling-time, 
  * the output-folder for the captured data (same folder at the host-PC and at target-Smartphone), 
  * the Simulation-Mode-flag etc..
- * 
+ *
+ * @version 2.0
  * @author Dionysios Satikidis (dionysios.satikidis@yahoo.de)
  * @version 1.0
+ * @author D. Lagamtzis
+ * @version 2.0
  */
 public class ConfigApp {
 

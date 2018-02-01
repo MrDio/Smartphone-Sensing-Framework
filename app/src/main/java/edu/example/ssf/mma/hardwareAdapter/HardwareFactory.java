@@ -42,8 +42,11 @@ import edu.example.ssf.mma.hardwareAdapter.proximity.proximity;
 /**
  * * Initialises the hardware components and checks if either a simulated or the sensor of the device should be used.
  * A factory for creating Hardware objects.
+ * @version 2.0
  * @author Dionysios Satikidis (dionysios.satikidis@yahoo.de)
  * @version 1.0
+ * @author D. Lagamtzis
+ * @version 2.0
  */
 
 public class HardwareFactory {
