@@ -17,7 +17,7 @@
         android:theme="@style/AppTheme"
         >
 
-        <activity android:name="edu.example.ssf.mma.MainActivity">
+        <activity android:name="edu.example.ssf.mma.userInterface.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

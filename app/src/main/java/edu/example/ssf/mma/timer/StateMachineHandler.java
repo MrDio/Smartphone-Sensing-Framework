@@ -24,9 +24,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 
-import edu.example.ssf.mma.MainActivity;
+import edu.example.ssf.mma.userInterface.MainActivity;
 import edu.example.ssf.mma.config.ConfigApp;
 import edu.example.ssf.mma.data.CsvFileWriter;
 import edu.example.ssf.mma.data.CurrentTickData;

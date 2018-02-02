@@ -16,7 +16,7 @@
     along with MMA.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package edu.example.ssf.mma;
+package edu.example.ssf.mma.userInterface;
 
 
 /**
@@ -47,15 +47,13 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 
-
-
+import edu.example.ssf.mma.R;
 import edu.example.ssf.mma.charts.AccChart;
 import edu.example.ssf.mma.config.ConfigApp;
 import edu.example.ssf.mma.data.CsvFileWriter;
 import edu.example.ssf.mma.data.CurrentTickData;
 import edu.example.ssf.mma.hardwareAdapter.HardwareFactory;
 import edu.example.ssf.mma.timer.StateMachineHandler;
-import edu.example.ssf.mma.userInterface.ListFileActivity;
 
 public class MainActivity extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener{
 
