@@ -2,11 +2,13 @@
 Sensing Framework for android smartphones developed by D. Satikidis and D. Lagamtzis used for academic lectures.
 
 ## Documentation
-[Wiki] Put link here
+[Wiki](https://github.com/MrDio/Smartphone-Sensing-Framework/wiki/Systemoverview)
 
-## Building on Android / Android Studio
-[Building] Put link here
 
-## Ausführen der Beispiele
+## Building on Android SDK
+[Building](https://github.com/MrDio/Smartphone-Sensing-Framework/wiki/Building-with-Android-SDK)
 
-[Anleitung] Put link here
+## Execute Examples
+
+[Intro](https://github.com/MrDio/Smartphone-Sensing-Framework/wiki/Execute-Example)
+
