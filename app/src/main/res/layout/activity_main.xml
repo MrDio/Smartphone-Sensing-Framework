@@ -62,10 +62,12 @@
 
         <ToggleButton
             android:id="@+id/mmaButton"
-            android:layout_width="wrap_content"
+            android:layout_width="100"
             android:layout_height="60dp"
             android:layout_marginTop="48dp"
+            android:background="@drawable/buttonshape"
             android:text="MMA"
+            android:textColor="@android:color/white"
             android:textOff="Start MMA"
             android:textOn="Stop MMA"
             app:layout_constraintEnd_toStartOf="@+id/recMic"
@@ -81,6 +83,8 @@
             android:text="Event"
             android:textOff="Event Start"
             android:textOn="Event Stop"
+            android:background="@drawable/buttonshape"
+            android:textColor="@android:color/white"
             app:layout_constraintEnd_toStartOf="@+id/editText"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
