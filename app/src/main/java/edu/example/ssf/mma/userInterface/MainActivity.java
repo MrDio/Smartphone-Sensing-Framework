@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
 
         //UI -- Textviews init
         eventEditText = findViewById(R.id.editText);
-        headerTextView = findViewById(R.id.test);
+        headerTextView = findViewById(R.id.headerTextView);
         headerTextView.setText(defaultMessage);
         textView1 = findViewById(R.id.TextOne);
         textView2 = findViewById(R.id.TextTwo);
