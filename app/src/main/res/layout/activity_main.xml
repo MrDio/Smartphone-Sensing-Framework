@@ -62,7 +62,7 @@
 
         <ToggleButton
             android:id="@+id/mmaButton"
-            android:layout_width="100"
+            android:layout_width="100dp"
             android:layout_height="60dp"
             android:layout_marginTop="48dp"
             android:background="@drawable/buttonshape"
