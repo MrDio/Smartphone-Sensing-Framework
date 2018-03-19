@@ -25,7 +25,6 @@ package edu.example.ssf.mma.data;
  * @version 1.0
  * @author D. Lagamtzis
  * @version 2.0
- * CurrentTickData
  */
 
 public class CurrentTickData {
