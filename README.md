@@ -11,4 +11,3 @@ Sensing Framework for android smartphones developed by D. Satikidis and D. Lagam
 ## Execute Examples
 
 [Intro](https://github.com/MrDio/Smartphone-Sensing-Framework/wiki/Execute-Example)
-
