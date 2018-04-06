@@ -38,19 +38,4 @@ public class MathCalculations {
         SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
         return sdf.format(dateInMilliseconds);
     }
-
-    public static double getDB(Integer ampli){
-
-        int x = ampli;
-        double x2 = x;
-        double db = (20 * Math.log10(x2 / 0.1));
-        if(db>0)
-        {
-            return db;
-        }
-        else
-        {
-            return 0;
-        }
-    }
 }

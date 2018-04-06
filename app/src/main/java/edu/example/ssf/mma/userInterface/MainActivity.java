@@ -55,7 +55,7 @@ import edu.example.ssf.mma.data.CurrentTickData;
 import edu.example.ssf.mma.hardwareAdapter.HardwareFactory;
 import edu.example.ssf.mma.timer.StateMachineHandler;
 
-public class MainActivity extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     private DrawerLayout mDrawerLayout;
     private ActionBarDrawerToggle mToggle;
@@ -118,16 +118,6 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        //Buttons & Toggle Buttons
-        fileBrowserButton = findViewById(R.id.fileexplorer);
-        fileBrowserButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent =  new Intent(MainActivity.this, ListFileActivity.class);
-                startActivity(intent);
-            }
-        });
-
         recButton = findViewById(R.id.recMic);
         recButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,11 +128,9 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
                 }
                 else {
                     if (recButton.isChecked()) {
-                        onClickMicREC();
                         CsvFileWriter.crtFile();
                         mmaCallBackBool = true;
                     } else {
-                        onClickMicREC();
                         CurrentTickData.resetValues();
                         CsvFileWriter.closeFile();
                         stateMachineHandler.stopStateMachine();
@@ -194,7 +182,6 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
                     HardwareFactory.hwAcc.start();
                     HardwareFactory.hwGPS.initGPS(MainActivity.this);
                     HardwareFactory.hwGyro.start();
-                    HardwareFactory.hwMagn.start();
                     HardwareFactory.hwProxi.start();
                     stateMachineHandler.startStateMachine();
                     showChartButton.setVisibility(View.VISIBLE);
@@ -202,7 +189,6 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
                     HardwareFactory.hwAcc.stop();
                     HardwareFactory.hwGPS.stop();
                     HardwareFactory.hwGyro.stop();
-                    HardwareFactory.hwMagn.stop();
                     HardwareFactory.hwProxi.stop();
                     CurrentTickData.resetValues();
                 }
@@ -379,23 +365,7 @@ public class MainActivity extends AppCompatActivity implements  NavigationView.O
 
         }
     }
-    public void onClickMicREC(){
-        if(recButton.isChecked()) {
-            //Thread
-            if (t.isAlive()){}
-            else{
-                t.start();}
-            //Sensor
-            HardwareFactory.hwMic.start();
-            Toast.makeText(this,"Aufnahme beginnt", Toast.LENGTH_SHORT).show();
-            Toast.makeText(this,"Datei geöffnet", Toast.LENGTH_LONG).show();
-        } else {
-            //Sensor
-            HardwareFactory.hwMic.stop();
-            Toast.makeText(this,"Aufnahme beendet", Toast.LENGTH_SHORT).show();
-            Toast.makeText(this,"Datei geschlossen", Toast.LENGTH_LONG).show();
-        }
-    }
+
     public void show_hideUI(){
         if(textView1.getVisibility() == View.VISIBLE){
             textView1.setVisibility(View.INVISIBLE);

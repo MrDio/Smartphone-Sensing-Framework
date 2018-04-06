@@ -21,19 +21,9 @@ package edu.example.ssf.mma.hardwareAdapter;
 import android.content.Context;
 import android.util.Log;
 
-import edu.example.ssf.mma.config.ConfigApp;
-import edu.example.ssf.mma.data.CsvFileReader;
 import edu.example.ssf.mma.hardwareAdapter.GPS.gps;
-import edu.example.ssf.mma.hardwareAdapter.GPS.gpsSim;
 import edu.example.ssf.mma.hardwareAdapter.accelerometer.accelerometer;
-import edu.example.ssf.mma.hardwareAdapter.accelerometer.accelerometerSim;
 import edu.example.ssf.mma.hardwareAdapter.gyroscope.gyro;
-import edu.example.ssf.mma.hardwareAdapter.gyroscope.gyroSim;
-import edu.example.ssf.mma.hardwareAdapter.magnetometer.magneto;
-import edu.example.ssf.mma.hardwareAdapter.magnetometer.magnetoSim;
-import edu.example.ssf.mma.hardwareAdapter.microphone.microSim;
-import edu.example.ssf.mma.hardwareAdapter.microphone.microphone;
-import edu.example.ssf.mma.hardwareAdapter.proximity.proxiSim;
 import edu.example.ssf.mma.hardwareAdapter.proximity.proximity;
 
 
@@ -51,19 +41,13 @@ import edu.example.ssf.mma.hardwareAdapter.proximity.proximity;
 
 public class HardwareFactory {
 
-	/**referencing the isSimulation variable to the isSimulation variable from the ConfigApp class. */
-	private static boolean isSimulation = ConfigApp.isSimulation;
-	
+
 	/** setting the simulated accelerometer to null. */
 	public static IAccelerometer hwAcc = null;
 
 	public static IGPS hwGPS = null;
 
 	public static IGyroscope hwGyro = null;
-
-	public static IMicrophone hwMic = null;
-
-	public static IMagneto hwMagn = null;
 
 	public static IProximity hwProxi = null;
 
@@ -73,24 +57,16 @@ public class HardwareFactory {
 	 */
 
 	public HardwareFactory(Context context){
-		if (isSimulation) {
-			Log.d("hwSim" , "simulation fail");
-			CsvFileReader.readFile();
-			Log.d("hwSim" , "simulation readfile");
-		}else {
+
 		getAccelerometer(context);
 		Log.d("init?","acc initialized");
 		getGPS(context);
 		Log.d("init?","gps initialized");
 		getGyroscope(context);
 		Log.d("init?","gyro initialized");
-		getMicrophone(context);
-		Log.d("init?","mic initialized");
-		getMagnetometer(context);
-		Log.d("init?","magnetomerer initialized");
 		getProximity(context);
 		Log.d("init?","proxi initialized");
-		}
+
 	}
 
 
@@ -100,12 +76,9 @@ public class HardwareFactory {
 	 * @return either the simulated or the devices accelerometer 
 	 */
 	public static IAccelerometer getAccelerometer(Context context) {
-		if(isSimulation){
-			Log.d("getAccX", "HardwareFactory.getAccelerometer");
-			hwAcc = new accelerometerSim();
-		}else{
-			hwAcc = new accelerometer(context);
-		}
+
+		hwAcc = new accelerometer(context);
+
 		return hwAcc;
 	}
 	
@@ -115,11 +88,9 @@ public class HardwareFactory {
 	 * @return either the simulated or the devices GPS-sensor 
 	 */
 	public static IGPS getGPS(Context context) {
-		if(isSimulation){
-			hwGPS = new gpsSim();
-		}else{
-			hwGPS = new gps(context);
-		}
+
+		hwGPS = new gps(context);
+
 		return hwGPS;
 	}
 	/**
@@ -128,52 +99,22 @@ public class HardwareFactory {
 	 * @return either the simulated or the devices Gyro-sensor
 	 */
 	public static IGyroscope getGyroscope(Context context) {
-		if(isSimulation){
-			hwGyro = new gyroSim();
-		}else{
-			hwGyro = new gyro(context);
-		}
+
+		hwGyro = new gyro(context);
+
 		return hwGyro;
 	}
 
-	
-	/**
-	 * determines if to uses the devices microphone or simulate a microphone
-	 *
-	 * @return either the simulated or the devices microphone
-	 */
-	public static IMicrophone getMicrophone(Context context) {
-		if(isSimulation){
-			hwMic = new microSim();
-		}else{
-			hwMic = new microphone(context);
-		}
-		return hwMic;
-	}
-	/**
-	 * determines if to uses the devices magnetometer or simulate a magnetometer
-	 *
-	 * @return either the simulated or the devices magnetometer
-	 */
-	public static IMagneto getMagnetometer(Context context) {
-		if(isSimulation){
-			hwMagn = new magnetoSim();
-		}else{
-			hwMagn = new magneto(context);
-		}
-		return hwMagn;
-	}
+
 	/**
 	 * determines if to uses the devices proximity sensor or simulate a proximity sensor
 	 *
 	 * @return either the simulated or the devices proximity sensor
 	 */
 	public static IProximity getProximity(Context context) {
-		if(isSimulation){
-			hwProxi = new proxiSim();
-		}else{
-			hwProxi = new proximity(context);
-		}
+
+		hwProxi = new proximity(context);
+
 		return hwProxi;
 	}
 

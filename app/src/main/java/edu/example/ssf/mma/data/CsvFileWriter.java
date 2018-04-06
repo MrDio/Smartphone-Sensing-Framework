@@ -120,15 +120,10 @@ public class CsvFileWriter {
 			String gpsAlt,
 			String gpsLat,
             String gpsLon,
-            String micAmpl,
             String rotX,
             String rotY,
             String rotZ,
-            String magnX,
-            String magnY,
-            String magnZ,
-            String proximity,
-			String event
+            String proximity
 			) {
 		if (fileWriter==null) {
 			return;
@@ -143,15 +138,10 @@ public class CsvFileWriter {
                     gpsAlt+separator+
                     gpsLat+separator+
                     gpsLon+separator+
-                    micAmpl+separator+
                     rotX+separator+
                     rotY+separator+
                     rotZ+separator+
-                    magnX+separator+
-                    magnY+separator+
-                    magnZ+separator+
                     proximity+separator+
-					event+separator+
 					"\r\n");
 
 

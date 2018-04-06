@@ -33,8 +33,6 @@ import edu.example.ssf.mma.hardwareAdapter.HardwareFactory;
 import edu.example.ssf.mma.hardwareAdapter.IAccelerometer;
 import edu.example.ssf.mma.hardwareAdapter.IGPS;
 import edu.example.ssf.mma.hardwareAdapter.IGyroscope;
-import edu.example.ssf.mma.hardwareAdapter.IMagneto;
-import edu.example.ssf.mma.hardwareAdapter.IMicrophone;
 import edu.example.ssf.mma.hardwareAdapter.IProximity;
 
 
@@ -72,17 +70,10 @@ public class StateMachineHandler extends Handler{
     private boolean initTask = true;
 	/** Interface to the hardware abstraction layer. */
 	private IAccelerometer accelerometer = null;
-
 	/** Interface to the hardware abstraction layer. */
 	private IGPS gps = null;
-
-	/** Interface to the hardware abstraction layer. */
-	private IMicrophone microphone = null;
-
 	/** Interface to the hardware abstraction layer. */
 	private IProximity proximity = null;
-	/** Interface to the hardware abstraction layer. */
-	private IMagneto magneto = null;
 	/** Interface to the hardware abstraction layer. */
 	private IGyroscope gyroscope = null;
 
@@ -99,9 +90,7 @@ public class StateMachineHandler extends Handler{
 		 */
 		this.accelerometer = HardwareFactory.getAccelerometer(context);
 		this.gps = HardwareFactory.getGPS(context);
-		this.microphone = HardwareFactory.getMicrophone(context);
 		this.gyroscope = HardwareFactory.getGyroscope(context);
-		this.magneto = HardwareFactory.getMagnetometer(context);
 		this.proximity = HardwareFactory.getProximity(context);
 	}
 
@@ -136,61 +125,23 @@ public class StateMachineHandler extends Handler{
 
 		if(MainActivity.mmaCallBackBool) {
 			//Log.d("getAccX", "StateMachineHandler.MainActivity.mmaCallBackBool");
-				if(ConfigApp.isSimulation){
-					//Fetch data from acceleration sensor
+			// Try with direct usage of sensor data :)
+			CsvFileWriter.writeLine(CurrentTickData.curTick.toString(),
+					CurrentTickData.curTimestamp,
+					CurrentTickData.accX.toString(),
+					CurrentTickData.accY.toString(),
+					CurrentTickData.accZ.toString(),
+					CurrentTickData.accVecA.toString(),
+					CurrentTickData.GPSalt.toString(),
+					CurrentTickData.GPSlon.toString(),
+					CurrentTickData.GPSlat.toString(),
+					CurrentTickData.rotationX.toString(),
+					CurrentTickData.rotationY.toString(),
+					CurrentTickData.rotationZ.toString(),
+					CurrentTickData.proxState
+			);
+			//Log.d("Time", CurrentTickData.curTimestamp);
 
-					CurrentTickData.accX=this.accelerometer.getAccX();
-					CurrentTickData.accY=this.accelerometer.getAccY();
-					CurrentTickData.accZ=this.accelerometer.getAccZ();
-					CurrentTickData.accVecA=this.accelerometer.getAccA();
-					//Log.d("getAccX", CurrentTickData.accX + " ");
-					//Fetch data from GPS-Sensor
-					CurrentTickData.GPSalt=this.gps.getAltitude();
-					CurrentTickData.GPSlon=this.gps.getLongitude();
-					CurrentTickData.GPSlat=this.gps.getLatitude();
-					CurrentTickData.GPSbearing=this.gps.getBearing();
-					CurrentTickData.GPSspeed=this.gps.getSpeed();
-
-					//Fetch data from microphone
-					CurrentTickData.micMaxAmpl=microphone.getMaxAmplitude();
-
-					//Fetch data from gyros
-					CurrentTickData.rotationX=this.gyroscope.getRotX();
-					CurrentTickData.rotationY=this.gyroscope.getRotY();
-					CurrentTickData.rotationZ=this.gyroscope.getRotZ();
-					//Fetch data from magnetometer
-					CurrentTickData.magneticX=this.magneto.getMagnetoX();
-					CurrentTickData.magneticY=this.magneto.getMagnetoY();
-					CurrentTickData.magneticZ=this.magneto.getMagnetoZ();
-					//Fetch data from proximity
-					CurrentTickData.proxState=this.proximity.getProximity();
-					
-
-				}
-			else {
-					//Log.d("getAccX", "StateMachineHandler.MainActivity.mmaCallBackBool");
-					// Try with direct usage of sensor data :)
-					CsvFileWriter.writeLine(CurrentTickData.curTick.toString(),
-							CurrentTickData.curTimestamp,
-							CurrentTickData.accX.toString(),
-							CurrentTickData.accY.toString(),
-							CurrentTickData.accZ.toString(),
-							CurrentTickData.accVecA.toString(),
-							CurrentTickData.GPSalt.toString(),
-							CurrentTickData.GPSlon.toString(),
-							CurrentTickData.GPSlat.toString(),
-							CurrentTickData.micMaxAmpl.toString(),
-							CurrentTickData.rotationX.toString(),
-							CurrentTickData.rotationY.toString(),
-							CurrentTickData.rotationZ.toString(),
-							CurrentTickData.magneticX.toString(),
-							CurrentTickData.magneticY.toString(),
-							CurrentTickData.magneticZ.toString(),
-							CurrentTickData.proxState,
-							CurrentTickData.event
-					);
-					//Log.d("Time", CurrentTickData.curTimestamp);
-				}
 		}
 		//Log.d("getAccX", "NOT StateMachineHandler.MainActivity.mmaCallBackBool");
     	//Call daddy and say everything is ok, by forwarding received message

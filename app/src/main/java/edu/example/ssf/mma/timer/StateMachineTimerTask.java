@@ -28,8 +28,7 @@ import android.os.Bundle;
 import android.os.Message;
 import android.util.Log;
 
-import edu.example.ssf.mma.statemachine.IStateMachine;
-import edu.example.ssf.mma.statemachine.StateMachine;
+
 
 
 // TODO: Auto-generated Javadoc
@@ -64,9 +63,7 @@ public class StateMachineTimerTask extends TimerTask{
     /** The Constant curTimestampMsgTag. */
     public static final String curTimestampMsgTag = "CUR_TIMESTAMP";
 
-	//Interface to the state machine
-	/**  Interface to the state machine. */
-	private IStateMachine stateMachine = null;
+
 
 
 	/** Current tick. */
@@ -79,7 +76,6 @@ public class StateMachineTimerTask extends TimerTask{
      */
     public StateMachineTimerTask(StateMachineHandler stateMachineHandler) {
     	this.stateMachineHandler=stateMachineHandler;
-		this.stateMachine=new StateMachine();
 	}
 	
 	/* (non-Javadoc)
@@ -88,20 +84,16 @@ public class StateMachineTimerTask extends TimerTask{
 	@Override
 	public void run() {
 		if (!this.runStateMachine) {
-			this.stateMachine.initStateMachine();
 			cnt=0;
 			return;
 		}
 
-		this.stateMachine.transisionCheck();
-		this.stateMachine.stateCheck();
 
 		cnt++;
 
 		Message msg = new Message();
 		Bundle bundle = new Bundle();
 
-		bundle.putString(actStateMsgTag, this.stateMachine.getStateLabel());
 		bundle.putInt(curTickMsgTag, this.cnt);
 		bundle.putString(curTimestampMsgTag, this.timestampFormat.format(new Date()));
 
