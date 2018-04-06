@@ -10,7 +10,7 @@ The aim of this framework is to provide a quick way to develop context aware app
 [SmartCart](https://www.hackster.io/dcse-team-b/smart-cart-09155f)
 
 ## Respected projects
-[Walabot](https://www.youtube.com/watch?v=CoWdmFFnMi0#action=share)
+[Walabot](https://www.youtube.com/watch?v=CoWdmFFnMi0#action=share)<br>
 [CO2GO](http://senseable.mit.edu/co2go/)
 
 ## How to use?<br>
