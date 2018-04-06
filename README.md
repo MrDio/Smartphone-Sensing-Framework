@@ -15,7 +15,7 @@ How to use?<br>
   Capture-Sensor-Data<br>
   Find patterns<br>
   Create matcher and state-machine<br>
-  Repeat<br>
+  Dont find the killer App? -> Repeat<br>
  
 ## Documentation
 [Wiki](https://github.com/MrDio/Smartphone-Sensing-Framework/wiki/Systemoverview)
