@@ -9,6 +9,7 @@ Here some of the past projects:
 <p align="left">
   <img src="https://hackster.imgix.net/uploads/attachments/295326/app8_XV25JuJSsb.jpg?auto=compress%2Cformat&w=900&h=675&fit=min" width="100"/>
 </p>
+
 [SmartCart](https://www.hackster.io/dcse-team-b/smart-cart-09155f)
 
 <p align="left">
