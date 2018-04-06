@@ -4,6 +4,7 @@ Sensing Framework for android smartphones developed by D. Satikidis (since 2012)
 The aim of this framework is to provide a quick way to develop context aware apps on android in an experimetal way.
 
 Here some of the past projects:
+
 [SmartphoneReminder] (https://www.hackster.io/43563/smartphone-reminder-5fb580)
 [SmartCart] (https://www.hackster.io/dcse-team-b/smart-cart-09155f)
 
