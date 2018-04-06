@@ -10,18 +10,13 @@ Here some of the past projects:
 [SmartCart](https://www.hackster.io/dcse-team-b/smart-cart-09155f)
 
 
-How to use?
-
-  Ideate
-  
-  Capture-Sensor-Data
+How to use?<br>
+  Ideate<br>
+  Capture-Sensor-Data<br>
+  Find patterns<br>
+  Create matcher and state-machine<br>
+  Repeat<br>
  
-  Find patterns
-  
-  Create matcher and state-machine
-  
-  Repeat
-  
 ## Documentation
 [Wiki](https://github.com/MrDio/Smartphone-Sensing-Framework/wiki/Systemoverview)
 
