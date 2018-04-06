@@ -10,6 +10,10 @@ Here some of the past projects:
 [SmartCart](https://www.hackster.io/dcse-team-b/smart-cart-09155f)
 ![alt text](https://hackster.imgix.net/uploads/attachments/294695/f2f2f2_bT0h7rkQqg.jpg?auto=compress%2Cformat&w=900&h=675&fit=min)
 
+<p align="center">
+  <img src="https://hackster.imgix.net/uploads/attachments/294695/f2f2f2_bT0h7rkQqg.jpg?auto=compress%2Cformat&w=900&h=675&fit=min" width="350"/>
+</p>
+
 How to use?
   Ideate
   Capture-Sensor-Data
