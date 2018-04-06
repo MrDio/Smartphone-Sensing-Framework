@@ -9,6 +9,7 @@ Here some of the past projects:
 
 [SmartCart](https://www.hackster.io/dcse-team-b/smart-cart-09155f)
 
+
 How to use?
   Ideate
   Capture-Sensor-Data
