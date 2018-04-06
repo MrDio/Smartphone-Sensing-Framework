@@ -13,9 +13,13 @@ Here some of the past projects:
 How to use?
 
   Ideate
+  
   Capture-Sensor-Data
+ 
   Find patterns
+  
   Create matcher and state-machine
+  
   Repeat
   
 ## Documentation
