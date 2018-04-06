@@ -9,9 +9,7 @@ Here some of the past projects:
 
 [SmartCart](https://www.hackster.io/dcse-team-b/smart-cart-09155f)
 
-<iframe frameborder='0' height='327.5' scrolling='no' 
-src='https://www.hackster.io/dcse-team-b/smart-cart-09155f/embed' width='350'>
-</iframe>
+<iframe frameborder='0' src='https://www.hackster.io/dcse-team-b/smart-cart-09155f/embed' width='350'></iframe>
 
 How to use?
   Ideate
