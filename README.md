@@ -8,7 +8,7 @@ Here some of the past projects:
 [SmartphoneReminder](https://www.hackster.io/43563/smartphone-reminder-5fb580)
 
 [SmartCart](https://www.hackster.io/dcse-team-b/smart-cart-09155f)
-
+![alt text](https://hackster.imgix.net/uploads/attachments/294695/f2f2f2_bT0h7rkQqg.jpg?auto=compress%2Cformat&w=900&h=675&fit=min)
 
 How to use?
   Ideate
