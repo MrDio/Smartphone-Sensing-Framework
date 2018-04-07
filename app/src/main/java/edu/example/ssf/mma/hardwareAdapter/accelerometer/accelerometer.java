@@ -66,7 +66,7 @@ public class accelerometer implements SensorEventListener, IAccelerometer {
 
     @Override
     public void start() {
-        sensorManager.registerListener(this, acc, SensorManager.SENSOR_DELAY_NORMAL);
+        sensorManager.registerListener(this, acc, SensorManager.SENSOR_DELAY_FASTEST);
         //CsvFileWriter.crtFile();
     }
 

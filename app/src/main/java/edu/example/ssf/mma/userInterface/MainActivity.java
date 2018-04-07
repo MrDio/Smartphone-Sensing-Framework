@@ -130,9 +130,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickCalibrate(View v){
-        //TODO CALIBRATE ACCELEROMETER
+
 
         HardwareFactory.hwAcc.start();
+        HardwareFactory.hwAcc.enableCalibration();
         HardwareFactory.hwProxi.start();
 
         waitingForStartPosition();

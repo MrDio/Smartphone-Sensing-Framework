@@ -147,6 +147,7 @@ public class StateMachineHandler extends Handler{
 		this.stateMachineTimerTask.stopStateMachine();
 		HardwareFactory.hwAcc.stop();
 		HardwareFactory.hwProxi.stop();
+		HardwareFactory.hwAcc.disableCalibration();
         CurrentTickData.resetValues();
 	}
 

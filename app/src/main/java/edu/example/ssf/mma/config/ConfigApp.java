@@ -35,7 +35,7 @@ public class ConfigApp {
 	/**
 	 * This is the global sample time of the applications' state-machine in ms.
 	 */
-	public static Integer globalSampleTimeMs = 100;
+	public static Integer globalSampleTimeMs = 10;
 
 	/** The delay of state machine timer task time in ms. */
 	public static Integer delayStateMachineTimerTaskTimeMs = 10;
