@@ -46,7 +46,17 @@ public class accelerometer implements SensorEventListener, IAccelerometer {
     private Float x = 0.0f;
     private Float y = 0.0f;
     private Float z = 0.0f;
-    private Double accelationSquareRoot = 0.0d;
+    private Float deltaX = 0.0f;
+    private Float deltaY = 0.0f;
+    private Float deltaZ = 0.0f;
+    private Float tempDeltaX = 0.0f;
+    private Float tempDeltaY = 0.0f;
+    private Float tempDeltaZ = 0.0f;
+    private Float expectedX = 0.0f;
+    private Float expectedY = 0.0f;
+    private Float expectedZ = 1.0f;
+    private Double accelerationSquareRoot = 0.0d;
+    private Boolean isCalibrationActive = false;
 
     public accelerometer(){}
 
@@ -63,7 +73,20 @@ public class accelerometer implements SensorEventListener, IAccelerometer {
     @Override
     public void stop() {
         sensorManager.unregisterListener(this);
-       // CsvFileWriter.closeFile();
+        // CsvFileWriter.closeFile();
+    }
+
+    @Override
+    public void enableCalibration() {
+        deltaX = expectedX - tempDeltaX;
+        deltaY = expectedY - tempDeltaY;
+        deltaZ = expectedZ - tempDeltaZ;
+        isCalibrationActive = true;
+    }
+
+    @Override
+    public void disableCalibration() {
+        isCalibrationActive = false;
     }
 
     @Override
@@ -71,6 +94,7 @@ public class accelerometer implements SensorEventListener, IAccelerometer {
         System.out.println("Accelerometer Changed");
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
             getAccelerometer(event);
+            setTemporaryDeltas(event);
         }
 
     }
@@ -83,6 +107,11 @@ public class accelerometer implements SensorEventListener, IAccelerometer {
         x = values[0];
         y = values[1];
         z = values[2];
+        if(isCalibrationActive){
+            x = x+deltaX;
+            y = y+deltaY;
+            z = z+deltaZ;
+        }
         double accelationSquareRoot = MathCalculations.calculatePythagoras(x,y,z);
 
         CurrentTickData.accX = x;
@@ -92,7 +121,14 @@ public class accelerometer implements SensorEventListener, IAccelerometer {
 
         //Log.d("AccValues",CurrentTickData.accVecA +"");
 
+    }
 
+    private void setTemporaryDeltas(SensorEvent event){
+        float[] values = event.values;
+        // Movement
+        tempDeltaX = values[0];
+        tempDeltaY = values[1];
+        tempDeltaZ = values[2];
     }
 
     @Override
@@ -125,6 +161,6 @@ public class accelerometer implements SensorEventListener, IAccelerometer {
 
     @Override
     public Double getAccA() {
-        return this.accelationSquareRoot;
+        return this.accelerationSquareRoot;
     }
 }
