@@ -24,10 +24,12 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import edu.example.ssf.mma.data.CurrentTickData;
-import edu.example.ssf.mma.data.MathCalculations;
 import edu.example.ssf.mma.hardwareAdapter.IProximity;
+import edu.example.ssf.mma.userInterface.MainActivity;
+
 /**
  * Initialising the Proximity-Sensor of the Smartphone and get the data output form
  * the sensor.
@@ -40,9 +42,10 @@ public class proximity implements SensorEventListener, IProximity {
     private SensorManager sensorManager;
     private Sensor proxi;
     private static final int SENSOR_SENSITIVITY = 4;
+    private Context context;
 
     private Float x = 0.0f;
-    private String proxState = " ";
+    private boolean proxState = false;
 
     public proximity(){}
 
@@ -52,7 +55,7 @@ public class proximity implements SensorEventListener, IProximity {
 
     @Override
     public void start() {
-        sensorManager.registerListener(this, proxi, SensorManager.SENSOR_DELAY_NORMAL);
+        sensorManager.registerListener(this, proxi, SensorManager.SENSOR_DELAY_FASTEST);
     }
 
     @Override
@@ -63,30 +66,22 @@ public class proximity implements SensorEventListener, IProximity {
     @Override
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_PROXIMITY) {
-            //getProximity(event);
             if (event.values[0] >= -SENSOR_SENSITIVITY && event.values[0] <= SENSOR_SENSITIVITY) {
                 //near
-                this.proxState = "near";
+                this.proxState = true;
                 CurrentTickData.proxState = this.proxState;
             } else {
                 //far
-                this.proxState = "far";
+                this.proxState = false;
+                if(MainActivity.isRacing){
+                    Toast.makeText(context, "Round: "+CurrentTickData.round, Toast.LENGTH_LONG).show();
+                    CurrentTickData.round++;
+                }
+
                 CurrentTickData.proxState = this.proxState;
             }
 
         }
-
-    }
-
-    private void getProximity(SensorEvent event) {
-
-        /** Not in use
-         * works only with mobile phones supporting distance proximity!!!
-         * thatfor no getter --> use proxState or write a function same pattern
-         * */
-
-        this.x = event.values[0];
-
 
     }
 
@@ -100,15 +95,11 @@ public class proximity implements SensorEventListener, IProximity {
     public void initProximity(Context context) {
         sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
         proxi = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
-    }
-
-    public void proxiUI(String s1, TextView...tvs){
-        Log.d("proxi","proxi");
-        tvs[0].setText("Proximity: " + s1);
+        this.context = context;
     }
 
     @Override
-    public String getProximity() {
+    public boolean getProximity() {
         return this.proxState;
     }
 

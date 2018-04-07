@@ -40,14 +40,8 @@ public class ConfigApp {
 	/** The delay of state machine timer task time in ms. */
 	public static Integer delayStateMachineTimerTaskTimeMs = 10;
 
-	/** Switch to simulation- or to real-mode. */
-	/** real-mode == false */
-	public static boolean isSimulation = false;
 
 	/** The string of the target storage direction. */
-	public static String targetStorageDir = "/RapidDisruption/Data";
-	
-	/** The string for the csv reader stimuli. */
-	public static String csvReaderStimuli = "S01.csv";
+	public static String targetStorageDir = "/LapOps/Data";
 
 }

@@ -76,24 +76,12 @@ public class CsvFileWriter {
 			outputFile = new File( dir,fileName);
 			Log.d("creating file", "File Created");
 			fileWriter=new FileWriter(outputFile, true);
-			fileWriter.write("Tick" +separator+
+			fileWriter.write("Round" +separator+
 					"Timestamp"+separator+
 					"AccX"+separator+
 					"AccY"+separator+
 					"AccZ"+separator+
 					"Acc Vector a"+separator+
-					"GPS Altitude"+separator+
-					"GPS Latitude"+separator+
-					"GPS Longitude"+separator+
-					"Mic Amplitude"+separator+
-					"RotationX"+separator+
-					"RotationY"+separator+
-					"RotationZ"+separator+
-					"MagneticX"+separator+
-					"MagneticY"+separator+
-					"MagneticZ"+separator+
-					"Proximity"+separator+
-					"Event"+separator+
 					"\r\n");
 		}
 		catch(Exception e){
@@ -104,44 +92,30 @@ public class CsvFileWriter {
     
     /**
      * Writes the captured data in the csv file.
-     *
+     * @param round current round
      * @param timestamp current timestamp
      * @param accx current Accelerometer X-Value
      * @param accy current Accelerometer Y-Value
      * @param accz current Accelerometer Z-Value
      * @param accVecA = sqrt(accx+accy+accz)
      */
-	public static void writeLine(String cnt,
+	public static void writeLine(String round,
 			String timestamp,
 			String accx,
 			String accy,
 			String accz,
-			String accVecA,
-			String gpsAlt,
-			String gpsLat,
-            String gpsLon,
-            String rotX,
-            String rotY,
-            String rotZ,
-            String proximity
+			String accVecA
 			) {
 		if (fileWriter==null) {
 			return;
 		}
 		try {
-			fileWriter.write(cnt + separator +
+			fileWriter.write(round + separator +
 					timestamp+separator+
 					accx+separator+
 					accy+separator+
 					accz+separator+
 					accVecA+separator+
-                    gpsAlt+separator+
-                    gpsLat+separator+
-                    gpsLon+separator+
-                    rotX+separator+
-                    rotY+separator+
-                    rotZ+separator+
-                    proximity+separator+
 					"\r\n");
 
 

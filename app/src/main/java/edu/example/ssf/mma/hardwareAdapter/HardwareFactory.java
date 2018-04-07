@@ -21,9 +21,7 @@ package edu.example.ssf.mma.hardwareAdapter;
 import android.content.Context;
 import android.util.Log;
 
-import edu.example.ssf.mma.hardwareAdapter.GPS.gps;
 import edu.example.ssf.mma.hardwareAdapter.accelerometer.accelerometer;
-import edu.example.ssf.mma.hardwareAdapter.gyroscope.gyro;
 import edu.example.ssf.mma.hardwareAdapter.proximity.proximity;
 
 
@@ -45,10 +43,6 @@ public class HardwareFactory {
 	/** setting the simulated accelerometer to null. */
 	public static IAccelerometer hwAcc = null;
 
-	public static IGPS hwGPS = null;
-
-	public static IGyroscope hwGyro = null;
-
 	public static IProximity hwProxi = null;
 
 	
@@ -60,10 +54,6 @@ public class HardwareFactory {
 
 		getAccelerometer(context);
 		Log.d("init?","acc initialized");
-		getGPS(context);
-		Log.d("init?","gps initialized");
-		getGyroscope(context);
-		Log.d("init?","gyro initialized");
 		getProximity(context);
 		Log.d("init?","proxi initialized");
 
@@ -80,29 +70,6 @@ public class HardwareFactory {
 		hwAcc = new accelerometer(context);
 
 		return hwAcc;
-	}
-	
-	/**
-	 * determines if to uses the devices GPS-sensor or simulate a GPS-sensor
-	 * 
-	 * @return either the simulated or the devices GPS-sensor 
-	 */
-	public static IGPS getGPS(Context context) {
-
-		hwGPS = new gps(context);
-
-		return hwGPS;
-	}
-	/**
-	 * determines if to uses the devices Gyro-sensor or simulate a Gyro-sensor
-	 *
-	 * @return either the simulated or the devices Gyro-sensor
-	 */
-	public static IGyroscope getGyroscope(Context context) {
-
-		hwGyro = new gyro(context);
-
-		return hwGyro;
 	}
 
 

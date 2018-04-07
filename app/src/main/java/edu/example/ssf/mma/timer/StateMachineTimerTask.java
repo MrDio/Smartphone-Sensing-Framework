@@ -94,7 +94,6 @@ public class StateMachineTimerTask extends TimerTask{
 		Message msg = new Message();
 		Bundle bundle = new Bundle();
 
-		bundle.putInt(curTickMsgTag, this.cnt);
 		bundle.putString(curTimestampMsgTag, this.timestampFormat.format(new Date()));
 
 		msg.setData(bundle);

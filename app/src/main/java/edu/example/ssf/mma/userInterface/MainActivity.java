@@ -27,42 +27,27 @@ package edu.example.ssf.mma.userInterface;
  * @version 2.0
  */
 import android.Manifest;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.ToggleButton;
 
 
 import edu.example.ssf.mma.R;
-import edu.example.ssf.mma.charts.AccChart;
-import edu.example.ssf.mma.config.ConfigApp;
 import edu.example.ssf.mma.data.CsvFileWriter;
 import edu.example.ssf.mma.data.CurrentTickData;
 import edu.example.ssf.mma.hardwareAdapter.HardwareFactory;
 import edu.example.ssf.mma.timer.StateMachineHandler;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity {
 
-    private DrawerLayout mDrawerLayout;
-    private ActionBarDrawerToggle mToggle;
-    public static boolean mmaCallBackBool = false;
-    private boolean navigationBool = false;
-    private int idOfNavObj;
-
+    public static boolean isMeasuring = false;
+    public static boolean carOnStart = false;
+    public static boolean isRacing = false;
     // Init HW-Factory
     HardwareFactory hw;
 
@@ -70,19 +55,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public  static final int PERMISSIONS_MULTIPLE_REQUEST = 123;
 
     // UI
-    private TextView headerTextView;
-    private TextView textView1;
-    private TextView textView2;
-    private TextView textView3;
-    private TextView textView4;
-    private TextView textView5;
-    private static TextView textViewActState;
-    private EditText eventEditText;
-    private ToggleButton recButton, mmaButton, eventButton;
-    private Button fileBrowserButton, showChartButton;
-
-    //Text View Result
-    private String defaultMessage = "Please Choose your Sensor to Display!";
+    private TextView instructionText;
+    private ImageView light1;
+    private ImageView light2;
+    private ImageView light3;
+    private Button button;
 
 
     /** Declaration of the state machine. */
@@ -97,121 +74,29 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ActivityCompat.requestPermissions(MainActivity.this, new  String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.RECORD_AUDIO,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSIONS_MULTIPLE_REQUEST);
 
         //UI -- Textviews init
-        eventEditText = findViewById(R.id.editText);
-        headerTextView = findViewById(R.id.headerTextView);
-        headerTextView.setText(defaultMessage);
-        textView1 = findViewById(R.id.TextOne);
-        textView2 = findViewById(R.id.TextTwo);
-        textView3 = findViewById(R.id.TextThree);
-        textView4 = findViewById(R.id.TextFour);
-        textView5 =  findViewById(R.id.TextFive);
-        textViewActState=findViewById(R.id.textViewActState);
-        textViewActState.setText("");
+        instructionText = findViewById(R.id.instructionText);
+        light1 = findViewById(R.id.light1);
+        light2 = findViewById(R.id.light2);
+        light3 = findViewById(R.id.light3);
+        button = findViewById(R.id.doneButton);
+        light1.setImageResource(R.mipmap.lightred);
+        setInitialState();
+    }
 
-        // NavigationView init
-        mDrawerLayout = findViewById(R.id.drawerLayout);
-        mToggle = new ActionBarDrawerToggle(this, mDrawerLayout,R.string.open,R.string.close);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        mDrawerLayout.addDrawerListener(mToggle);
-        mToggle.syncState();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-
-        recButton = findViewById(R.id.recMic);
-        recButton.setOnClickListener(new View.OnClickListener() {
+    public void setInitialState(){
+        light1.setImageResource(R.mipmap.lightred);
+        light2.setImageResource(R.mipmap.lightoff);
+        light3.setImageResource(R.mipmap.lightoff);
+        instructionText.setText("Mount device on car");
+        button.setText("DONE");
+        button.setActivated(true);
+        button.setVisibility(View.VISIBLE);
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(ConfigApp.isSimulation){
-                        mmaCallBackBool = true;
-                    Log.d("CHECKED", "called");
-                }
-                else {
-                    if (recButton.isChecked()) {
-                        CsvFileWriter.crtFile();
-                        mmaCallBackBool = true;
-                    } else {
-                        CurrentTickData.resetValues();
-                        CsvFileWriter.closeFile();
-                        stateMachineHandler.stopStateMachine();
-                    }
-                }
+                onClickMount(view);
             }
         });
-
-        eventButton = findViewById(R.id.eventHandler);
-        eventButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if((mmaButton.isChecked()) || (recButton.isChecked())){
-
-                    if (eventButton.isChecked()) {
-                        if(eventEditText.getText().toString().trim().length() == 0){
-                            CurrentTickData.event = "Event Occured";
-                        }
-                        else{
-                            CurrentTickData.event = eventEditText.getText().toString();
-                        }
-
-                    } else {
-                        CurrentTickData.event = "";
-
-                    }
-                    Log.d("event", "" + CurrentTickData.event);
-                }
-                else {
-                    Toast.makeText(MainActivity.this,"Please first start the MMA", Toast.LENGTH_LONG).show();
-                    eventButton.setChecked(false);
-                }
-                if(eventButton.isChecked()){
-                    eventEditText.setText(null);
-                }
-            }
-        });
-        mmaButton = findViewById(R.id.mmaButton);
-        mmaButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (t.isAlive()){
-                    // Do Nothing
-                }
-                else{
-                    t.start();}
-                if (mmaButton.isChecked()) {
-
-                    HardwareFactory.hwAcc.start();
-                    HardwareFactory.hwGPS.initGPS(MainActivity.this);
-                    HardwareFactory.hwGyro.start();
-                    HardwareFactory.hwProxi.start();
-                    stateMachineHandler.startStateMachine();
-                    showChartButton.setVisibility(View.VISIBLE);
-                }else{
-                    HardwareFactory.hwAcc.stop();
-                    HardwareFactory.hwGPS.stop();
-                    HardwareFactory.hwGyro.stop();
-                    HardwareFactory.hwProxi.stop();
-                    CurrentTickData.resetValues();
-                }
-
-            }
-        });
-        showChartButton = findViewById(R.id.showChart);
-        showChartButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (t.isAlive()){
-                    // Do Nothing
-                }
-                else{
-                    t.start();}
-                if(showChartButton.isPressed()){
-                    Intent intent = new Intent(MainActivity.this, AccChart.class);
-                    startActivity(intent);
-                }
-            }
-        });
-        //Buttons & Toggle Buttons
-
     }
 
     @Override
@@ -222,164 +107,166 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // Hardware
                     hw = new HardwareFactory(this);
-                    stateMachineHandler=new StateMachineHandler(this);
-                } else {
-                    // Do Nothing
+                    stateMachineHandler = new StateMachineHandler(this);
                 }
         }
     }
-    @Override
-    public void onBackPressed() {
-        if (this.mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
-            this.mDrawerLayout.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        // Handle navigation view item clicks here.
-        idOfNavObj = item.getItemId();
-        if (navigationBool) {
-            navigationBool = false;
-            onClickUI();
-        }
-            if (idOfNavObj == R.id.nav_acc) {
-                headerTextView.setText(R.string.acce);
-                navigationBool = true;
-                onClickUI();
-            } else if (idOfNavObj == R.id.nav_gyro) {
-                headerTextView.setText(R.string.gyro);
-                navigationBool = true;
-                onClickUI();
-            } else if (idOfNavObj == R.id.nav_magn) {
-                headerTextView.setText(R.string.magn);
-                navigationBool = true;
-                onClickUI();
-            } else if (idOfNavObj == R.id.nav_mic) {
-                headerTextView.setText(R.string.mic);
-                navigationBool = true;
-                onClickUI();
-            } else if (idOfNavObj == R.id.nav_gps) {
-                headerTextView.setText(R.string.gps);
-                navigationBool = true;
-                onClickUI();
-            } else if (idOfNavObj == R.id.nav_proximity) {
-                headerTextView.setText(R.string.proximity);
-                navigationBool = true;
-                onClickUI();
+
+    public void onClickMount(View v){
+
+        light1.setImageResource(R.mipmap.lightred);
+        light2.setImageResource(R.mipmap.lightred);
+        light3.setImageResource(R.mipmap.lightoff);
+        instructionText.setText("Calibrate sensors");
+        button.setText("CALIBRATE");
+        button.setActivated(true);
+        button.setVisibility(View.VISIBLE);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickCalibrate(view);
             }
-            mDrawerLayout.closeDrawer(GravityCompat.START);
-            return true;
-        }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        return mToggle.onOptionsItemSelected(item) || super.onOptionsItemSelected(item);
+        });
     }
 
-    public static void actState(String state){
-        textViewActState.setText(state);
+    public void onClickCalibrate(View v){
+        //TODO CALIBRATE ACCELEROMETER
 
+        HardwareFactory.hwAcc.start();
+        HardwareFactory.hwProxi.start();
+
+        waitingForStartPosition();
     }
 
-    Thread t = new Thread(new Runnable() {
-        @Override
-        public void run() {
-            while (true) {
-                runOnUiThread(new Runnable() {
+    public void waitingForStartPosition(){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                light1.setImageResource(R.mipmap.lightred);
+                light2.setImageResource(R.mipmap.lightred);
+                light3.setImageResource(R.mipmap.lightred);
+                instructionText.setText("Place car on start");
+                button.setText("");
+                button.setActivated(false);
+                button.setVisibility(View.INVISIBLE);
+            }
+        });
+        Thread t = new Thread(new Runnable(){
+            @Override
+            public void run(){
+                while (!carOnStart && !isRacing) {
+                    if(CurrentTickData.proxState){
+                        carOnStart = true;
+                        onReadyForStart();
+                    }
+                }
+            }
+        });
+        t.start();
+    }
+
+    public void onReadyForStart(){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                light1.setImageResource(R.mipmap.lightred);
+                light2.setImageResource(R.mipmap.lightred);
+                light3.setImageResource(R.mipmap.lightred);
+                instructionText.setText("You're ready to start");
+                button.setText("GO");
+                button.setActivated(true);
+                button.setVisibility(View.VISIBLE);
+                button.setOnClickListener(new View.OnClickListener() {
                     @Override
-                    public void run() {
-                        if (idOfNavObj == R.id.nav_acc) {
-                            textView5.setVisibility(View.INVISIBLE);
-                            textView1.setText("X: " + String.format("%.2f", CurrentTickData.accX));
-                            textView2.setText("Y: " + String.format("%.2f", CurrentTickData.accY));
-                            textView3.setText("Z: " + String.format("%.2f", CurrentTickData.accZ));
-                            textView4.setText("AccV: " + String.format("%.2f", CurrentTickData.accVecA));
-                        } else if (idOfNavObj == R.id.nav_gps) {
-                            textView1.setText("GPS Alt: " + String.format("%.2f", CurrentTickData.GPSalt));
-                            textView2.setText("GPS Lat: " + String.format("%.6f", CurrentTickData.GPSlat));
-                            textView3.setText("GPS Lon: "  + String.format("%.6f", CurrentTickData.GPSlon));
-                            textView4.setText("GPS Bear: " + String.format("%.2f", CurrentTickData.GPSbearing));
-                            textView5.setText("GPS Speed: " + String.format("%.2f", CurrentTickData.GPSspeed));
-                            Log.d("GPS", "lat : " + CurrentTickData.GPSlat + "---" + "lon : " + CurrentTickData.GPSlon );
-                        } else if (idOfNavObj == R.id.nav_gyro){
-                            textView4.setVisibility(View.INVISIBLE);
-                            textView5.setVisibility(View.INVISIBLE);
-                            textView1.setText("Rot. X: " + String.format("%.2f", CurrentTickData.rotationX));
-                            textView2.setText("Rot. Y: " + String.format("%.2f", CurrentTickData.rotationY));
-                            textView3.setText("Rot. Z: " + String.format("%.2f", CurrentTickData.rotationZ));
-                            // Log.d("GPS", "lat : " + CurrentTickData. + "---" + "lon : " + CurrentTickData. );
-                        } else if (idOfNavObj == R.id.nav_mic) {
-                            textView2.setVisibility(View.INVISIBLE);
-                            textView3.setVisibility(View.INVISIBLE);
-                            textView4.setVisibility(View.INVISIBLE);
-                            textView5.setVisibility(View.INVISIBLE);
-                            textView1.setText("Max Aplitude : " + CurrentTickData.micMaxAmpl);
+                    public void onClick(View view) {
 
-                        } else if (idOfNavObj == R.id.nav_magn){
-                            textView4.setVisibility(View.INVISIBLE);
-                            textView5.setVisibility(View.INVISIBLE);
-                            textView1.setText("Magn. X: " + String.format("%.2f", CurrentTickData.magneticX));
-                            textView2.setText("Magn. Y: " + String.format("%.2f", CurrentTickData.magneticY));
-                            textView3.setText("Magn. Z: " + String.format("%.2f", CurrentTickData.magneticZ));
-                            // Log.d("GPS", "lat : " + CurrentTickData. + "---" + "lon : " + CurrentTickData. );
-                        }else if (idOfNavObj == R.id.nav_proximity) {
-                            textView2.setVisibility(View.INVISIBLE);
-                            textView3.setVisibility(View.INVISIBLE);
-                            textView4.setVisibility(View.INVISIBLE);
-                            textView5.setVisibility(View.INVISIBLE);
-                            textView1.setText("Proximity: " + CurrentTickData.proxState);
-                        }
-
-
+                        button.setActivated(false);
+                        button.setVisibility(View.INVISIBLE);
+                        onClickStartMeasurements(view);
                     }
                 });
-                try {
-                    Thread.sleep(1000);
-                } catch (Exception e) {
-                    // Do Nothing
+            }
+        });
+        Thread t = new Thread(new Runnable(){
+            @Override
+            public void run(){
+                while (carOnStart) {
+                    if(!CurrentTickData.proxState && !isRacing){
+                        carOnStart = false;
+                        waitingForStartPosition();
+                    }
                 }
             }
-        }
-    });
+        });
+        t.start();
 
-    /** TODO SEPARATE INTO OWN INTERFACE SoC
-     *  onClick Handlers for different Sensors + UI (later non textual but graphical )
-     */
-    public void onClickUI(){
-        if(navigationBool) {
-            //Thread
-            if (t.isAlive()){
-                //Do Nothing
+    }
+
+    public void onClickStartMeasurements(View v){
+        carOnStart = false;
+        CsvFileWriter.crtFile();
+        light1.setImageResource(R.mipmap.lightoff);
+        light2.setImageResource(R.mipmap.lightoff);
+        light3.setImageResource(R.mipmap.lightoff);
+        instructionText.setText("");
+        button.setText("");
+        button.setActivated(false);
+        button.setVisibility(View.INVISIBLE);
+
+
+        Thread t = new Thread(new Runnable(){
+            @Override
+            public void run(){
+                while (!isMeasuring) {
+                    if(!CurrentTickData.proxState){
+                        isMeasuring = true;
+                        stateMachineHandler.startStateMachine();
+                        onRacing();
+                    }
+                }
             }
-            else{
-                t.start();}
-            // UI
-            show_hideUI();
+        });
+        t.start();
 
-        } else {
-            //UI
-            headerTextView.setText(defaultMessage);
-            show_hideUI();
-
-        }
     }
 
-    public void show_hideUI(){
-        if(textView1.getVisibility() == View.VISIBLE){
-            textView1.setVisibility(View.INVISIBLE);
-            textView2.setVisibility(View.INVISIBLE);
-            textView3.setVisibility(View.INVISIBLE);
-            textView4.setVisibility(View.INVISIBLE);
-            textView5.setVisibility(View.INVISIBLE);
-        }else if(textView1.getVisibility() == View.INVISIBLE){
-            textView1.setVisibility(View.VISIBLE);
-            textView2.setVisibility(View.VISIBLE);
-            textView3.setVisibility(View.VISIBLE);
-            textView4.setVisibility(View.VISIBLE);
-            textView5.setVisibility(View.VISIBLE);
+    public void onRacing(){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                isRacing = true;
 
-        }
+
+                light1.setImageResource(R.mipmap.lightgreen);
+                light2.setImageResource(R.mipmap.lightgreen);
+                light3.setImageResource(R.mipmap.lightgreen);
+                instructionText.setText("");
+                button.setText("FINISH");
+                button.setActivated(true);
+                button.setVisibility(View.VISIBLE);
+                button.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        onClickFinish(view);
+                    }
+                });
+            }
+        });
+
     }
+
+    public void onClickFinish(View view){
+        CsvFileWriter.closeFile();
+        CurrentTickData.resetValues();
+        stateMachineHandler.stopStateMachine();
+
+        isMeasuring = false;
+        carOnStart = false;
+        isRacing = false;
+
+        setInitialState();
+    }
+
+
+
 }

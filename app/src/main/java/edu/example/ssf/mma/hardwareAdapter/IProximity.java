@@ -19,7 +19,6 @@ package edu.example.ssf.mma.hardwareAdapter;
 
 
 import android.content.Context;
-import android.widget.TextView;
 
 /**
  * Interface class to Instantiate the Proximity Sensor , get the state of the Sensor
@@ -38,5 +37,5 @@ public interface IProximity {
 	 void start();
 	 void stop();
 
-	 String getProximity();
+	 boolean getProximity();
 }

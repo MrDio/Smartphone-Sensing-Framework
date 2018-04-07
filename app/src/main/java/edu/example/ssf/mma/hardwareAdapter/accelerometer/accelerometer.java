@@ -68,6 +68,7 @@ public class accelerometer implements SensorEventListener, IAccelerometer {
 
     @Override
     public void onSensorChanged(SensorEvent event) {
+        System.out.println("Accelerometer Changed");
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
             getAccelerometer(event);
         }

@@ -71,11 +71,7 @@ public class StateMachineHandler extends Handler{
 	/** Interface to the hardware abstraction layer. */
 	private IAccelerometer accelerometer = null;
 	/** Interface to the hardware abstraction layer. */
-	private IGPS gps = null;
-	/** Interface to the hardware abstraction layer. */
 	private IProximity proximity = null;
-	/** Interface to the hardware abstraction layer. */
-	private IGyroscope gyroscope = null;
 
 
 	public StateMachineHandler(Context context) {
@@ -89,8 +85,6 @@ public class StateMachineHandler extends Handler{
 		 * Interface to the hardware abstraction layer
 		 */
 		this.accelerometer = HardwareFactory.getAccelerometer(context);
-		this.gps = HardwareFactory.getGPS(context);
-		this.gyroscope = HardwareFactory.getGyroscope(context);
 		this.proximity = HardwareFactory.getProximity(context);
 	}
 
@@ -105,7 +99,6 @@ public class StateMachineHandler extends Handler{
 		 
 		
 		//Unpack data from bundle by using message tags defined in StateMachineTimerTask
-    	CurrentTickData.actState = bundle.getString(StateMachineTimerTask.actStateMsgTag);
     	CurrentTickData.curTimestamp = bundle.getString(StateMachineTimerTask.curTimestampMsgTag);
     	CurrentTickData.curTick = bundle.getInt(StateMachineTimerTask.curTickMsgTag);
     	
@@ -116,32 +109,19 @@ public class StateMachineHandler extends Handler{
     	 * Fetch the sensor data just one time per tick! 
     	 * It's better to store data temporary at first.  
     	 */
-    	//Fetch data from Sensors before writing it in the CSV
-
-		//Update user-interface State
-		MainActivity.actState(CurrentTickData.actState);
 
 
-
-		if(MainActivity.mmaCallBackBool) {
+		if(MainActivity.isMeasuring) {
 			//Log.d("getAccX", "StateMachineHandler.MainActivity.mmaCallBackBool");
 			// Try with direct usage of sensor data :)
-			CsvFileWriter.writeLine(CurrentTickData.curTick.toString(),
+			CsvFileWriter.writeLine(Integer.toString(CurrentTickData.round),
 					CurrentTickData.curTimestamp,
 					CurrentTickData.accX.toString(),
 					CurrentTickData.accY.toString(),
 					CurrentTickData.accZ.toString(),
-					CurrentTickData.accVecA.toString(),
-					CurrentTickData.GPSalt.toString(),
-					CurrentTickData.GPSlon.toString(),
-					CurrentTickData.GPSlat.toString(),
-					CurrentTickData.rotationX.toString(),
-					CurrentTickData.rotationY.toString(),
-					CurrentTickData.rotationZ.toString(),
-					CurrentTickData.proxState
+					CurrentTickData.accVecA.toString()
 			);
 			//Log.d("Time", CurrentTickData.curTimestamp);
-
 		}
 		//Log.d("getAccX", "NOT StateMachineHandler.MainActivity.mmaCallBackBool");
     	//Call daddy and say everything is ok, by forwarding received message
@@ -156,25 +136,19 @@ public class StateMachineHandler extends Handler{
 		if (initTask) {
         	this.timer.schedule(this.stateMachineTimerTask, this.delayTimeMs, this.cycleTimeMs);
         	this.initTask=false;
+
 		}
-		this.stateMachineTimerTask.startStateMachine();
    	}
 	
 	/**
 	 * Stops the state machine
 	 */
-	public void stopStateMachine(){
+	public void stopStateMachine()	{
 		this.stateMachineTimerTask.stopStateMachine();
+		HardwareFactory.hwAcc.stop();
+		HardwareFactory.hwProxi.stop();
+        CurrentTickData.resetValues();
 	}
-	
-	/**
-	 * Under Construction: This method allows to change the cycle-time of the state-machine in run-time.
-	 * @param cycleTimeMs The cycle time to change 
-	 */
-	void changeCycleTime(Integer cycleTimeMs){
-		this.cycleTimeMs=cycleTimeMs;
-		this.stopStateMachine();
-		this.startStateMachine();
-	}
+
 }
 
