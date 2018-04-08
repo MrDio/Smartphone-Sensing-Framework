@@ -17,62 +17,120 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/light1"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:layout_marginBottom="180dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@mipmap/lightoff" />
-
-        <ImageView
-            android:id="@+id/light2"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:layout_marginBottom="180dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/light3"
-            app:layout_constraintStart_toEndOf="@+id/light1"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@mipmap/lightoff" />
-
-        <ImageView
-            android:id="@+id/light3"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
-            android:layout_marginBottom="180dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="100dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/instructionText"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@mipmap/lightoff" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/light1"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginBottom="180dp"
+                android:layout_marginEnd="6dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/light2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@mipmap/lightoff" />
+
+            <ImageView
+                android:id="@+id/light2"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginBottom="180dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="1dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/doneButton"
+                app:layout_constraintStart_toEndOf="@+id/light1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@mipmap/lightoff" />
+
+            <ImageView
+                android:id="@+id/light3"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginBottom="180dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/light4"
+                app:layout_constraintStart_toEndOf="@+id/light2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@mipmap/lightoff" />
+
+            <ImageView
+                android:id="@+id/light4"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginBottom="180dp"
+                android:layout_marginEnd="1dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="1dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/doneButton"
+                app:layout_constraintStart_toEndOf="@+id/light3"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@mipmap/lightoff" />
+
+            <ImageView
+                android:id="@+id/light5"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginBottom="180dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/doneButton"
+                app:layout_constraintStart_toEndOf="@+id/light4"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@mipmap/lightoff" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/doneButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
             android:layout_marginBottom="111dp"
             android:layout_marginEnd="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/light2" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
             android:id="@+id/instructionText"
@@ -83,12 +141,10 @@
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:textAppearance="@android:style/TextAppearance.Medium"
             app:layout_constraintBottom_toTopOf="@+id/doneButton"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/light2" />
+            app:layout_constraintStart_toStartOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 </android.support.v4.widget.DrawerLayout>

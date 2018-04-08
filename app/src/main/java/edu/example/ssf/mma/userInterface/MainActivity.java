@@ -32,6 +32,8 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -59,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
     private ImageView light1;
     private ImageView light2;
     private ImageView light3;
+    private ImageView light4;
+    private ImageView light5;
     private Button button;
 
 
@@ -69,6 +73,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        //Remove title bar
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        //Remove notification bar
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
 
         ActivityCompat.requestPermissions(MainActivity.this, new  String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.RECORD_AUDIO,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSIONS_MULTIPLE_REQUEST);
@@ -78,6 +87,8 @@ public class MainActivity extends AppCompatActivity {
         light1 = findViewById(R.id.light1);
         light2 = findViewById(R.id.light2);
         light3 = findViewById(R.id.light3);
+        light4 = findViewById(R.id.light4);
+        light5 = findViewById(R.id.light5);
         button = findViewById(R.id.doneButton);
         light1.setImageResource(R.mipmap.lightred);
         setInitialState();
@@ -87,6 +98,8 @@ public class MainActivity extends AppCompatActivity {
         light1.setImageResource(R.mipmap.lightred);
         light2.setImageResource(R.mipmap.lightoff);
         light3.setImageResource(R.mipmap.lightoff);
+        light4.setImageResource(R.mipmap.lightoff);
+        light5.setImageResource(R.mipmap.lightoff);
         instructionText.setText("Mount device on car");
         button.setText("DONE");
         button.setActivated(true);
@@ -117,6 +130,8 @@ public class MainActivity extends AppCompatActivity {
         light1.setImageResource(R.mipmap.lightred);
         light2.setImageResource(R.mipmap.lightred);
         light3.setImageResource(R.mipmap.lightoff);
+        light4.setImageResource(R.mipmap.lightoff);
+        light5.setImageResource(R.mipmap.lightoff);
         instructionText.setText("Calibrate sensors");
         button.setText("CALIBRATE");
         button.setActivated(true);
@@ -131,12 +146,35 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickCalibrate(View v){
 
+        light1.setImageResource(R.mipmap.lightred);
+        light2.setImageResource(R.mipmap.lightred);
+        light3.setImageResource(R.mipmap.lightyellow);
+        light4.setImageResource(R.mipmap.lightoff);
+        light5.setImageResource(R.mipmap.lightoff);
+        instructionText.setText("Calibrating...");
+        button.setText("");
+        button.setActivated(false);
+        button.setVisibility(View.INVISIBLE);
 
         HardwareFactory.hwAcc.start();
         HardwareFactory.hwAcc.enableCalibration();
         HardwareFactory.hwProxi.start();
 
-        waitingForStartPosition();
+        light1.setImageResource(R.mipmap.lightred);
+        light2.setImageResource(R.mipmap.lightred);
+        light3.setImageResource(R.mipmap.lightred);
+        light4.setImageResource(R.mipmap.lightoff);
+        light5.setImageResource(R.mipmap.lightoff);
+        instructionText.setText("Calibration successful");
+        button.setText("GET IN POSITION");
+        button.setActivated(true);
+        button.setVisibility(View.VISIBLE);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                waitingForStartPosition();
+            }
+        });
     }
 
     public void waitingForStartPosition(){
@@ -146,6 +184,8 @@ public class MainActivity extends AppCompatActivity {
                 light1.setImageResource(R.mipmap.lightred);
                 light2.setImageResource(R.mipmap.lightred);
                 light3.setImageResource(R.mipmap.lightred);
+                light4.setImageResource(R.mipmap.lightyellow);
+                light5.setImageResource(R.mipmap.lightoff);
                 instructionText.setText("Place car on start");
                 button.setText("");
                 button.setActivated(false);
@@ -173,6 +213,8 @@ public class MainActivity extends AppCompatActivity {
                 light1.setImageResource(R.mipmap.lightred);
                 light2.setImageResource(R.mipmap.lightred);
                 light3.setImageResource(R.mipmap.lightred);
+                light4.setImageResource(R.mipmap.lightred);
+                light5.setImageResource(R.mipmap.lightoff);
                 instructionText.setText("You're ready to start");
                 button.setText("GO");
                 button.setActivated(true);
@@ -206,9 +248,11 @@ public class MainActivity extends AppCompatActivity {
     public void onClickStartMeasurements(View v){
         carOnStart = false;
         CsvFileWriter.crtFile();
-        light1.setImageResource(R.mipmap.lightoff);
-        light2.setImageResource(R.mipmap.lightoff);
-        light3.setImageResource(R.mipmap.lightoff);
+        light1.setImageResource(R.mipmap.lightred);
+        light2.setImageResource(R.mipmap.lightred);
+        light3.setImageResource(R.mipmap.lightred);
+        light4.setImageResource(R.mipmap.lightred);
+        light5.setImageResource(R.mipmap.lightred);
         instructionText.setText("");
         button.setText("");
         button.setActivated(false);
@@ -238,9 +282,11 @@ public class MainActivity extends AppCompatActivity {
                 isRacing = true;
 
 
-                light1.setImageResource(R.mipmap.lightgreen);
-                light2.setImageResource(R.mipmap.lightgreen);
-                light3.setImageResource(R.mipmap.lightgreen);
+                light1.setImageResource(R.mipmap.lightoff);
+                light2.setImageResource(R.mipmap.lightoff);
+                light3.setImageResource(R.mipmap.lightoff);
+                light4.setImageResource(R.mipmap.lightoff);
+                light5.setImageResource(R.mipmap.lightoff);
                 instructionText.setText("");
                 button.setText("FINISH");
                 button.setActivated(true);
