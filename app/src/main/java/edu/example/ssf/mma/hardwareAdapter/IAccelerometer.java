@@ -40,8 +40,8 @@ public interface IAccelerometer {
 
 	 void start();
 	 void stop();
-	 void enableCalibration();
-	 void disableCalibration();
+//	 void enableCalibration();
+//	 void disableCalibration();
 	 Float getAccX();
 	 Float getAccY();
 	 Float getAccZ();

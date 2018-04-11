@@ -157,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
         button.setVisibility(View.INVISIBLE);
 
         HardwareFactory.hwAcc.start();
-        //HardwareFactory.hwAcc.enableCalibration();
+//        HardwareFactory.hwAcc.enableCalibration();
         HardwareFactory.hwProxi.start();
 
         light1.setImageResource(R.mipmap.lightred);
