@@ -85,7 +85,7 @@ public class accelerometer implements SensorEventListener, IAccelerometer {
             // with t, the low-pass filter's time-constant
             // and dT, the event delivery rate
 
-            final float alpha = 0.8f;
+/*            final float alpha = 0.8f;
 
             gravity[0] = alpha * gravity[0] + (1 - alpha) * event.values[0];
             gravity[1] = alpha * gravity[1] + (1 - alpha) * event.values[1];
@@ -95,18 +95,18 @@ public class accelerometer implements SensorEventListener, IAccelerometer {
 
             linear_acceleration[0] = event.values[0] - gravity[0];
             linear_acceleration[1] = event.values[1] - gravity[1];
-            linear_acceleration[2] = event.values[2] - gravity[2];
+            linear_acceleration[2] = event.values[2] - gravity[2];*/
 
 
-            getAccelerometer(linear_acceleration);
+            getAccelerometer(event);
         }
 
     }
 
-    private void getAccelerometer(float[] linear_acceleration) {
+    private void getAccelerometer(SensorEvent event) {
 
 
-        float[] values = linear_acceleration;
+        float[] values = event.values;
         // Movement
         x = values[0];
         y = values[1];
