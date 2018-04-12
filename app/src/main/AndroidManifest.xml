@@ -25,6 +25,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".userInterface.MainActivity"> </activity>
+        <activity android:name=".userInterface.LapListActivity"> </activity>
+        <activity android:name=".userInterface.ReportActivity"> </activity>
     </application>
 
 </manifest>
