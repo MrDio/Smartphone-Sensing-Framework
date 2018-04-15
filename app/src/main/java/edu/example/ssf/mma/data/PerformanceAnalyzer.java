@@ -26,6 +26,7 @@ public class PerformanceAnalyzer {
         for (Lap lap : mLaps) {
             List<List<TickData>> paritionedTicks = Lists.partition(lap.getRawData(),SMOOTHINGPOINTAMOUNT);
             ArrayList<TickData> newTickDataList = new ArrayList();
+            CsvFileWriter.crtFile();
             newTickDataList.add(lap.getRawData().get(0));
             for (List<TickData> data : paritionedTicks) {
                 TickData smoothedData = combineTickDatas(data);

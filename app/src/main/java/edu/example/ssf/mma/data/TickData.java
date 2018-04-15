@@ -28,4 +28,10 @@ public class TickData {
     public void setTimeStamp(long timeStamp) {
         this.timeStamp = timeStamp;
     }
+
+    public TickData(){
+        accX = 0f;
+        accY = 0f;
+        timeStamp = 0L;
+    }
 }
