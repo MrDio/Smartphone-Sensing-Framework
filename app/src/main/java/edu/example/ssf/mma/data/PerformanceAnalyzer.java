@@ -21,29 +21,32 @@ public class PerformanceAnalyzer {
     public static void clearNoise(){
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
+
     public static void smoothCurves(){
-        mLaps.forEach(lap -> {
+        for (Lap lap : mLaps) {
             List<List<TickData>> paritionedTicks = Lists.partition(lap.getRawData(),SMOOTHINGPOINTAMOUNT);
             ArrayList<TickData> newTickDataList = new ArrayList();
             newTickDataList.add(lap.getRawData().get(0));
-            paritionedTicks.forEach(data->{
+            for (List<TickData> data : paritionedTicks) {
                 TickData smoothedData = combineTickDatas(data);
                 newTickDataList.add(smoothedData);
-            });
+            }
             newTickDataList.add(lap.getRawData().get(lap.getRawData().size()-1));
+            for (TickData x : newTickDataList) {
+                CsvFileWriter.writeLine("0",""+x.getTimeStamp(),""+x.getAccX(),""+x.getAccY());
+            }
             lap.setRawData(newTickDataList);
-        });
-    }
+        }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
+    }
     private static TickData combineTickDatas(List<TickData> dataToCombine){
         TickData result = new TickData();
-        dataToCombine.forEach(data -> {
+        for (TickData data : dataToCombine) {
+
             result.setAccX(result.getAccX()+data.getAccX());
             result.setAccY(result.getAccY()+data.getAccY());
             result.setTimeStamp(result.getTimeStamp()+data.getTimeStamp());
-        });
+        }
         result.setTimeStamp(result.getTimeStamp()/dataToCombine.size());
         result.setAccX(result.getAccX()/dataToCombine.size());
         result.setAccY(result.getAccY()/dataToCombine.size());
