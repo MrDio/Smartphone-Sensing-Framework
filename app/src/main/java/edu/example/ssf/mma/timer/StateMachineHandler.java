@@ -117,9 +117,7 @@ public class StateMachineHandler extends Handler{
 			CsvFileWriter.writeLine(Integer.toString(CurrentTickData.round),
 					CurrentTickData.curTimestamp,
 					CurrentTickData.accX.toString(),
-					CurrentTickData.accY.toString(),
-					CurrentTickData.accZ.toString(),
-					CurrentTickData.accVecA.toString()
+					CurrentTickData.accY.toString()
 			);
 			//Log.d("Time", CurrentTickData.curTimestamp);
 		}

@@ -80,8 +80,6 @@ public class CsvFileWriter {
 					"Timestamp"+separator+
 					"AccX"+separator+
 					"AccY"+separator+
-					"AccZ"+separator+
-					"Acc Vector a"+separator+
 					"\r\n");
 		}
 		catch(Exception e){
@@ -96,15 +94,11 @@ public class CsvFileWriter {
      * @param timestamp current timestamp
      * @param accx current Accelerometer X-Value
      * @param accy current Accelerometer Y-Value
-     * @param accz current Accelerometer Z-Value
-     * @param accVecA = sqrt(accx+accy+accz)
      */
 	public static void writeLine(String round,
 			String timestamp,
 			String accx,
-			String accy,
-			String accz,
-			String accVecA
+			String accy
 			) {
 		if (fileWriter==null) {
 			return;
@@ -114,8 +108,6 @@ public class CsvFileWriter {
 					timestamp+separator+
 					accx+separator+
 					accy+separator+
-					accz+separator+
-					accVecA+separator+
 					"\r\n");
 
 
