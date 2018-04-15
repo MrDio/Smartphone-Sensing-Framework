@@ -49,11 +49,11 @@ public class StateMachineTimerTask extends TimerTask{
     //Callback-reference to the handler
     /** Callback-reference to the handler */
     private StateMachineHandler stateMachineHandler = null;
-    
+
     //The format of the timestamp
     /** The format of the timestamp */
     private SimpleDateFormat timestampFormat = new SimpleDateFormat("hh:mm:ss:SSS", Locale.GERMAN);
-    
+
     /** Message queue tags for the communication with the handler. */
     public static final String actStateMsgTag = "ACT_STATE";
     

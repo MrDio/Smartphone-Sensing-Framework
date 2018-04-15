@@ -2,6 +2,12 @@ package edu.example.ssf.mma;
 
 import org.junit.Test;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
+import edu.example.ssf.mma.data.CsvFileReader;
+import edu.example.ssf.mma.data.Lap;
+
 import static org.junit.Assert.*;
 
 /**

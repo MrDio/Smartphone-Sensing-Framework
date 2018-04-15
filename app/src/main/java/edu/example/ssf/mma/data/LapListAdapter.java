@@ -63,8 +63,8 @@ public class LapListAdapter extends BaseAdapter {
             holder = (ViewHolder) view.getTag();
         }
 
-        holder.number.setText(String.valueOf(data.get(i).getNumber()));
-        holder.roundTime.setText(String.valueOf(data.get(i).getRoundTime()));
+        holder.number.setText(String.valueOf(data.get(i).getNumberAsString()));
+        holder.roundTime.setText(String.valueOf(data.get(i).getRoundTimeAsString()));
         int pi = data.get(i).getPerformanceIndicator();
 
         switch(pi){

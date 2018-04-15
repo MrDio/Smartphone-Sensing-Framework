@@ -10,11 +10,19 @@ public class Lap {
     private double roundTime;
     private double performanceIndicator;
     private ArrayList<Section> sections;
+    private ArrayList<TickData> rawData;
+
+    public Lap(){
+        sections = new ArrayList<>();
+        rawData = new ArrayList<>();
+    }
 
     public Lap(int number, double roundTime, double performanceIndicator){
         this.number = number;
         this.roundTime = roundTime;
         this.performanceIndicator = performanceIndicator;
+        sections = new ArrayList<>();
+        rawData = new ArrayList<>();
     }
 
     public ArrayList<Section> getSections() {
@@ -25,22 +33,30 @@ public class Lap {
         this.sections = sections;
     }
 
-    public String getNumber() {
+    public String getNumberAsString() {
         return "Lap: "+number;
+    }
+
+    public int getNumber() {
+        return number;
     }
 
     public void setNumber(int number) {
         this.number = number;
     }
 
-    public String getRoundTime() {
+    public String getRoundTimeAsString() {
 
 
-        int minutes = (int)roundTime/60;
-        int seconds = (int)roundTime;
-        int milli = (int)((roundTime - seconds) * 1000);
-        seconds -= 60*minutes;
-        return minutes + ":" + seconds + ":" + milli;
+        int seconds = (int)roundTime/1000;
+        roundTime -= seconds*1000;
+        int minutes = seconds/60;
+        seconds -= minutes*60;
+        return minutes + ":" + seconds + ":" + (int)roundTime;
+    }
+
+    public double getRoundTime() {
+        return roundTime;
     }
 
     public void setRoundTime(double roundTime) {
@@ -61,6 +77,18 @@ public class Lap {
 
     public void setPerformanceIndicator(double performanceIndicator) {
         this.performanceIndicator = performanceIndicator;
+    }
+
+    public ArrayList<TickData> getRawData() {
+        return rawData;
+    }
+
+    public void setRawData(ArrayList<TickData> rawData) {
+        this.rawData = rawData;
+    }
+
+    public void setDataPoint(TickData data){
+        rawData.add(data);
     }
 
 }
