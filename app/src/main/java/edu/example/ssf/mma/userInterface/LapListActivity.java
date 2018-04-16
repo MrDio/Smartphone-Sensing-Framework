@@ -1,12 +1,8 @@
 package edu.example.ssf.mma.userInterface;
 
 import android.app.ListActivity;
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.View;
 import android.widget.ListView;
 
@@ -43,8 +39,8 @@ public class LapListActivity extends ListActivity {
         data = CsvFileReader.readFile();
         CsvFileReader.closeFile();
         PerformanceAnalyzer.initialize(data);
-        PerformanceAnalyzer.clearNoise();
         PerformanceAnalyzer.smoothCurves();
+        PerformanceAnalyzer.applySavitzkyGolay();
         PerformanceAnalyzer.calculatePerformanceIndicator();
 
     }
