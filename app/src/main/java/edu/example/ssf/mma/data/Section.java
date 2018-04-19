@@ -12,6 +12,10 @@ public class Section {
     private SectionType type;
     private String optimizationTip;
     private double performanceIndicator;
+    private TickData start;
+    private TickData end;
+    private TickData medianX;
+    private TickData medianY;
 
     public Section(SectionType sectionType, String optimizationTip, double performanceIndicator){
         this.performanceIndicator = performanceIndicator;
@@ -49,5 +53,37 @@ public class Section {
 
     public void setOptimizationTip(String optimizationTip) {
         this.optimizationTip = optimizationTip;
+    }
+
+    public TickData getStart() {
+        return start;
+    }
+
+    public void setStart(TickData start) {
+        this.start = start;
+    }
+
+    public TickData getEnd() {
+        return end;
+    }
+
+    public void setEnd(TickData end) {
+        this.end = end;
+    }
+
+    public TickData getMedianX() {
+        return medianX;
+    }
+
+    public void setMedianX(TickData medianX) {
+        this.medianX = medianX;
+    }
+
+    public TickData getMedianY() {
+        return medianY;
+    }
+
+    public void setMedianY(TickData medianY) {
+        this.medianY = medianY;
     }
 }
