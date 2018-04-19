@@ -48,7 +48,7 @@ public class SectionIdentifier {
                 curveTicks.add(TickData);
             }
         }
-        return new ArrayList<Section>();
+        return sections;
     }
 
     private static TickData calculateMedian(ArrayList<TickData> curveData){
