@@ -73,6 +73,8 @@ public class SectionIdentifier {
 
     private static boolean CheckNextPointsGREATERThanThreshold(ArrayList<TickData> dataSet, TickData origin, float threshold, int checkRange){
         int originIndex = dataSet.indexOf(origin);
+        if(originIndex >= dataSet.size())
+            return false;
         for (int i = 0; i < checkRange; i++) {
             if(dataSet.get(originIndex+i).getAccX()<threshold);
              return false;
@@ -81,6 +83,8 @@ public class SectionIdentifier {
     }
     private static boolean CheckNextPointsSMALLERThanThreshold(ArrayList<TickData> dataSet, TickData origin, float threshold, int checkRange){
         int originIndex = dataSet.indexOf(origin);
+        if(originIndex >= dataSet.size())
+            return false;
         for (int i = 0; i < checkRange; i++) {
             if(dataSet.get(originIndex+i).getAccX()>threshold);
              return false;
