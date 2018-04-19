@@ -18,19 +18,19 @@ public class SectionIdentifier {
         currentSection.setStart(data.get(0));
         currentSection.setMedian(new TickData());
         currentSection.setType(Section.SectionType.STRAIGHT);
-        for (TickData TickData : data) {
-            if(Math.abs(TickData.getAccX()) >= CURVETHRESHOLD && !curveStarted && currentSection.getType() == Section.SectionType.STRAIGHT){
+        for (TickData tickData : data) {
+            if(Math.abs(tickData.getAccX()) >= CURVETHRESHOLD && !curveStarted && currentSection.getType() == Section.SectionType.STRAIGHT){
                 curveStarted = true;
                 curveTicks = new ArrayList<>();
-                currentSection.setEnd(data.get(data.indexOf(data)));
+                currentSection.setEnd(data.get(data.indexOf(tickData)));
                 currentSection.setTimeTaken();
                 sections.add(currentSection);
                 currentSection = new Section();
-                currentSection.setStart(data.get(data.indexOf(data)));
-            } else if(Math.abs(TickData.getAccX()) <= CURVETHRESHOLD && curveStarted && currentSection.getType() == Section.SectionType.UNDEFINED){
+                currentSection.setStart(data.get(data.indexOf(tickData)));
+            } else if(Math.abs(tickData.getAccX()) <= CURVETHRESHOLD && curveStarted && currentSection.getType() == Section.SectionType.UNDEFINED){
                 curveStarted = false;
-                currentSection.setEnd(data.get(data.indexOf(data)));
-                curveTicks.add(data.get(data.indexOf(data)));
+                currentSection.setEnd(data.get(data.indexOf(tickData)));
+                curveTicks.add(data.get(data.indexOf(tickData)));
                 currentSection.setTimeTaken();
                 TickData median = calculateMedian(curveTicks);
                 currentSection.setMedian(median);
@@ -41,11 +41,11 @@ public class SectionIdentifier {
                 }
                 sections.add(currentSection);
                 currentSection = new Section();
-                currentSection.setStart(data.get(data.indexOf(data)));
+                currentSection.setStart(data.get(data.indexOf(tickData)));
                 currentSection.setType(Section.SectionType.STRAIGHT);
             }
-            if(curveStarted && TickData.getAccX() >= CURVETHRESHOLD){
-                curveTicks.add(TickData);
+            if(curveStarted && tickData.getAccX() >= CURVETHRESHOLD){
+                curveTicks.add(tickData);
             }
         }
         return sections;
