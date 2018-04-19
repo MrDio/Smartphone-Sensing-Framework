@@ -5,7 +5,7 @@ import java.util.List;
 
 public class SectionIdentifier {
 
-    public List<Section> identifySections(List<TickData> data){
+    public static ArrayList<Section> identifySections(List<TickData> data){
         return new ArrayList<Section>();
     }
 }
