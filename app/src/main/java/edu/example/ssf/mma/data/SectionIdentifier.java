@@ -22,15 +22,15 @@ public class SectionIdentifier {
             if(Math.abs(TickData.getAccX()) >= CURVETHRESHOLD && !curveStarted && currentSection.getType() == Section.SectionType.STRAIGHT){
                 curveStarted = true;
                 curveTicks = new ArrayList<>();
-                currentSection.setEnd(data.get(data.indexOf(data)-1));
+                currentSection.setEnd(data.get(data.indexOf(data)));
                 currentSection.setTimeTaken();
                 sections.add(currentSection);
                 currentSection = new Section();
-                currentSection.setStart(data.get(data.indexOf(data)-1));
+                currentSection.setStart(data.get(data.indexOf(data)));
             } else if(Math.abs(TickData.getAccX()) <= CURVETHRESHOLD && curveStarted && currentSection.getType() == Section.SectionType.UNDEFINED){
                 curveStarted = false;
-                currentSection.setEnd(data.get(data.indexOf(data)+1));
-                curveTicks.add(data.get(data.indexOf(data)+1));
+                currentSection.setEnd(data.get(data.indexOf(data)));
+                curveTicks.add(data.get(data.indexOf(data)));
                 currentSection.setTimeTaken();
                 TickData median = calculateMedian(curveTicks);
                 currentSection.setMedian(median);
@@ -41,7 +41,7 @@ public class SectionIdentifier {
                 }
                 sections.add(currentSection);
                 currentSection = new Section();
-                currentSection.setStart(data.get(data.indexOf(data)+1));
+                currentSection.setStart(data.get(data.indexOf(data)));
                 currentSection.setType(Section.SectionType.STRAIGHT);
             }
             if(curveStarted && TickData.getAccX() >= CURVETHRESHOLD){
