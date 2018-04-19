@@ -1,12 +1,37 @@
 package edu.example.ssf.mma.data;
 
 public class Section {
+    private final float LONGCURVETHRESHOLD = 2.0f;
+
+    public double getTimeTaken() {
+        return timeTaken;
+    }
+
+    public void setTimeTaken() {
+        this.timeTaken = end.getTimeStamp()-start.getTimeStamp();
+    }
+
+    public void calculateCurveType(){
+        if(median.getAccX() > 0){
+            if(timeTaken > LONGCURVETHRESHOLD)
+                setType(SectionType.LONGRIGHTCURVE);
+            setType(SectionType.RIGHTCURVE);
+        } else{
+            if(timeTaken > LONGCURVETHRESHOLD)
+                setType(SectionType.LONGLEFTCURVE);
+            setType(SectionType.LEFTCURVE);
+        }
+
+    }
+
     public enum SectionType {
         STRAIGHT,
         RIGHTCURVE,
         LEFTCURVE,
         LONGLEFTCURVE,
-        LONGRIGHTCURVE
+        LONGRIGHTCURVE,
+        UNDEFINED,
+        INVALID
     }
 
     private SectionType type;
@@ -14,8 +39,12 @@ public class Section {
     private double performanceIndicator;
     private TickData start;
     private TickData end;
-    private TickData medianX;
-    private TickData medianY;
+    private TickData median;
+    private double timeTaken;
+
+    public Section(){
+        type = SectionType.UNDEFINED;
+    }
 
     public Section(SectionType sectionType, String optimizationTip, double performanceIndicator){
         this.performanceIndicator = performanceIndicator;
@@ -71,19 +100,12 @@ public class Section {
         this.end = end;
     }
 
-    public TickData getMedianX() {
-        return medianX;
+    public TickData getMedian() {
+        return median;
     }
 
-    public void setMedianX(TickData medianX) {
-        this.medianX = medianX;
+    public void setMedian(TickData median) {
+        this.median = median;
     }
 
-    public TickData getMedianY() {
-        return medianY;
-    }
-
-    public void setMedianY(TickData medianY) {
-        this.medianY = medianY;
-    }
 }
