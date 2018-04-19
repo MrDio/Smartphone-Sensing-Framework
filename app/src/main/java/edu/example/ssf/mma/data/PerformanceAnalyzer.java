@@ -112,6 +112,11 @@ public class PerformanceAnalyzer {
         return result;
     }
 
+    public static void createSections(){
+        for (Lap lap : mLaps){
+            SectionIdentifier.identifySections(lap.getRawData());
+        }
+    }
     public static void calculatePerformanceIndicator(){
 
     }

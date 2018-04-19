@@ -41,6 +41,7 @@ public class LapListActivity extends ListActivity {
         PerformanceAnalyzer.initialize(data);
         PerformanceAnalyzer.smoothCurves();
         PerformanceAnalyzer.applySavitzkyGolay();
+        PerformanceAnalyzer.createSections();
         PerformanceAnalyzer.calculatePerformanceIndicator();
 
     }
