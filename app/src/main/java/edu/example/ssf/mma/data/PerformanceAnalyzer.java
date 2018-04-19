@@ -5,7 +5,9 @@ import android.support.annotation.RequiresApi;
 
 import com.google.common.collect.Lists;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class PerformanceAnalyzer {
@@ -21,7 +23,7 @@ public class PerformanceAnalyzer {
     public static void applySavitzkyGolay(){
         for (Lap lap : mLaps) {
             ArrayList<TickData> newTickDataList = new ArrayList();
-            CsvFileWriter.crtFile();
+            CsvFileWriter.crtFile("SG_" + lap.getNumber() + "_" + new SimpleDateFormat("yyyy-MM-dd_hh_mm_ss'.csv'").format(new Date()));
             newTickDataList.add(lap.getRawData().get(0));
             newTickDataList.add(lap.getRawData().get(1));
             newTickDataList.add(lap.getRawData().get(2));
@@ -41,9 +43,10 @@ public class PerformanceAnalyzer {
             newTickDataList.add(lap.getRawData().get(lap.getRawData().size()-2));
             newTickDataList.add(lap.getRawData().get(lap.getRawData().size()-1));
             for (TickData x : newTickDataList) {
-                CsvFileWriter.writeLine("0",""+x.getTimeStamp(),""+x.getAccX(),""+x.getAccY());
+                CsvFileWriter.writeLine(""+lap.getNumber(),""+x.getTimeStamp(),""+x.getAccX(),""+x.getAccY());
             }
             lap.setRawData(newTickDataList);
+            CsvFileWriter.closeFile();
         }
     }
 
@@ -80,7 +83,7 @@ public class PerformanceAnalyzer {
         for (Lap lap : mLaps) {
             List<List<TickData>> paritionedTicks = Lists.partition(lap.getRawData(),SMOOTHINGPOINTAMOUNT);
             ArrayList<TickData> newTickDataList = new ArrayList();
-            CsvFileWriter.crtFile();
+            CsvFileWriter.crtFile("S_" + lap.getNumber() + "_" + new SimpleDateFormat("yyyy-MM-dd_hh_mm_ss'.csv'").format(new Date()));
             newTickDataList.add(lap.getRawData().get(0));
             for (List<TickData> data : paritionedTicks) {
                 TickData smoothedData = combineTickDatas(data);
@@ -88,9 +91,10 @@ public class PerformanceAnalyzer {
             }
             newTickDataList.add(lap.getRawData().get(lap.getRawData().size()-1));
             for (TickData x : newTickDataList) {
-                CsvFileWriter.writeLine("0",""+x.getTimeStamp(),""+x.getAccX(),""+x.getAccY());
+                CsvFileWriter.writeLine(""+lap.getNumber(),""+x.getTimeStamp(),""+x.getAccX(),""+x.getAccY());
             }
             lap.setRawData(newTickDataList);
+            CsvFileWriter.closeFile();
         }
 
     }

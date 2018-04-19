@@ -248,7 +248,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickStartMeasurements(View v){
         carOnStart = false;
-        CsvFileWriter.crtFile();
+        CsvFileWriter.crtFile(null);
         light1.setImageResource(R.mipmap.lightred);
         light2.setImageResource(R.mipmap.lightred);
         light3.setImageResource(R.mipmap.lightred);

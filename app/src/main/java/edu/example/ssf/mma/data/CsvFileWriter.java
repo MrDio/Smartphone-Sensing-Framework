@@ -62,11 +62,17 @@ public class CsvFileWriter {
 	 * If the new file is created, the first line in the file will be: Count; Timestamp; AccX; AccY;
 	 * AccZ; GPS-Alt; GPS-Lon; GPS-Lat; MicMaxAmpl; Acc Vector a
 	 */
-    public static void crtFile() {
+    public static void crtFile(String name) {
     	File outputFile;
     	String fileName;
-    	
-		fileName = new SimpleDateFormat("yyyy-MM-dd_hh_mm_ss'.csv'").format(new Date());
+
+		if (name != null) {
+			fileName = name;
+		}
+		else{
+			fileName = new SimpleDateFormat("yyyy-MM-dd_hh_mm_ss'.csv'").format(new Date());
+		}
+
 		try {
 			File dir = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+ ConfigApp.targetStorageDir);
 			if (!dir.exists()) {

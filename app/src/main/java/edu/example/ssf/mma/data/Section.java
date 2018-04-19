@@ -4,7 +4,9 @@ public class Section {
     public enum SectionType {
         STRAIGHT,
         RIGHTCURVE,
-        LEFTCURVE
+        LEFTCURVE,
+        LONGLEFTCURVE,
+        LONGRIGHTCURVE
     }
 
     private SectionType type;
