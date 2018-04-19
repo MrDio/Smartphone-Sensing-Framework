@@ -12,7 +12,7 @@ import java.util.List;
 
 public class PerformanceAnalyzer {
 
-    private static final int SMOOTHINGPOINTAMOUNT = 4;
+    private static final int SMOOTHINGPOINTAMOUNT = 5;
 
     private static ArrayList<Lap> mLaps;
 
