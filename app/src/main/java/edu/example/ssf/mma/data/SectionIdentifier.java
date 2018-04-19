@@ -8,62 +8,88 @@ public class SectionIdentifier {
     private static Section currentSection;
     private static ArrayList<TickData> curveTicks;
     private static boolean curveStarted = false;
-    private static final float CURVETHRESHOLD = 1.5f;
-    private static final int MINCURVEPOINTS = 8;
+    private static final float CURVETHRESHOLD = 2f;
+    private static final int MINCURVEPOINTS = 3;
+    private static final int NUMBEROFPOINTSCONSIDERED = 4;
+    private static boolean firstSection= false;
 
 
-    public static ArrayList<Section> identifySections(List<TickData> data){
+    public static ArrayList<Section> identifySections(ArrayList<TickData> data){
+        curveStarted = false;
+        firstSection = true;
         ArrayList<Section> sections = new ArrayList<>();
         currentSection = new Section();
         currentSection.setStart(data.get(0));
         currentSection.setMedian(new TickData());
         currentSection.setType(Section.SectionType.STRAIGHT);
         for (TickData tickData : data) {
-            if(Math.abs(tickData.getAccX()) >= CURVETHRESHOLD && !curveStarted && currentSection.getType() == Section.SectionType.STRAIGHT){
+            if(CheckNextPointsGREATERThanThreshold(data,tickData,CURVETHRESHOLD,NUMBEROFPOINTSCONSIDERED) && !curveStarted && currentSection.getType() == Section.SectionType.STRAIGHT){
                 curveStarted = true;
                 curveTicks = new ArrayList<>();
-                currentSection.setEnd(data.get(data.indexOf(tickData)));
+                currentSection.setEnd(tickData);
                 currentSection.setTimeTaken();
                 sections.add(currentSection);
                 currentSection = new Section();
-                currentSection.setStart(data.get(data.indexOf(tickData)));
-            } else if(Math.abs(tickData.getAccX()) <= CURVETHRESHOLD && curveStarted && currentSection.getType() == Section.SectionType.UNDEFINED){
+                currentSection.setStart(tickData);
+            } else if(CheckNextPointsSMALLERThanThreshold(data,tickData,CURVETHRESHOLD,NUMBEROFPOINTSCONSIDERED) && curveStarted && currentSection.getType() == Section.SectionType.UNDEFINED){
                 curveStarted = false;
-                currentSection.setEnd(data.get(data.indexOf(tickData)));
-                curveTicks.add(data.get(data.indexOf(tickData)));
+                currentSection.setEnd(tickData);
                 currentSection.setTimeTaken();
                 TickData median = calculateMedian(curveTicks);
                 currentSection.setMedian(median);
-                if(curveTicks.size()<MINCURVEPOINTS && median.getAccX() < CURVETHRESHOLD){
+                if(curveTicks.size()<MINCURVEPOINTS){
                     currentSection.setType(Section.SectionType.INVALID);
                 } else{
                     currentSection.calculateCurveType();
                 }
                 sections.add(currentSection);
                 currentSection = new Section();
-                currentSection.setStart(data.get(data.indexOf(tickData)));
+                currentSection.setStart(tickData);
                 currentSection.setType(Section.SectionType.STRAIGHT);
             }
-            if(curveStarted && tickData.getAccX() >= CURVETHRESHOLD){
+            if(curveStarted && Math.abs(tickData.getAccX()) >= CURVETHRESHOLD){
                 curveTicks.add(tickData);
             }
         }
+        currentSection.setEnd(data.get(data.size()-1));
+        sections.add(currentSection);
         return sections;
     }
 
     private static TickData calculateMedian(ArrayList<TickData> curveData){
-        TickData accumulatedTickData = new TickData();
         TickData result = new TickData();
-
+        float addedX = 0.0f;
+        float addedY = 0.0f;
         for (TickData data : curveData) {
-            accumulatedTickData.setAccX(accumulatedTickData.getAccX()+data.getAccX());
-            accumulatedTickData.setAccY(accumulatedTickData.getAccY()+data.getAccY());
+            addedX+=data.getAccX();
+            addedY+=data.getAccY();
         }
 
         result.setTimeStamp((curveData.get(0).getTimeStamp()+curveData.get(curveData.size()-1).getTimeStamp())/2);
-        result.setAccX(accumulatedTickData.getAccX()/curveData.size());
-        result.setAccY(accumulatedTickData.getAccY()/curveData.size());
+        result.setAccX(addedX/curveData.size());
+        result.setAccY(addedY/curveData.size());
 
         return result;
+    }
+
+    private static boolean CheckNextPointsGREATERThanThreshold(ArrayList<TickData> dataSet, TickData origin, float threshold, int checkRange){
+        int originIndex = dataSet.indexOf(origin);
+        if(originIndex+checkRange >= dataSet.size())
+            return false;
+        for (int i = 0; i < checkRange; i++) {
+            if(Math.abs(dataSet.get(originIndex+i).getAccX())<threshold)
+             return false;
+        }
+        return true;
+    }
+    private static boolean CheckNextPointsSMALLERThanThreshold(ArrayList<TickData> dataSet, TickData origin, float threshold, int checkRange){
+        int originIndex = dataSet.indexOf(origin);
+        if(originIndex+checkRange >= dataSet.size())
+            return false;
+        for (int i = 0; i < checkRange; i++) {
+            if(Math.abs(dataSet.get(originIndex+i).getAccX())>threshold)
+             return false;
+        }
+        return true;
     }
 }
