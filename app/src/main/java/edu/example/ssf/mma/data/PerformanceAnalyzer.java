@@ -2,7 +2,9 @@ package edu.example.ssf.mma.data;
 
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.util.Pair;
 
+import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 
 import java.text.SimpleDateFormat;
@@ -114,7 +116,36 @@ public class PerformanceAnalyzer {
 
     public static void createSections(){
         for (Lap lap : mLaps){
-            SectionIdentifier.identifySections(lap.getRawData());
+            ArrayList<Section> sections = SectionIdentifier.identifySections(lap.getRawData());
+/*            Section testSection = new Section();
+            TickData testStart = new TickData();
+            testStart.setTimeStamp(1);
+            TickData testEnd = new TickData();
+            testEnd.setTimeStamp(48);
+            TickData testMedian = new TickData();
+            testMedian.setTimeStamp(16);
+            testMedian.setAccX(-10f);
+
+            testSection.setStart(testStart);
+            testSection.setEnd(testEnd);
+            testSection.setMedian(testMedian);
+
+            ArrayList<Section> sections = new ArrayList<Section>();
+            sections.add(testSection);*/
+
+           for (Section section : sections){
+               double start = section.getStart().getTimeStamp();
+               double end = section.getEnd().getTimeStamp();
+               double vertex = start + ((end - start) / 2);
+               double median = section.getMedian().getAccX();
+               double area = 0.0;
+               for(double i = start; i <= end; i++){
+                   double b = -1 * (Math.pow(((start + end) / 2.0), 2.0)) + (start * end);
+                   double a = median/b;
+                   area += a * (Math.pow(i-vertex, 2)) + median;
+               }
+               section.setPerformanceIndicator(Math.abs(area));
+           }
         }
     }
     public static void calculatePerformanceIndicator(){
