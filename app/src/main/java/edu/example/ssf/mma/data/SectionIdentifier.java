@@ -15,6 +15,10 @@ public class SectionIdentifier {
     private static final float CURVETHRESHOLD = 1f;
 
     public static ArrayList<Section> identifySections(ArrayList<TickData> data){
+        pointsOverThreshold = new HashMap<>();
+        pointsUnderThreshold = new HashMap<>();
+        SectionList = new TreeMap<>();
+        
         ArrayList<Section> sections = new ArrayList<>();
 
         for (int i = 0; i < data.size(); i++) {
