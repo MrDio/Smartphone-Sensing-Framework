@@ -1,14 +1,12 @@
 package edu.example.ssf.mma.data;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 public class SectionIdentifier {
     private static Section currentSection;
-    private static ArrayList<TickData> curveTicks;
+    private static ArrayList<TickData> temporarySectionPoints = new ArrayList<>();
     private static boolean curveStarted = false;
-    private static final float CURVETHRESHOLD = 2f;
+    private static final float CURVETHRESHOLD = 1f;
     private static final int MINCURVEPOINTS = 3;
     private static final int NUMBEROFPOINTSCONSIDERED = 4;
     private static boolean firstSection= false;
@@ -21,37 +19,35 @@ public class SectionIdentifier {
         currentSection = new Section();
         currentSection.setStart(data.get(0));
         currentSection.setMedian(new TickData());
-        currentSection.setType(Section.SectionType.STRAIGHT);
+        currentSection.setType(Section.SectionType.UNDEFINED);
         for (TickData tickData : data) {
-            if(CheckNextPointsGREATERThanThreshold(data,tickData,CURVETHRESHOLD,NUMBEROFPOINTSCONSIDERED) && !curveStarted && currentSection.getType() == Section.SectionType.STRAIGHT){
+            if(Math.abs(tickData.getAccX()) >= CURVETHRESHOLD && !curveStarted && temporarySectionPoints.size() >= 3){
                 curveStarted = true;
-                curveTicks = new ArrayList<>();
                 currentSection.setEnd(tickData);
                 currentSection.setTimeTaken();
+                TickData median = calculateMedian(temporarySectionPoints);
+                currentSection.setMedian(median);
                 sections.add(currentSection);
                 currentSection = new Section();
                 currentSection.setStart(tickData);
-            } else if(CheckNextPointsSMALLERThanThreshold(data,tickData,CURVETHRESHOLD,NUMBEROFPOINTSCONSIDERED) && curveStarted && currentSection.getType() == Section.SectionType.UNDEFINED){
+            } else if(curveStarted && Math.abs(tickData.getAccX()) <= CURVETHRESHOLD && temporarySectionPoints.size() >= 3){
                 curveStarted = false;
                 currentSection.setEnd(tickData);
                 currentSection.setTimeTaken();
-                TickData median = calculateMedian(curveTicks);
+                TickData median = calculateMedian(temporarySectionPoints);
                 currentSection.setMedian(median);
-                if(curveTicks.size()<MINCURVEPOINTS){
-                    currentSection.setType(Section.SectionType.INVALID);
-                } else{
-                    currentSection.calculateCurveType();
-                }
                 sections.add(currentSection);
                 currentSection = new Section();
                 currentSection.setStart(tickData);
                 currentSection.setType(Section.SectionType.STRAIGHT);
+                temporarySectionPoints = new ArrayList<>();
             }
-            if(curveStarted && Math.abs(tickData.getAccX()) >= CURVETHRESHOLD){
-                curveTicks.add(tickData);
-            }
+            temporarySectionPoints.add(tickData);
         }
         currentSection.setEnd(data.get(data.size()-1));
+        currentSection.setTimeTaken();
+        TickData median = calculateMedian(temporarySectionPoints);
+        currentSection.setMedian(median);
         sections.add(currentSection);
         return sections;
     }
