@@ -74,7 +74,7 @@ public class SectionIdentifier {
             }
 
             section.setStart(temporaryList.get(0));
-            if(pointsOverThreshold.get(i)!= null){
+            if(pointsUnderThreshold.containsKey(i)){
                 section.setEnd(pointsUnderThreshold.get(i));
             } else{
                 section.setEnd(temporaryList.get(temporaryList.size()-1));
