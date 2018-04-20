@@ -74,7 +74,11 @@ public class SectionIdentifier {
             }
 
             section.setStart(temporaryList.get(0));
-            section.setEnd(pointsUnderThreshold.get(i));
+            if(pointsOverThreshold.get(i)!= null){
+                section.setEnd(pointsUnderThreshold.get(i));
+            } else{
+                section.setEnd(temporaryList.get(temporaryList.size()-1));
+            }
             section.setMedian(calculateMedian(temporaryList));
             sectionMap.put(key,section);
             while(!upperBoundDataset.containsKey(i) && i<max){
