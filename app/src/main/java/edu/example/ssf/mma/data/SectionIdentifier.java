@@ -66,7 +66,9 @@ public class SectionIdentifier {
         while (i < max) {
             Section section = new Section();
             ArrayList<TickData> temporaryList = new ArrayList<>();
-            temporaryList.add(pointsUnderThreshold.get(i-1));
+            if(pointsUnderThreshold.containsKey(i-1)){
+                temporaryList.add(pointsUnderThreshold.get(i-1));
+            }
             int key = i-1;
             while(upperBoundDataset.containsKey(i)){
                 temporaryList.add(upperBoundDataset.get(i));
