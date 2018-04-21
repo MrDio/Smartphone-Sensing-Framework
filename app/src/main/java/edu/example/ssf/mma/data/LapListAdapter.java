@@ -68,15 +68,17 @@ public class LapListAdapter extends BaseAdapter {
         int pi = data.get(i).getPerformanceIndicator();
 
         switch(pi){
-            case 0:
+            case 1:
                 holder.performanceIndicator.setImageResource(R.mipmap.lightred);
                 break;
-            case 1:
+            case 2:
                 holder.performanceIndicator.setImageResource(R.mipmap.lightyellow);
                 break;
-            case 2:
+            case 3:
                 holder.performanceIndicator.setImageResource(R.mipmap.lightgreen);
                 break;
+            case 0:
+                holder.performanceIndicator.setImageResource(R.mipmap.lightoff);
         }
 
         return view;

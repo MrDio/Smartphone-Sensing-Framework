@@ -3,14 +3,6 @@ package edu.example.ssf.mma.data;
 public class Section {
     private final float LONGCURVETHRESHOLD = 2.0f;
 
-    public double getTimeTaken() {
-        return timeTaken;
-    }
-
-    public void setTimeTaken() {
-        this.timeTaken = end.getTimeStamp()-start.getTimeStamp();
-    }
-
     public void calculateCurveType(){
         if(median.getAccX() > 0){
             if(timeTaken > LONGCURVETHRESHOLD)
@@ -41,6 +33,7 @@ public class Section {
     private TickData end;
     private TickData median;
     private double timeTaken;
+    private double forceToVehicle;
 
     public Section(){
         type = SectionType.UNDEFINED;
@@ -108,4 +101,19 @@ public class Section {
         this.median = median;
     }
 
+    public double getForceToVehicle() {
+        return forceToVehicle;
+    }
+
+    public void setForceToVehicle(double forceToVehicle) {
+        this.forceToVehicle = forceToVehicle;
+    }
+
+    public double getTimeTaken() {
+        return timeTaken;
+    }
+
+    public void setTimeTaken() {
+        this.timeTaken = end.getTimeStamp()-start.getTimeStamp();
+    }
 }

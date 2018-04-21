@@ -15,6 +15,7 @@ public class Lap {
     public Lap(){
         sections = new ArrayList<>();
         rawData = new ArrayList<>();
+        performanceIndicator = 0.5;
     }
 
     public Lap(int number, double roundTime, double performanceIndicator){
@@ -65,9 +66,12 @@ public class Lap {
 
     public int getPerformanceIndicator() {
         if(performanceIndicator > 0.75){
-            return 2;
+            return 3;
         }
         if(performanceIndicator > 0.25){
+            return 2;
+        }
+        if(performanceIndicator > 0){
             return 1;
         }
         else{
