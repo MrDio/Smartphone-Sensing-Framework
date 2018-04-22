@@ -32,9 +32,11 @@ public class PerformanceAnalyzer {
                 }
             }
         }
+        fastestLap.setFastestLap(true);
         for (int i = 0; i <fastestLap.getSections().size() ; i++) {
             fastestlapSections.put(i,fastestLap.getSections().get(i));
         }
+
 
         for (Map.Entry<Integer, Section> sectionEntry: fastestlapSections.entrySet()){
             Double fastestNextSectionTime;
@@ -102,7 +104,7 @@ public class PerformanceAnalyzer {
             if(currentSection.getSectionTime() > fastestSection.getSectionTime() && currentSection.getSectionForces() > fastestSection.getSectionForces() && currentSection.getNextSectionTime()>fastestSection.getNextSectionTime()){
                 return SectionSpeed.TOOFAST;
             }
-            if(currentSection.getSectionTime() < fastestSection.getSectionTime() && currentSection.getNextSectionTime() < fastestSection.getNextSectionTime() && currentSection.getSectionForces() > fastestSection.getSectionForces()){
+            if(currentSection.getSectionTime() < fastestSection.getSectionTime() && currentSection.getNextSectionTime() < fastestSection.getNextSectionTime()){
                 return SectionSpeed.FAST;
             }
             if(currentSection.getSectionTime() > fastestSection.getSectionTime() && currentSection.getNextSectionTime() > fastestSection.getNextSectionTime() && currentSection.getSectionForces() < fastestSection.getSectionForces()){
@@ -118,7 +120,7 @@ public class PerformanceAnalyzer {
                 return SectionSpeed.SLOW;
             }
         }
-        return SectionSpeed.GOOD;
+        return SectionSpeed.NOTAVAILABLE;
     }
 
     private static CurveGrade calculateCurveGrade(SectionData fastestSection, SectionData currentSection){
@@ -156,7 +158,7 @@ public class PerformanceAnalyzer {
             case SLOW:
                 return SectionPerformance.BAD;
             default:
-                return SectionPerformance.NEUTRAL;
+                return SectionPerformance.UNDEFINED;
         }
     }
 }

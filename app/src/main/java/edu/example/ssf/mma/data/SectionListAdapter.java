@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import edu.example.ssf.mma.R;
 import edu.example.ssf.mma.model.Section;
+import edu.example.ssf.mma.model.SectionPerformance;
 
 public class SectionListAdapter extends BaseAdapter {
 
@@ -66,16 +67,16 @@ public class SectionListAdapter extends BaseAdapter {
 
         holder.type.setText(String.valueOf(data.get(i).getType()));
         holder.optimizationTip.setText(data.get(i).getOptimizationTip());
-        int pi = data.get(i).getPerformanceIndicator();
+        SectionPerformance pi = data.get(i).getSectionPerformance();
 
         switch(pi){
-            case 0:
+            case BAD:
                 holder.performanceIndicator.setImageResource(R.mipmap.lightred);
                 break;
-            case 1:
+            case NEUTRAL:
                 holder.performanceIndicator.setImageResource(R.mipmap.lightyellow);
                 break;
-            case 2:
+            case GOOD:
                 holder.performanceIndicator.setImageResource(R.mipmap.lightgreen);
                 break;
         }
