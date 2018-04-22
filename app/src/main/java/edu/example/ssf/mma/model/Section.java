@@ -5,7 +5,6 @@ import java.io.Serializable;
 public class Section implements Serializable{
 
 
-
     private SectionType type;
     private SectionPerformance sectionPerformance;
     private SectionSpeed sectionSpeed;
@@ -18,17 +17,18 @@ public class Section implements Serializable{
     private double timeTaken;
     private double forceToVehicle;
 
-    public Section(){
+    public Section() {
         type = SectionType.UNDEFINED;
         curveGrade = CurveGrade.NOTAVAILABLE;
         sectionSpeed = SectionSpeed.NOTAVAILABLE;
     }
 
-    public Section(SectionType sectionType, String optimizationTip, double performanceIndicator){
+    public Section(SectionType sectionType, String optimizationTip, double performanceIndicator) {
         this.performanceIndicator = performanceIndicator;
         this.type = sectionType;
         this.optimizationTip = optimizationTip;
     }
+
     public SectionType getType() {
         return type;
     }
@@ -38,13 +38,12 @@ public class Section implements Serializable{
     }
 
     public int getPerformanceIndicator() {
-        if(performanceIndicator > 0.75){
+        if (performanceIndicator > 0.75) {
             return 2;
         }
-        if(performanceIndicator > 0.25){
+        if (performanceIndicator > 0.25) {
             return 1;
-        }
-        else{
+        } else {
             return 0;
         }
     }
@@ -55,12 +54,49 @@ public class Section implements Serializable{
 
 
     public String getOptimizationTip() {
-        return optimizationTip;
+        String tip;
+        boolean isTip = true;
+        switch (type) {
+            case LEFTCURVE:
+            case RIGHTCURVE:
+                tip = "turn";
+                break;
+            case STRAIGHT:
+                tip = "straight";
+                break;
+            default:
+                isTip = false;
+                tip = "No tip available.";
+        }
+
+        if (isTip)
+            switch (sectionSpeed) {
+                case TOOFAST:
+                    if (tip.equals("turn")) {
+                        tip = "Make the turn a little slower to accelerate on the straight.";
+                    } else {
+                        tip = "Slow down on the straight to improve cornering.";
+                    }
+                    break;
+                case FAST:
+                    tip = "This was impressive!";
+                    break;
+                case GOOD:
+                    tip = "Try to be a little faster on the " + tip + ".";
+                    break;
+                case SLOW:
+                    tip = "Put the pedal to the metal!";
+                    break;
+                default:
+                    tip = "No tip available.";
+            }
+
+        return tip;
     }
 
-    public void setOptimizationTip(String optimizationTip) {
-        this.optimizationTip = optimizationTip;
-    }
+//    public void setOptimizationTip(String optimizationTip) {
+//        this.optimizationTip = optimizationTip;
+//    }
 
     public TickData getStart() {
         return start;
@@ -99,7 +135,7 @@ public class Section implements Serializable{
     }
 
     public void setTimeTaken() {
-        this.timeTaken = end.getTimeStamp()-start.getTimeStamp();
+        this.timeTaken = end.getTimeStamp() - start.getTimeStamp();
     }
 
     public SectionPerformance getSectionPerformance() {
