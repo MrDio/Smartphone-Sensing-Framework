@@ -137,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
         button.setText("CALIBRATE");
         button.setActivated(true);
         button.setVisibility(View.VISIBLE);
+        HardwareFactory.hwLight.start();
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -159,7 +160,8 @@ public class MainActivity extends AppCompatActivity {
 
         HardwareFactory.hwAcc.start();
 //        HardwareFactory.hwAcc.enableCalibration();
-        HardwareFactory.hwProxi.start();
+//        HardwareFactory.hwProxi.start();
+        HardwareFactory.hwLight.calibrateMax();
 
         light1.setImageResource(R.mipmap.lightred);
         light2.setImageResource(R.mipmap.lightred);
@@ -223,6 +225,7 @@ public class MainActivity extends AppCompatActivity {
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        HardwareFactory.hwLight.calibrateMin();
 
                         button.setActivated(false);
                         button.setVisibility(View.INVISIBLE);

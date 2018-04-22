@@ -22,6 +22,7 @@ import android.content.Context;
 import android.util.Log;
 
 import edu.example.ssf.mma.hardwareAdapter.accelerometer.accelerometer;
+import edu.example.ssf.mma.hardwareAdapter.lightsensor.LightSensor;
 import edu.example.ssf.mma.hardwareAdapter.proximity.proximity;
 
 
@@ -42,7 +43,7 @@ public class HardwareFactory {
 
 	/** setting the simulated accelerometer to null. */
 	public static IAccelerometer hwAcc = null;
-
+	public static ILightSensor hwLight = null;
 	public static IProximity hwProxi = null;
 
 	
@@ -54,8 +55,12 @@ public class HardwareFactory {
 
 		getAccelerometer(context);
 		Log.d("init?","acc initialized");
-		getProximity(context);
-		Log.d("init?","proxi initialized");
+
+		getLight(context);
+		Log.d("init?","light initialized");
+
+//		getProximity(context);
+//		Log.d("init?","proxi initialized");
 
 	}
 
@@ -83,6 +88,19 @@ public class HardwareFactory {
 		hwProxi = new proximity(context);
 
 		return hwProxi;
+	}
+
+
+	/**
+	 * determines if to use the devices light sensor or simulate a light sensor
+	 *
+	 * @return either the simulated or the devices light sensor
+	 */
+	public static ILightSensor getLight(Context context) {
+
+		hwLight = new LightSensor(context);
+
+		return hwLight;
 	}
 
 
