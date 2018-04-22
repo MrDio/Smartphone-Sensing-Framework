@@ -19,6 +19,7 @@ public class Section {
     public Section(){
         type = SectionType.UNDEFINED;
         curveGrade = CurveGrade.NOTAVAILABLE;
+        sectionSpeed = SectionSpeed.NOTAVAILABLE;
     }
 
     public Section(SectionType sectionType, String optimizationTip, double performanceIndicator){

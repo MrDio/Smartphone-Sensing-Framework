@@ -5,5 +5,6 @@ public enum SectionSpeed {
     FAST,
     GOOD,
     SLOW,
-    TOOSLOW
+    TOOSLOW,
+    NOTAVAILABLE
 }
