@@ -101,7 +101,7 @@ public class PerformanceAnalyzer {
 
     private static SectionSpeed calculateSpeedCurve(SectionData fastestSection, SectionData currentSection){
         if(fastestSection.getNextSectionTime()!= null && currentSection.getNextSectionTime() != null){
-            if(currentSection.getSectionTime() > fastestSection.getSectionTime() && currentSection.getSectionForces() > fastestSection.getSectionForces() && currentSection.getNextSectionTime()>fastestSection.getNextSectionTime()){
+            if(currentSection.getSectionTime() < fastestSection.getSectionTime() && currentSection.getSectionForces() > fastestSection.getSectionForces() && currentSection.getNextSectionTime()>fastestSection.getNextSectionTime()){
                 return SectionSpeed.TOOFAST;
             }
             if(currentSection.getSectionTime() < fastestSection.getSectionTime() && currentSection.getNextSectionTime() < fastestSection.getNextSectionTime() && currentSection.getSectionForces() > fastestSection.getSectionForces()){
