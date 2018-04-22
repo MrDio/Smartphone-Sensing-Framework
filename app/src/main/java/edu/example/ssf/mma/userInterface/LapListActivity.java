@@ -9,11 +9,11 @@ import android.widget.ListView;
 import java.util.ArrayList;
 
 import edu.example.ssf.mma.data.CsvFileReader;
-import edu.example.ssf.mma.data.Lap;
+import edu.example.ssf.mma.data.DataModification;
+import edu.example.ssf.mma.model.Lap;
 import edu.example.ssf.mma.data.LapListAdapter;
-import edu.example.ssf.mma.data.PerformanceAnalyzer;
-import edu.example.ssf.mma.data.Section;
-import edu.example.ssf.mma.data.SectionIdentifier;
+import edu.example.ssf.mma.dataAnalyzation.PerformanceAnalyzer;
+import edu.example.ssf.mma.dataAnalyzation.SectionIdentifier;
 
 public class LapListActivity extends ListActivity {
 
@@ -40,12 +40,22 @@ public class LapListActivity extends ListActivity {
         data = new ArrayList();
         data = CsvFileReader.readFile();
         CsvFileReader.closeFile();
-        SectionIdentifier.initialize(data);
-        SectionIdentifier.smoothCurves();
-        SectionIdentifier.applySavitzkyGolay();
-        data = SectionIdentifier.createSections();
-        PerformanceAnalyzer.initialize(data);
-        PerformanceAnalyzer.calculatePerformanceIndicator();
+        DataModification.smoothCurves(data);
+        DataModification.applySavitzkyGolay(data);
+
+        data = SectionIdentifier.createSections(data);
+        data = SectionIdentifier.classifySections(data);
+        data = SectionIdentifier.invalidateLaps(data);
+
+        System.out.println("<<<<AFTER MERGING>>>>>");
+        for(Lap lap : data){
+            System.out.println("Lap "+lap.getNumber()+" Sections: "+lap.getSections().size());
+            for(int i = 0; i < lap.getSections().size(); i++){
+                System.out.println("Section: Start: "+lap.getSections().get(i).getStart().getTimeStamp()+" | End: "+lap.getSections().get(i).getEnd().getTimeStamp()+" | Type: "+lap.getSections().get(i).getType());
+            }
+        }
+
+        PerformanceAnalyzer.calculatePerformanceIndicator(data);
 
     }
 }

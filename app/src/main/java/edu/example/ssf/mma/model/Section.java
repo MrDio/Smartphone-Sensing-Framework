@@ -1,32 +1,13 @@
-package edu.example.ssf.mma.data;
+package edu.example.ssf.mma.model;
 
 public class Section {
-    private final float LONGCURVETHRESHOLD = 2.0f;
 
-    public void calculateCurveType(){
-        if(median.getAccX() > 0){
-            if(timeTaken > LONGCURVETHRESHOLD)
-                setType(SectionType.LONGRIGHTCURVE);
-            setType(SectionType.RIGHTCURVE);
-        } else{
-            if(timeTaken > LONGCURVETHRESHOLD)
-                setType(SectionType.LONGLEFTCURVE);
-            setType(SectionType.LEFTCURVE);
-        }
 
-    }
-
-    public enum SectionType {
-        STRAIGHT,
-        RIGHTCURVE,
-        LEFTCURVE,
-        LONGLEFTCURVE,
-        LONGRIGHTCURVE,
-        UNDEFINED,
-        INVALID
-    }
 
     private SectionType type;
+    private SectionPerformance sectionPerformance;
+    private SectionSpeed sectionSpeed;
+    private CurveGrade curveGrade;
     private String optimizationTip;
     private double performanceIndicator;
     private TickData start;
@@ -37,6 +18,7 @@ public class Section {
 
     public Section(){
         type = SectionType.UNDEFINED;
+        curveGrade = CurveGrade.NOTAVAILABLE;
     }
 
     public Section(SectionType sectionType, String optimizationTip, double performanceIndicator){
@@ -115,5 +97,29 @@ public class Section {
 
     public void setTimeTaken() {
         this.timeTaken = end.getTimeStamp()-start.getTimeStamp();
+    }
+
+    public SectionPerformance getSectionPerformance() {
+        return sectionPerformance;
+    }
+
+    public void setSectionPerformance(SectionPerformance sectionPerformance) {
+        this.sectionPerformance = sectionPerformance;
+    }
+
+    public SectionSpeed getSectionSpeed() {
+        return sectionSpeed;
+    }
+
+    public void setSectionSpeed(SectionSpeed sectionSpeed) {
+        this.sectionSpeed = sectionSpeed;
+    }
+
+    public CurveGrade getCurveGrade() {
+        return curveGrade;
+    }
+
+    public void setCurveGrade(CurveGrade curveGrade) {
+        this.curveGrade = curveGrade;
     }
 }

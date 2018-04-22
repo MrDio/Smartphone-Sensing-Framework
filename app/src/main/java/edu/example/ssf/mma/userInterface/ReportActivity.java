@@ -1,21 +1,13 @@
 package edu.example.ssf.mma.userInterface;
 
 import android.app.ListActivity;
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.Intent;
-import android.icu.util.ULocale;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.view.View;
 import android.widget.ListView;
 
 import java.util.ArrayList;
 
-import edu.example.ssf.mma.data.Lap;
-import edu.example.ssf.mma.data.LapListAdapter;
-import edu.example.ssf.mma.data.Section;
+import edu.example.ssf.mma.model.Section;
 import edu.example.ssf.mma.data.SectionListAdapter;
 
 public class ReportActivity extends ListActivity {

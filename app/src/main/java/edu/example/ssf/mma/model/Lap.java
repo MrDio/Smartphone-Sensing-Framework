@@ -1,11 +1,11 @@
-package edu.example.ssf.mma.data;
+package edu.example.ssf.mma.model;
 
 import java.util.ArrayList;
 
 public class Lap {
 
 
-
+    private boolean isValid = true;
     private int number;
     private double roundTime;
     private double performanceIndicator;
@@ -95,4 +95,11 @@ public class Lap {
         rawData.add(data);
     }
 
+    public boolean isValid() {
+        return isValid;
+    }
+
+    public void setValid(boolean valid) {
+        isValid = valid;
+    }
 }

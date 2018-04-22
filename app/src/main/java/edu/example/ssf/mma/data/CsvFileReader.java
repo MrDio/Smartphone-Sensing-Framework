@@ -18,9 +18,10 @@
 package edu.example.ssf.mma.data;
 
 import android.os.Environment;
-import android.util.Log;
 
 import edu.example.ssf.mma.config.ConfigApp;
+import edu.example.ssf.mma.model.Lap;
+import edu.example.ssf.mma.model.TickData;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -28,7 +29,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

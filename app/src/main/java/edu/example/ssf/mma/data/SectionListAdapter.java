@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import edu.example.ssf.mma.R;
+import edu.example.ssf.mma.model.Section;
 
 public class SectionListAdapter extends BaseAdapter {
 

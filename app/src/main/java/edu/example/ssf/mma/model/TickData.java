@@ -1,4 +1,4 @@
-package edu.example.ssf.mma.data;
+package edu.example.ssf.mma.model;
 
 public class TickData {
     private Float accX;
