@@ -272,7 +272,6 @@ public class SectionIdentifier {
         mergedSection.setStart(start.getStart());
         mergedSection.setEnd(end.getEnd());
         mergedSection.setMedian(new TickData());
-        mergedSection.setTimeTaken();
         return mergedSection;
     }
 }

@@ -37,22 +37,6 @@ public class Section implements Serializable{
         this.type = type;
     }
 
-    public int getPerformanceIndicator() {
-        if (performanceIndicator > 0.75) {
-            return 2;
-        }
-        if (performanceIndicator > 0.25) {
-            return 1;
-        } else {
-            return 0;
-        }
-    }
-
-    public void setPerformanceIndicator(double performanceIndicator) {
-        this.performanceIndicator = performanceIndicator;
-    }
-
-
     public String getOptimizationTip() {
         String tip;
         boolean isTip = true;
@@ -131,11 +115,7 @@ public class Section implements Serializable{
     }
 
     public double getTimeTaken() {
-        return timeTaken;
-    }
-
-    public void setTimeTaken() {
-        this.timeTaken = end.getTimeStamp() - start.getTimeStamp();
+        return end.getTimeStamp() - start.getTimeStamp();
     }
 
     public SectionPerformance getSectionPerformance() {
