@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import edu.example.ssf.mma.model.Section;
 import edu.example.ssf.mma.data.SectionListAdapter;
+import edu.example.ssf.mma.model.SectionType;
 
 public class ReportActivity extends ListActivity {
 
@@ -32,31 +33,31 @@ public class ReportActivity extends ListActivity {
     private void initiateData(){
         data = new ArrayList();
 
-        Section section = new Section(Section.SectionType.STRAIGHT, "Here should be tips", 0.2);
+        Section section = new Section(SectionType.STRAIGHT, "Here should be tips", 0.2);
         data.add(section);
 
-        section = new Section(Section.SectionType.LEFTCURVE, "Here should be tips", 0.6);
+        section = new Section(SectionType.LEFTCURVE, "Here should be tips", 0.6);
         data.add(section);
 
-        section = new Section(Section.SectionType.STRAIGHT, "Here should be tips", 0.6);
+        section = new Section(SectionType.STRAIGHT, "Here should be tips", 0.6);
         data.add(section);
-        section = new Section(Section.SectionType.LEFTCURVE, "Here should be tips", 0.6);
+        section = new Section(SectionType.LEFTCURVE, "Here should be tips", 0.6);
         data.add(section);
-        section = new Section(Section.SectionType.STRAIGHT, "Here should be tips", 0.6);
+        section = new Section(SectionType.STRAIGHT, "Here should be tips", 0.6);
         data.add(section);
-        section = new Section(Section.SectionType.RIGHTCURVE, "Here should be tips", 0.6);
+        section = new Section(SectionType.RIGHTCURVE, "Here should be tips", 0.6);
         data.add(section);
-        section = new Section(Section.SectionType.STRAIGHT, "Here should be tips", 0.6);
+        section = new Section(SectionType.STRAIGHT, "Here should be tips", 0.6);
         data.add(section);
-        section = new Section(Section.SectionType.LEFTCURVE, "Here should be tips", 0.84);
+        section = new Section(SectionType.LEFTCURVE, "Here should be tips", 0.84);
         data.add(section);
-        section = new Section(Section.SectionType.LEFTCURVE, "Here should be tips", 0.84);
+        section = new Section(SectionType.LEFTCURVE, "Here should be tips", 0.84);
         data.add(section);
-        section = new Section(Section.SectionType.STRAIGHT, "Here should be tips", 0.84);
+        section = new Section(SectionType.STRAIGHT, "Here should be tips", 0.84);
         data.add(section);
-        section = new Section(Section.SectionType.LEFTCURVE, "Here should be tips", 0.84);
+        section = new Section(SectionType.LEFTCURVE, "Here should be tips", 0.84);
         data.add(section);
-        section = new Section(Section.SectionType.STRAIGHT, "Here should be tips", 0.84);
+        section = new Section(SectionType.STRAIGHT, "Here should be tips", 0.84);
         data.add(section);
 
     }

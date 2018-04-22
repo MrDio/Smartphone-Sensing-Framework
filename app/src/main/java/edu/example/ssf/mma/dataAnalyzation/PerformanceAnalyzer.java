@@ -149,7 +149,8 @@ public class PerformanceAnalyzer {
 
     private static SectionPerformance determineSectionPerformance(SectionSpeed speed, CurveGrade curveGrade, SectionData fastestSection, SectionData currentSection){
         if(curveGrade == CurveGrade.NOTAVAILABLE){
-
+            return SectionPerformance.NEUTRAL;
         }
+        return SectionPerformance.NEUTRAL;
     }
 }
