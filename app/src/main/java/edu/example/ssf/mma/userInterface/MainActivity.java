@@ -27,6 +27,7 @@ package edu.example.ssf.mma.userInterface;
  * @version 2.0
  */
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -37,10 +38,15 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import edu.example.ssf.mma.R;
+import edu.example.ssf.mma.config.ConfigApp;
 import edu.example.ssf.mma.data.CsvFileWriter;
 import edu.example.ssf.mma.data.CurrentTickData;
 import edu.example.ssf.mma.hardwareAdapter.HardwareFactory;
@@ -94,6 +100,8 @@ public class MainActivity extends AppCompatActivity {
         light1.setImageResource(R.mipmap.lightred);
         setInitialState();
     }
+
+
 
     public void setInitialState(){
         light1.setImageResource(R.mipmap.lightred);
@@ -251,7 +259,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickStartMeasurements(View v){
         carOnStart = false;
-        CsvFileWriter.crtFile(null);
+        String fileName = new SimpleDateFormat("yyyy-MM-dd_hh_mm_ss'.csv'").format(new Date());
+        CsvFileWriter.crtFile(fileName);
+        ConfigApp.currentLapFile = fileName;
         light1.setImageResource(R.mipmap.lightred);
         light2.setImageResource(R.mipmap.lightred);
         light3.setImageResource(R.mipmap.lightred);
@@ -315,7 +325,16 @@ public class MainActivity extends AppCompatActivity {
         carOnStart = false;
         isRacing = false;
 
-        setInitialState();
+        light1.setVisibility(View.INVISIBLE);
+        light2.setVisibility(View.INVISIBLE);
+        light3.setVisibility(View.INVISIBLE);
+        light4.setVisibility(View.INVISIBLE);
+        light5.setVisibility(View.INVISIBLE);
+        instructionText.setVisibility(View.INVISIBLE);
+        button.setVisibility(View.INVISIBLE);
+
+        ProgressDialog dialog = new ProgressDialog(this);
+        dialog.show(MainActivity.this,"Loading data", "Please wait...");
 
         Intent intent = new Intent(this, LapListActivity.class);
         startActivity(intent);

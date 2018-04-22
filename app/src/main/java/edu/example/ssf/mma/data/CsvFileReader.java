@@ -175,7 +175,7 @@ public class CsvFileReader{
         Lap currentLap = new Lap();
         ArrayList<Lap> laps = new ArrayList<>();
         try {
-            inputFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+ ConfigApp.targetStorageDir, "2018-04-11_06_57_30.csv");
+            inputFile = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+ ConfigApp.targetStorageDir, ConfigApp.currentLapFile);
             fr = new FileReader(inputFile);
             fis = new FileInputStream(inputFile);
             br = new BufferedReader(fr);
