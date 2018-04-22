@@ -67,9 +67,7 @@ public class PerformanceAnalyzer {
                         currentSection.setSectionSpeed(calculateSpeedCurve(fastestSectionData,currentSectionData));
                         currentSection.setCurveGrade(calculateCurveGrade(fastestSectionData,currentSectionData));
                     }
-                    currentSection.setSectionPerformance(determineSectionPerformance(currentSection.getSectionSpeed(),currentSection.getCurveGrade(),fastestSectionData,currentSectionData));
-
-
+                    currentSection.setSectionPerformance(determineSectionPerformance(currentSection.getSectionSpeed()));
                 }
             }
         }
@@ -147,10 +145,18 @@ public class PerformanceAnalyzer {
         return CurveGrade.NEUTRAL;
     }
 
-    private static SectionPerformance determineSectionPerformance(SectionSpeed speed, CurveGrade curveGrade, SectionData fastestSection, SectionData currentSection){
-        if(curveGrade == CurveGrade.NOTAVAILABLE){
-            return SectionPerformance.NEUTRAL;
+    private static SectionPerformance determineSectionPerformance(SectionSpeed speed){
+        switch (speed){
+            case GOOD:
+                return SectionPerformance.NEUTRAL;
+            case FAST:
+                return SectionPerformance.GOOD;
+            case TOOFAST:
+                return SectionPerformance.BAD;
+            case SLOW:
+                return SectionPerformance.BAD;
+            default:
+                return SectionPerformance.NEUTRAL;
         }
-        return SectionPerformance.NEUTRAL;
     }
 }
