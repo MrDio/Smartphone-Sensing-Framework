@@ -79,7 +79,7 @@ public class accelerometer implements SensorEventListener, IAccelerometer {
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        System.out.println("Accelerometer Changed");
+//        System.out.println("Accelerometer Changed");
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
             // alpha is calculated as t / (t + dT)
             // with t, the low-pass filter's time-constant

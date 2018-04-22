@@ -69,16 +69,16 @@ public class proximity implements SensorEventListener, IProximity {
             if (event.values[0] >= -SENSOR_SENSITIVITY && event.values[0] <= SENSOR_SENSITIVITY) {
                 //near
                 this.proxState = true;
-                CurrentTickData.proxState = this.proxState;
+//                CurrentTickData.proxState = this.proxState;
             } else {
                 //far
                 this.proxState = false;
-                if(MainActivity.isRacing){
-                    Toast.makeText(context, "Round: "+CurrentTickData.round, Toast.LENGTH_LONG).show();
-                    CurrentTickData.round++;
-                }
-
-                CurrentTickData.proxState = this.proxState;
+//                if(MainActivity.isRacing){
+//                    Toast.makeText(context, "Round: "+CurrentTickData.round, Toast.LENGTH_LONG).show();
+//                    CurrentTickData.round++;
+//                }
+//
+//                CurrentTickData.proxState = this.proxState;
             }
 
         }
