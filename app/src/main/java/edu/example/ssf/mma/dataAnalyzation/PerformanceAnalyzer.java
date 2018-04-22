@@ -77,7 +77,7 @@ public class PerformanceAnalyzer {
 
     private static SectionSpeed calculateSpeedStraight(SectionData fastestSection, SectionData currentSection){
         if(fastestSection.getNextSectionTime()!= null && currentSection.getNextSectionTime() != null){
-            if(currentSection.getSectionTime()<fastestSection.getSectionTime() && currentSection.getNextSectionForces() > fastestSection.getNextSectionForces() && currentSection.getNextSectionTime() > fastestSection.getNextSectionTime()){
+            if(currentSection.getSectionTime()<fastestSection.getSectionTime() && currentSection.getNextSectionTime() > fastestSection.getNextSectionTime()){
                 return SectionSpeed.TOOFAST;
             }
             if(currentSection.getSectionTime()<fastestSection.getSectionTime() && currentSection.getNextSectionTime() < fastestSection.getNextSectionTime()){
@@ -96,18 +96,18 @@ public class PerformanceAnalyzer {
                 return SectionSpeed.SLOW;
             }
         }
-        return SectionSpeed.GOOD;
+        return SectionSpeed.NOTAVAILABLE;
     }
 
     private static SectionSpeed calculateSpeedCurve(SectionData fastestSection, SectionData currentSection){
         if(fastestSection.getNextSectionTime()!= null && currentSection.getNextSectionTime() != null){
-            if(currentSection.getSectionTime() < fastestSection.getSectionTime() && currentSection.getSectionForces() > fastestSection.getSectionForces() && currentSection.getNextSectionTime()>fastestSection.getNextSectionTime()){
+            if(currentSection.getSectionTime() < fastestSection.getSectionTime() && currentSection.getNextSectionTime()>fastestSection.getNextSectionTime()){
                 return SectionSpeed.TOOFAST;
             }
             if(currentSection.getSectionTime() < fastestSection.getSectionTime() && currentSection.getNextSectionTime() < fastestSection.getNextSectionTime()){
                 return SectionSpeed.FAST;
             }
-            if(currentSection.getSectionTime() > fastestSection.getSectionTime() && currentSection.getNextSectionTime() > fastestSection.getNextSectionTime() && currentSection.getSectionForces() < fastestSection.getSectionForces()){
+            if(currentSection.getSectionTime() > fastestSection.getSectionTime() && currentSection.getNextSectionTime() > fastestSection.getNextSectionTime()){
                 return SectionSpeed.SLOW;
             }
             if(currentSection.getSectionTime() > fastestSection.getSectionTime() && currentSection.getNextSectionTime() < fastestSection.getNextSectionTime()){
