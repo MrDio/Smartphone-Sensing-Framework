@@ -11,6 +11,8 @@ public class Lap {
     private double performanceIndicator;
     private ArrayList<Section> sections;
     private ArrayList<TickData> rawData;
+    private boolean isFastestLap = false;
+
 
     public Lap(){
         sections = new ArrayList<>();
@@ -101,5 +103,13 @@ public class Lap {
 
     public void setValid(boolean valid) {
         isValid = valid;
+    }
+
+    public boolean isFastestLap() {
+        return isFastestLap;
+    }
+
+    public void setFastestLap(boolean fastestLap) {
+        isFastestLap = fastestLap;
     }
 }

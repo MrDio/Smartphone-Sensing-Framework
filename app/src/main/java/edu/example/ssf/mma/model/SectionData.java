@@ -4,11 +4,13 @@ public class SectionData {
     private double sectionTime;
     private Double nextSectionTime;
     private float sectionForces;
-    private Float nextSectionForces;
+    private Float nextSectionForces = null;
 
     public SectionData(double sectionTime, Double nextSectionTime, float sectionForces, Float nextSectionForces){
-        this.sectionForces = sectionForces;
-        this.nextSectionForces = nextSectionForces;
+        this.sectionForces = Math.abs(sectionForces);
+        if(nextSectionForces != null){
+            this.nextSectionForces = Math.abs(nextSectionForces);
+        }
         this.sectionTime = sectionTime;
         this.nextSectionTime = nextSectionTime;
     }

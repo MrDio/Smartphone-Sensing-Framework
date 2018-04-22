@@ -40,6 +40,7 @@ public class LapListActivity extends ListActivity {
         data = new ArrayList();
         data = CsvFileReader.readFile();
         CsvFileReader.closeFile();
+
         DataModification.smoothCurves(data);
         DataModification.applySavitzkyGolay(data);
 

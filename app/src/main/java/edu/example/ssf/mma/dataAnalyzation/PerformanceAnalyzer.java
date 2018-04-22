@@ -32,9 +32,11 @@ public class PerformanceAnalyzer {
                 }
             }
         }
+        fastestLap.setFastestLap(true);
         for (int i = 0; i <fastestLap.getSections().size() ; i++) {
             fastestlapSections.put(i,fastestLap.getSections().get(i));
         }
+
 
         for (Map.Entry<Integer, Section> sectionEntry: fastestlapSections.entrySet()){
             Double fastestNextSectionTime;
@@ -67,9 +69,7 @@ public class PerformanceAnalyzer {
                         currentSection.setSectionSpeed(calculateSpeedCurve(fastestSectionData,currentSectionData));
                         currentSection.setCurveGrade(calculateCurveGrade(fastestSectionData,currentSectionData));
                     }
-                    currentSection.setSectionPerformance(determineSectionPerformance(currentSection.getSectionSpeed(),currentSection.getCurveGrade(),fastestSectionData,currentSectionData));
-
-
+                    currentSection.setSectionPerformance(determineSectionPerformance(currentSection.getSectionSpeed()));
                 }
             }
         }
@@ -104,7 +104,7 @@ public class PerformanceAnalyzer {
             if(currentSection.getSectionTime() < fastestSection.getSectionTime() && currentSection.getSectionForces() > fastestSection.getSectionForces() && currentSection.getNextSectionTime()>fastestSection.getNextSectionTime()){
                 return SectionSpeed.TOOFAST;
             }
-            if(currentSection.getSectionTime() < fastestSection.getSectionTime() && currentSection.getNextSectionTime() < fastestSection.getNextSectionTime() && currentSection.getSectionForces() > fastestSection.getSectionForces()){
+            if(currentSection.getSectionTime() < fastestSection.getSectionTime() && currentSection.getNextSectionTime() < fastestSection.getNextSectionTime()){
                 return SectionSpeed.FAST;
             }
             if(currentSection.getSectionTime() > fastestSection.getSectionTime() && currentSection.getNextSectionTime() > fastestSection.getNextSectionTime() && currentSection.getSectionForces() < fastestSection.getSectionForces()){
@@ -120,7 +120,7 @@ public class PerformanceAnalyzer {
                 return SectionSpeed.SLOW;
             }
         }
-        return SectionSpeed.GOOD;
+        return SectionSpeed.NOTAVAILABLE;
     }
 
     private static CurveGrade calculateCurveGrade(SectionData fastestSection, SectionData currentSection){
@@ -147,10 +147,18 @@ public class PerformanceAnalyzer {
         return CurveGrade.NEUTRAL;
     }
 
-    private static SectionPerformance determineSectionPerformance(SectionSpeed speed, CurveGrade curveGrade, SectionData fastestSection, SectionData currentSection){
-        if(curveGrade == CurveGrade.NOTAVAILABLE){
-            return SectionPerformance.NEUTRAL;
+    private static SectionPerformance determineSectionPerformance(SectionSpeed speed){
+        switch (speed){
+            case GOOD:
+                return SectionPerformance.NEUTRAL;
+            case FAST:
+                return SectionPerformance.GOOD;
+            case TOOFAST:
+                return SectionPerformance.BAD;
+            case SLOW:
+                return SectionPerformance.BAD;
+            default:
+                return SectionPerformance.UNDEFINED;
         }
-        return SectionPerformance.NEUTRAL;
     }
 }
