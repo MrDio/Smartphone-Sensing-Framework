@@ -14,8 +14,6 @@ public class PerformanceAnalyzer {
         mLaps = laps;
     }
 
-
-
     public static void calculatePerformanceIndicator(){
     }
 }
