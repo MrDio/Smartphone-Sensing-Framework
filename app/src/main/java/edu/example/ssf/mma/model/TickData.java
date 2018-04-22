@@ -1,6 +1,8 @@
 package edu.example.ssf.mma.model;
 
-public class TickData {
+import java.io.Serializable;
+
+public class TickData implements Serializable{
     private Float accX;
     private Float accY;
     private long timeStamp;

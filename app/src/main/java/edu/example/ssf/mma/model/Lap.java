@@ -1,8 +1,9 @@
 package edu.example.ssf.mma.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Lap {
+public class Lap implements Serializable {
 
 
     private boolean isValid = true;

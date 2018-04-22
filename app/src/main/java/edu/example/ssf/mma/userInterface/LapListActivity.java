@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import edu.example.ssf.mma.data.CsvFileReader;
@@ -14,6 +15,7 @@ import edu.example.ssf.mma.model.Lap;
 import edu.example.ssf.mma.data.LapListAdapter;
 import edu.example.ssf.mma.dataAnalyzation.PerformanceAnalyzer;
 import edu.example.ssf.mma.dataAnalyzation.SectionIdentifier;
+import edu.example.ssf.mma.model.Section;
 
 public class LapListActivity extends ListActivity {
 
@@ -32,8 +34,12 @@ public class LapListActivity extends ListActivity {
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id)
     {
-        Intent intent = new Intent(this, ReportActivity.class);
-        startActivity(intent);
+        if(data.get(position).isValid() && !data.get(position).isFastestLap()){
+            Intent intent = new Intent(this, ReportActivity.class);
+            intent.putExtra("sections", data.get(position).getSections());
+            startActivity(intent);
+        }
+
     }
 
     private void initiateData(){

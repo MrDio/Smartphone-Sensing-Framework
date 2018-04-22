@@ -79,6 +79,8 @@ public class SectionListAdapter extends BaseAdapter {
             case GOOD:
                 holder.performanceIndicator.setImageResource(R.mipmap.lightgreen);
                 break;
+            case UNDEFINED:
+                holder.performanceIndicator.setImageResource(R.mipmap.lightoff);
         }
 
         return view;

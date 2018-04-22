@@ -268,10 +268,10 @@ public class SectionIdentifier {
 
     private static Section mergeSection(Section start, Section end){
         Section mergedSection = new Section();
+        mergedSection.setType(SectionType.STRAIGHT);
         mergedSection.setStart(start.getStart());
         mergedSection.setEnd(end.getEnd());
-        mergedSection.setStart(start.getStart());
-        mergedSection.setEnd(end.getEnd());
+        mergedSection.setMedian(new TickData());
         mergedSection.setTimeTaken();
         return mergedSection;
     }

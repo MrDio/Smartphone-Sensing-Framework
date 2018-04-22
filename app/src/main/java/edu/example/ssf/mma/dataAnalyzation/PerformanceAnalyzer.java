@@ -18,10 +18,6 @@ import edu.example.ssf.mma.model.SectionType;
 
 public class PerformanceAnalyzer {
 
-
-
-    private static ArrayList<Lap> mLaps;
-
     public static void calculatePerformanceIndicator(ArrayList<Lap> mLaps){
         Lap fastestLap = null;
         TreeMap<Integer, Section> fastestlapSections = new TreeMap<>();
