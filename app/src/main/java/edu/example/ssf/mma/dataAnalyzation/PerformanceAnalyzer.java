@@ -114,9 +114,9 @@ public class PerformanceAnalyzer {
                 return SectionSpeed.GOOD;
             }
         } else{
-            if(currentSection.getSectionForces() > fastestSection.getSectionForces()){
+            if(currentSection.getSectionTime() > fastestSection.getSectionTime()){
                 return SectionSpeed.FAST;
-            } else if(currentSection.getSectionForces() < fastestSection.getSectionForces()){
+            } else if(currentSection.getSectionTime() < fastestSection.getSectionTime()){
                 return SectionSpeed.SLOW;
             }
         }
