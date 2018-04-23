@@ -7,6 +7,9 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import edu.example.ssf.mma.data.CurrentTickData;
 import edu.example.ssf.mma.hardwareAdapter.ILightSensor;
 import edu.example.ssf.mma.userInterface.MainActivity;
@@ -15,7 +18,7 @@ public class LightSensor implements SensorEventListener, ILightSensor {
 
     private SensorManager sensorManager;
     private Sensor light;
-    private static float SENSOR_DARK_CAP = 50;
+    private static float SENSOR_DARK_CAP = 0;
     private Context context;
 
     private float calibratedMax;
@@ -39,7 +42,7 @@ public class LightSensor implements SensorEventListener, ILightSensor {
 
     @Override
     public void start() {
-        sensorManager.registerListener(this, light, SensorManager.SENSOR_DELAY_FASTEST);
+        sensorManager.registerListener(this, light, SensorManager.SENSOR_DELAY_GAME);
     }
 
     @Override
@@ -54,11 +57,12 @@ public class LightSensor implements SensorEventListener, ILightSensor {
 
     @Override
     public void onSensorChanged(SensorEvent event) {
+
         if (event.sensor.getType() == Sensor.TYPE_LIGHT) {
+            //System.out.println(new Date().getTime()%10000);
             if (event.values[0] <= SENSOR_DARK_CAP) {
                 //dark
                 intensity = event.values[0];
-                CurrentTickData.proxState = true;
                 isNewRound = true;
             } else {
                 //bright
@@ -68,11 +72,10 @@ public class LightSensor implements SensorEventListener, ILightSensor {
                     isNewRound = false;
                 }
                 intensity = event.values[0];
-                CurrentTickData.proxState = false;
             }
 
         }
-//        System.out.println("LightIntensity: " + this.intensity);
+        //System.out.println("LightIntensity: " + this.intensity);
     }
 
     @Override

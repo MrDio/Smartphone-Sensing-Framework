@@ -26,6 +26,8 @@ import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Date;
+
 import edu.example.ssf.mma.data.CurrentTickData;
 import edu.example.ssf.mma.hardwareAdapter.IProximity;
 import edu.example.ssf.mma.userInterface.MainActivity;
@@ -43,7 +45,7 @@ public class proximity implements SensorEventListener, IProximity {
     private Sensor proxi;
     private static final int SENSOR_SENSITIVITY = 4;
     private Context context;
-
+    private boolean isNewRound = false;
     private Float x = 0.0f;
     private boolean proxState = false;
 
@@ -66,19 +68,23 @@ public class proximity implements SensorEventListener, IProximity {
     @Override
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_PROXIMITY) {
-            if (event.values[0] >= -SENSOR_SENSITIVITY && event.values[0] <= SENSOR_SENSITIVITY) {
+            System.out.println(event.values[0]);
+            if (event.values[0] <= SENSOR_SENSITIVITY) {
                 //near
                 this.proxState = true;
-//                CurrentTickData.proxState = this.proxState;
+                CurrentTickData.proxState = this.proxState;
+                if(MainActivity.isRacing) isNewRound = true;
+
             } else {
                 //far
                 this.proxState = false;
-//                if(MainActivity.isRacing){
-//                    Toast.makeText(context, "Round: "+CurrentTickData.round, Toast.LENGTH_LONG).show();
-//                    CurrentTickData.round++;
-//                }
-//
-//                CurrentTickData.proxState = this.proxState;
+                if(MainActivity.isRacing && isNewRound){
+                    isNewRound = false;
+                    CurrentTickData.round++;
+                    Toast.makeText(context, "Round: "+CurrentTickData.round, Toast.LENGTH_LONG).show();
+                }
+
+                CurrentTickData.proxState = this.proxState;
             }
 
         }

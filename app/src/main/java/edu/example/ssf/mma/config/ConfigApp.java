@@ -44,4 +44,6 @@ public class ConfigApp {
 	/** The string of the target storage direction. */
 	public static String targetStorageDir = "/LapOps/Data";
 
+	public static String currentLapFile = "";
+
 }
