@@ -28,6 +28,7 @@ package edu.example.ssf.mma.userInterface;
  */
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
     public static boolean isMeasuring = false;
     public static boolean carOnStart = false;
     public static boolean isRacing = false;
+    public static ProgressDialog dialog;
     // Init HW-Factory
     HardwareFactory hw;
 
@@ -78,7 +80,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         //Remove title bar
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -100,8 +101,6 @@ public class MainActivity extends AppCompatActivity {
         light1.setImageResource(R.mipmap.lightred);
         setInitialState();
     }
-
-
 
     public void setInitialState(){
         light1.setImageResource(R.mipmap.lightred);
@@ -145,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
         button.setText("CALIBRATE");
         button.setActivated(true);
         button.setVisibility(View.VISIBLE);
-        HardwareFactory.hwLight.start();
+        //HardwareFactory.hwLight.start();
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -168,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
 
         HardwareFactory.hwAcc.start();
 //        HardwareFactory.hwAcc.enableCalibration();
-//        HardwareFactory.hwProxi.start();
+        HardwareFactory.hwProxi.start();
         HardwareFactory.hwLight.calibrateMax();
 
         light1.setImageResource(R.mipmap.lightred);
@@ -233,7 +232,7 @@ public class MainActivity extends AppCompatActivity {
                 button.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        HardwareFactory.hwLight.calibrateMin();
+                        //HardwareFactory.hwLight.calibrateMin();
 
                         button.setActivated(false);
                         button.setVisibility(View.INVISIBLE);
@@ -325,21 +324,14 @@ public class MainActivity extends AppCompatActivity {
         carOnStart = false;
         isRacing = false;
 
-        light1.setVisibility(View.INVISIBLE);
-        light2.setVisibility(View.INVISIBLE);
-        light3.setVisibility(View.INVISIBLE);
-        light4.setVisibility(View.INVISIBLE);
-        light5.setVisibility(View.INVISIBLE);
-        instructionText.setVisibility(View.INVISIBLE);
-        button.setVisibility(View.INVISIBLE);
 
-        ProgressDialog dialog = new ProgressDialog(this);
-        dialog.show(MainActivity.this,"Loading data", "Please wait...");
+        dialog = ProgressDialog.show(this, "Analyzing Data", "Please wait");
 
+        setInitialState();
         Intent intent = new Intent(this, LapListActivity.class);
         startActivity(intent);
+
+
     }
-
-
 
 }

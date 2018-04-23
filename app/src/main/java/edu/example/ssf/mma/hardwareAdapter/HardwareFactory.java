@@ -59,8 +59,8 @@ public class HardwareFactory {
 		getLight(context);
 		Log.d("init?","light initialized");
 
-//		getProximity(context);
-//		Log.d("init?","proxi initialized");
+		getProximity(context);
+		Log.d("init?","proxi initialized");
 
 	}
 

@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import edu.example.ssf.mma.R;
 import edu.example.ssf.mma.data.CsvFileReader;
 import edu.example.ssf.mma.data.CurrentTickData;
 import edu.example.ssf.mma.data.DataModification;
@@ -22,16 +23,19 @@ public class LapListActivity extends ListActivity {
 
     private ArrayList<Lap> data;
     private LapListAdapter adapter;
-    private ProgressDialog dialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         data = new ArrayList<>();
         initiateData();
         adapter = new LapListAdapter(this, data);
-
+        MainActivity.dialog.dismiss();
         this.setListAdapter(adapter);
+
+
     }
 
     @Override
