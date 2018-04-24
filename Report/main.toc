@@ -1,3 +1,35 @@
 \boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
 \defcounter {refsection}{0}\relax 
 \select@language {english}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {1}LapOps}{2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1.1}Introduction}{2}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {2}System Analysis}{3}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.1}Use Cases}{3}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {3}Mathematical Models of Identifying Sections}{4}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.1}DataModification}{4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.1.1}DataModel}{4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.1.2}Smoothing}{4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.1.3}Savitzky-Golay Filtering}{4}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.2}Section Identification}{4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.2.1}Identification}{4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.2.2}Classification}{4}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.3}Section Rating}{4}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {4}LapOps Application}{5}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.1}User Manual}{5}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {5}Conclusion}{6}
