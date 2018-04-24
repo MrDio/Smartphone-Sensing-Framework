@@ -145,7 +145,7 @@ public class PerformanceAnalyzer {
             thresholdCasesToTest.add((float)i);
         }
         for (float threshold: thresholdCasesToTest){
-            sectionIdentification(laps, threshold);
+            sectionIdentification(laps, threshold,CURVETHRESHOLD);
 
             int validCount = 0;
             for (Lap lap : laps){
@@ -159,13 +159,13 @@ public class PerformanceAnalyzer {
 
         }
         int maxKey = Collections.max(bestThreshold.keySet());
-        sectionIdentification(laps,bestThreshold.get(maxKey));
+        sectionIdentification(laps,bestThreshold.get(maxKey),CURVETHRESHOLD);
     }
 
-    private static ArrayList<Lap> sectionIdentification(ArrayList<Lap> laps, float threshold) {
+    private static ArrayList<Lap> sectionIdentification(ArrayList<Lap> laps, float forceThreshold, float curveThreshold) {
 
-        SectionIdentifier.setFORCETHRESHOLD(threshold);
-        SectionIdentifier.setCURVETHRESHOLD(CURVETHRESHOLD);
+        SectionIdentifier.setFORCETHRESHOLD(forceThreshold);
+        SectionIdentifier.setCURVETHRESHOLD(curveThreshold);
 
         laps = SectionIdentifier.createSections(laps);
         laps = SectionIdentifier.classifySections(laps);
