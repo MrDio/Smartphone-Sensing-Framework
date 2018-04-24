@@ -30,6 +30,8 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {4}LapOps Application}{5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.1}User Manual}{5}
+\contentsline {section}{\numberline {4.1}How to use it}{5}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.2}Additional Information}{5}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {5}Conclusion}{6}
