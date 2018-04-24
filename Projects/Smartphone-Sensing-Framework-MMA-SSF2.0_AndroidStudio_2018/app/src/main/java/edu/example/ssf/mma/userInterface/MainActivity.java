@@ -37,8 +37,11 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import be.tarsos.dsp.AudioDispatcher;
@@ -67,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
     private int bufferSizeMic = sample_rate * 3;
     private int bufferSizeFFT = sample_rate;
     private StateMachine stateMachine;
+    private ScrollView scrollViewLog;
 
 
     @SuppressLint("RestrictedApi")
@@ -86,7 +90,11 @@ public class MainActivity extends AppCompatActivity {
     private void inAppLog(final String info) {
         runOnUiThread(() -> {
             CharSequence text = textViewLogs.getText();
-            textViewLogs.setText(text + "\n" + info);
+
+            textViewLogs.setText(text + info + "\n");
+            scrollViewLog.smoothScrollTo(0, 99999);
+
+
         });
     }
 
@@ -167,15 +175,8 @@ public class MainActivity extends AppCompatActivity {
                 PERMISSIONS_MULTIPLE_REQUEST);
 
 
-        textViewLogs = findViewById(R.id.textviewLogs);
+        initView();
 
-        this.startTimerButton = findViewById(R.id.startButton2);
-
-        recordtoCsvButton = findViewById(R.id.recordToCsvButton);
-        recordtoCsvButton.setOnClickListener(view -> record10SecondsFFTtoCsv());
-
-        clearLogButton = findViewById(R.id.clearLogButton);
-        clearLogButton.setOnClickListener(view -> textViewLogs.setText("Logs:"));
 
         Trackings.onNewDelta = (delta) -> onTrackingActivityStopped(delta);
         Trackings.onStartNewTracking = () -> onActivityStarted();
@@ -187,6 +188,26 @@ public class MainActivity extends AppCompatActivity {
 //       GoogleAccessor = new GoogleAccessor(this);
 //       GoogleAccessor.signIn();
 
+    }
+
+    private void initView() {
+        textViewLogs = findViewById(R.id.textviewLogs);
+        textViewLogs.setMovementMethod(new ScrollingMovementMethod());
+
+        this.startTimerButton = findViewById(R.id.startButton2);
+        scrollViewLog = findViewById(R.id.scrollViewLog);
+
+
+        recordtoCsvButton = findViewById(R.id.recordToCsvButton);
+        recordtoCsvButton.setOnClickListener(view -> record10SecondsFFTtoCsv());
+
+        clearLogButton = findViewById(R.id.clearLogButton);
+        clearLogButton.setOnClickListener(view -> clearLogs());
+    }
+
+    private void clearLogs() {
+        textViewLogs.scrollTo(0, 0);
+        textViewLogs.setText("");
     }
 
     private void setupAudioToCsv() {

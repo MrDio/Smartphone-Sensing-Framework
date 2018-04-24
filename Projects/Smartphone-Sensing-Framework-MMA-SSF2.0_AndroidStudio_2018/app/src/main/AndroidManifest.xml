@@ -17,16 +17,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         >
+        <activity
+            android:screenOrientation="portrait"
+            android:name="edu.example.ssf.mma.userInterface.MainActivity">
 
-        <activity android:name="edu.example.ssf.mma.userInterface.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="edu.example.ssf.mma.userInterface.ListFileActivity" > </activity>
-        <activity android:name="edu.example.ssf.mma.charts.AccChart" > </activity>
     </application>
 
 </manifest>
