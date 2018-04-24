@@ -22,11 +22,12 @@ public class LapListAdapter extends BaseAdapter {
         TextView roundTime;
         ImageView performanceIndicator;
     }
+
     private ArrayList<Lap> data;
 
     private final LayoutInflater mLayoutInflater;
 
-    public LapListAdapter(Context context, ArrayList<Lap> data){
+    public LapListAdapter(Context context, ArrayList<Lap> data) {
         this.data = data;
 
         mLayoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -50,7 +51,7 @@ public class LapListAdapter extends BaseAdapter {
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         ViewHolder holder;
-        if(view == null){
+        if (view == null) {
             view = mLayoutInflater.inflate(R.layout.laprow_layout, null);
 
             holder = new ViewHolder();
@@ -66,21 +67,20 @@ public class LapListAdapter extends BaseAdapter {
 
         holder.number.setText(String.valueOf(data.get(i).getNumberAsString()));
         holder.roundTime.setText(String.valueOf(data.get(i).getRoundTimeAsString()));
-        int pi = data.get(i).getPerformanceIndicator();
+        boolean valid = data.get(i).isValid();
+        boolean fastest = data.get(i).isFastestLap();
 
-        switch(pi){
-            case 1:
-                holder.performanceIndicator.setImageResource(R.mipmap.lightred);
-                break;
-            case 2:
-                holder.performanceIndicator.setImageResource(R.mipmap.lightyellow);
-                break;
-            case 3:
+        if (valid) {
+            if (fastest) {
                 holder.performanceIndicator.setImageResource(R.mipmap.lightgreen);
-                break;
-            case 0:
-                holder.performanceIndicator.setImageResource(R.mipmap.lightoff);
+            } else {
+                holder.performanceIndicator.setImageResource(R.mipmap.lightyellow);
+            }
+
+        } else {
+            holder.performanceIndicator.setImageResource(R.mipmap.lightred);
         }
+
 
         return view;
     }

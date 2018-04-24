@@ -3,11 +3,15 @@ package edu.example.ssf.mma.dataAnalyzation;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
 import javax.annotation.Nullable;
 
+import edu.example.ssf.mma.data.DataModification;
 import edu.example.ssf.mma.model.CurveGrade;
 import edu.example.ssf.mma.model.Lap;
 import edu.example.ssf.mma.model.Section;
@@ -156,5 +160,45 @@ public class PerformanceAnalyzer {
             default:
                 return SectionPerformance.UNDEFINED;
         }
+    }
+
+    public static void fitThreshold(ArrayList<Lap> laps){
+        Map<Integer,Float> BestThreshold = new HashMap<>();
+        ArrayList<Float> thresholdCasesToTest = new ArrayList<>();
+
+        int maxThreshold = 2500;
+        int initThreshold = 900;
+
+        for (int i = initThreshold; i <= maxThreshold; i+=100) {
+            thresholdCasesToTest.add((float)i);
+        }
+        for (float threshold: thresholdCasesToTest){
+            sectionIdentification(laps, threshold);
+
+            int validCount = 0;
+            for (Lap lap : laps){
+                if(lap.isValid()){
+                    validCount++;
+                }
+            }
+
+            if(!BestThreshold.containsKey(validCount)){
+                BestThreshold.put(validCount, threshold);
+            }
+
+        }
+        int maxKey = Collections.max(BestThreshold.keySet());
+        sectionIdentification(laps,BestThreshold.get(maxKey));
+    }
+
+    private static ArrayList<Lap> sectionIdentification(ArrayList<Lap> laps, float threshold) {
+
+        SectionIdentifier.setFORCETHRESHOLD(threshold);
+
+        laps = SectionIdentifier.createSections(laps);
+        laps = SectionIdentifier.classifySections(laps);
+        laps = SectionIdentifier.invalidateLaps(laps);
+
+        return laps;
     }
 }

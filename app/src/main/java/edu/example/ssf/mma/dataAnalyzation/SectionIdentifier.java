@@ -1,5 +1,7 @@
 package edu.example.ssf.mma.dataAnalyzation;
 
+import android.graphics.Bitmap;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -7,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import edu.example.ssf.mma.config.ConfigApp;
 import edu.example.ssf.mma.model.Lap;
 import edu.example.ssf.mma.model.Section;
 import edu.example.ssf.mma.model.SectionType;
@@ -16,7 +19,8 @@ public class SectionIdentifier {
     private static HashMap<Integer, TickData> pointsUnderThreshold = new HashMap<>();
     private static HashMap<Integer, TickData> pointsOverThreshold = new HashMap<>();
     private static TreeMap<Integer, Section> SectionList = new TreeMap<>();
-    private static final float CURVETHRESHOLD = 3.5f;
+    private static float CURVETHRESHOLD = ConfigApp.curveThreshold;
+    private static float FORCETHRESHOLD;
 
     private static ArrayList<Section> identifySections(ArrayList<TickData> data) {
         pointsOverThreshold = new HashMap<>();
@@ -197,7 +201,7 @@ public class SectionIdentifier {
 
             for (int i = 0; i < sections.size(); i++) {
                 System.out.println("Section: Start: " + sections.get(i).getStart().getTimeStamp() + " | End: " + sections.get(i).getEnd().getTimeStamp() + " | Area: " + sections.get(i).getForceToVehicle());
-                if (Math.abs(sections.get(i).getForceToVehicle()) < 900.0) {
+                if (Math.abs(sections.get(i).getForceToVehicle()) < FORCETHRESHOLD) {
                     if (possibleMerge == true) {
                         sectionToMerge = mergeSection(sectionToMerge, sections.get(i));
                     } else {
@@ -231,30 +235,70 @@ public class SectionIdentifier {
     }
 
     public static ArrayList<Lap> invalidateLaps(ArrayList<Lap> mLaps) {
-        HashMap<Integer, Integer> amountOfSectionsCount = new HashMap<>();
+        Map<Integer, List<Lap>> lapsGroupedBySections = new HashMap<>();
 
         for (Lap lap : mLaps) {
-            if (amountOfSectionsCount.containsKey(lap.getSections().size())) {
-                int count = amountOfSectionsCount.get(lap.getSections().size());
-                amountOfSectionsCount.put(lap.getSections().size(), count + 1);
+            lap.setValid(true);
+            if (lapsGroupedBySections.containsKey(lap.getSections().size())) {
+                lapsGroupedBySections.get(lap.getSections().size()).add(lap);
             } else {
-                amountOfSectionsCount.put(lap.getSections().size(), 1);
+                List<Lap> tempList = new ArrayList<>();
+                tempList.add(lap);
+                lapsGroupedBySections.put(lap.getSections().size(), tempList);
             }
         }
 
-        Map.Entry<Integer, Integer> maxEntry = null;
+        int maxAmountofCorrectLaps = 0;
+        int lapNumber = -1;
+        int rightKey = 0;
 
-        for (Map.Entry<Integer, Integer> entry : amountOfSectionsCount.entrySet()) {
-            if (maxEntry == null || entry.getValue().compareTo(maxEntry.getValue()) > 0) {
-                maxEntry = entry;
+        for (Map.Entry<Integer, List<Lap>> entry : lapsGroupedBySections.entrySet()) {
+            for (Lap lapRef : entry.getValue()) {
+                int correctlapsCurrentRef = 0;
+                List<Section> currentReference = lapRef.getSections();
+                for (Lap lap : entry.getValue()) {
+                    if (!lap.equals(lapRef)) {
+                        boolean lapSectionsEqual = true;
+                        for (int i = 0; i < currentReference.size(); i++) {
+                            if (currentReference.get(i).getType() != lap.getSections().get(i).getType()) {
+                                lapSectionsEqual = false;
+                            }
+                        }
+                        if (lapSectionsEqual) {
+                            correctlapsCurrentRef++;
+                        }
+                    }
+                    if (correctlapsCurrentRef > maxAmountofCorrectLaps) {
+                        maxAmountofCorrectLaps = correctlapsCurrentRef;
+                        lapNumber = lapRef.getNumber();
+                        rightKey = entry.getKey();
+                    }
+                }
+            }
+        }
+        for (Map.Entry<Integer, List<Lap>> entry : lapsGroupedBySections.entrySet()) {
+            if (entry.getKey() != rightKey) {
+                for (Lap lap : entry.getValue()) {
+                    lap.setValid(false);
+                }
+            }
+            if (entry.getKey() == rightKey) {
+                List<Section> correctSections = new ArrayList<>();
+                for (Lap lap : entry.getValue()) {
+                    if (lap.getNumber() == lapNumber) {
+                        correctSections = lap.getSections();
+                    }
+                }
+                for (Lap lap : entry.getValue()) {
+                    for (int i = 0; i < correctSections.size(); i++) {
+                        if (correctSections.get(i).getType() != lap.getSections().get(i).getType()) {
+                            lap.setValid(false);
+                        }
+                    }
+                }
             }
         }
 
-        for (Lap lap : mLaps) {
-            if (lap.getSections().size() != maxEntry.getKey()) {
-                lap.setValid(false);
-            }
-        }
 
         return mLaps;
 
@@ -267,5 +311,13 @@ public class SectionIdentifier {
         mergedSection.setEnd(end.getEnd());
         mergedSection.setMedian(new TickData());
         return mergedSection;
+    }
+
+    public static void setCURVETHRESHOLD(float CURVETHRESHOLD) {
+        SectionIdentifier.CURVETHRESHOLD = CURVETHRESHOLD;
+    }
+
+    public static void setFORCETHRESHOLD(float FORCETHRESHOLD) {
+        SectionIdentifier.FORCETHRESHOLD = FORCETHRESHOLD;
     }
 }

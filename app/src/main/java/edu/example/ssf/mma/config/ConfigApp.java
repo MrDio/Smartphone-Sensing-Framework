@@ -46,4 +46,11 @@ public class ConfigApp {
 
 	public static String currentLapFile = "";
 
+	public static Float curveThreshold = 5f;
+
+	public static Float forceThreshold = 900f;
+
+
+
+
 }
