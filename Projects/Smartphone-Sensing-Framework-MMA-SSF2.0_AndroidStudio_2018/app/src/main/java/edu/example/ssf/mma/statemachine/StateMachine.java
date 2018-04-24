@@ -23,7 +23,6 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.function.Consumer;
@@ -34,18 +33,10 @@ import edu.example.ssf.mma.hardwareAdapter.ClapDetector;
 
 public class StateMachine implements IStateMachine {
 
-    public Consumer<String> onWriteToAppLog = null;
-    /**
-     * state of the state machine when not in the state "WALKING" or "DRIVING". Also the state the state machine is in at the start.
-     */
-    /**
-     * setting the abstract state in the beginning to null.
-     */
+    private Consumer<String> onWriteToAppLog = null;
     private AbstractState actState = null;
-    private Date lastClapDetected = null;
     private ArrayList<Transition> transitions = new ArrayList<>();
-
-    private Timer timer = new Timer();
+    private Timer timeoutTimer = new Timer();
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     public StateMachine() {
@@ -55,76 +46,62 @@ public class StateMachine implements IStateMachine {
         AbstractState stoppingPrecondition = new StateStoppingPreCondition();
 
         transitions.add(new Transition(idle, Action.CLAP_DETECTED, trackingPrecondition, () -> {
+            safeCancelTimeoutTimer();
             startTimeoutTimer();
         }));
 
         transitions.add(new Transition(trackingPrecondition, Action.CLAP_DETECTED, trackingActivity, () -> {
+            onWriteToAppLog.accept("Double clap detected");
             safeCancelTimeoutTimer();
             Trackings.startNewTracking();
         }));
 
         transitions.add(new Transition(trackingActivity, Action.CLAP_DETECTED, stoppingPrecondition, () -> {
+            safeCancelTimeoutTimer();
             startTimeoutTimer();
         }));
         transitions.add(new Transition(stoppingPrecondition, Action.CLAP_DETECTED, idle, () -> {
+            onWriteToAppLog.accept("Double clap detected");
             safeCancelTimeoutTimer();
             Trackings.endTracking();
         }));
 
-        transitions.add(new Transition(trackingPrecondition, Action.PRECONDITION_TIMEOUT, idle));
-        transitions.add(new Transition(stoppingPrecondition, Action.PRECONDITION_TIMEOUT, trackingActivity));
-
+        transitions.add(new Transition(trackingPrecondition, Action.PRECONDITION_TIMEOUT, idle,
+                () -> onWriteToAppLog.accept("Only single clap detected")));
+        transitions.add(new Transition(stoppingPrecondition, Action.PRECONDITION_TIMEOUT, trackingActivity,
+                () -> onWriteToAppLog.accept("Only single clap detected")));
 
         this.actState = idle;
 
-        new ClapDetector((time, salience) -> {
-            onWriteToAppLog.accept("Clap detected");
-            transitionCheck(Action.CLAP_DETECTED);
-        });
+        new ClapDetector((time, salience) -> doTransition(Action.CLAP_DETECTED));
     }
 
     private void startTimeoutTimer() {
-        safeCancelTimeoutTimer();
-        timer = new Timer();
-        timer.schedule(new TimerTask() {
+        timeoutTimer = new Timer();
+        timeoutTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                transitionCheck(Action.PRECONDITION_TIMEOUT);
+                doTransition(Action.PRECONDITION_TIMEOUT);
             }
         }, 1000);
     }
-    private void safeCancelTimeoutTimer(){
-        try{
-            timer.cancel();
-        }
-        catch(Exception ex){
+
+    private void safeCancelTimeoutTimer() {
+        try {
+            timeoutTimer.cancel();
+        } catch (Exception ignored) {
 
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    private Boolean setAndCheckForDoubleClap() {
-        int maxTimeBetweenClapsInMs = 1000;
-        // init first clap
-        if (lastClapDetected == null) {
-            onWriteToAppLog.accept("Single Clap detected");
-            lastClapDetected = new Date();
-            return false;
-        }
-        // last clap less then n ms in the past
-        if ((new Date()).getTime() - lastClapDetected.getTime() < maxTimeBetweenClapsInMs) {
-            onWriteToAppLog.accept("Double Clap detected");
-            lastClapDetected = null;
-            return true;
-        }
-        // new first clap
-        onWriteToAppLog.accept("Single Clap detected");
-        lastClapDetected = new Date();
-        return false;
+
+    @Override
+    public void setLogger(Consumer<String> logger) {
+        onWriteToAppLog = logger;
     }
 
     @Override
-    public void transitionCheck(Action trigger) {
+    public void doTransition(Action trigger) {
 
         for (Transition transition : transitions) {
             if (transition.trigger.equals(trigger) && transition.preState.equals(actState)) {

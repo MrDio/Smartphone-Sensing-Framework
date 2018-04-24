@@ -20,6 +20,9 @@
 package edu.example.ssf.mma.statemachine;
 
 // TODO: Auto-generated Javadoc
+
+import java.util.function.Consumer;
+
 /**
  * Interface class for checking transition and state, getting the state label and initialising the StateMachine.
  * It also encapsulates the complete package statemachine from the other components and packages
@@ -28,11 +31,13 @@ package edu.example.ssf.mma.statemachine;
  */
 
 public interface IStateMachine {
-	
+
+	void setLogger(Consumer<String> logger);
+
 	/**
 	 * checks if a transition occurred.
 	 */
-	void transitionCheck(Action trigger);
+	void doTransition(Action trigger);
 
 	
 }

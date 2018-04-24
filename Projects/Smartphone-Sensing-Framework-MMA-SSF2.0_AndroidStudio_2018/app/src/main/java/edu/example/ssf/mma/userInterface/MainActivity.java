@@ -51,6 +51,7 @@ import be.tarsos.dsp.io.android.AudioDispatcherFactory;
 import be.tarsos.dsp.util.fft.FFT;
 import edu.example.ssf.mma.R;
 import edu.example.ssf.mma.data.CsvFileWriter;
+import edu.example.ssf.mma.statemachine.IStateMachine;
 import edu.example.ssf.mma.statemachine.StateMachine;
 import edu.example.ssf.mma.Tracker.Trackings;
 
@@ -69,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean isRecordingToCsv = false;
     private int bufferSizeMic = sample_rate * 3;
     private int bufferSizeFFT = sample_rate;
-    private StateMachine stateMachine;
+    private IStateMachine stateMachine;
     private ScrollView scrollViewLog;
 
 
@@ -178,11 +179,11 @@ public class MainActivity extends AppCompatActivity {
         initView();
 
 
-        Trackings.onNewDelta = (delta) -> onTrackingActivityStopped(delta);
-        Trackings.onStartNewTracking = () -> onActivityStarted();
+        Trackings.onNewDelta = this::onTrackingActivityStopped;
+        Trackings.onStartNewTracking = this::onActivityStarted;
 
         this.stateMachine = new StateMachine();
-        this.stateMachine.onWriteToAppLog = (s) -> inAppLog(s);
+        this.stateMachine.setLogger(this::inAppLog);
 
 //       setupAudioToCsv();
 //       GoogleAccessor = new GoogleAccessor(this);
