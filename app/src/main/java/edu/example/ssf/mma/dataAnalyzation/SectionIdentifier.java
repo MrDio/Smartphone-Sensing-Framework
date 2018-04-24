@@ -16,16 +16,16 @@ import edu.example.ssf.mma.model.SectionType;
 import edu.example.ssf.mma.model.TickData;
 
 public class SectionIdentifier {
-    private static HashMap<Integer, TickData> pointsUnderThreshold = new HashMap<>();
-    private static HashMap<Integer, TickData> pointsOverThreshold = new HashMap<>();
-    private static TreeMap<Integer, Section> SectionList = new TreeMap<>();
-    private static float CURVETHRESHOLD = ConfigApp.curveThreshold;
+    private static HashMap<Integer, TickData> pointsUnderThreshold;
+    private static HashMap<Integer, TickData> pointsOverThreshold;
+
+    private static float CURVETHRESHOLD;
     private static float FORCETHRESHOLD;
 
     private static ArrayList<Section> identifySections(ArrayList<TickData> data) {
+        TreeMap<Integer, Section> SectionList = new TreeMap<>();
         pointsOverThreshold = new HashMap<>();
         pointsUnderThreshold = new HashMap<>();
-        SectionList = new TreeMap<>();
 
         ArrayList<Section> sections = new ArrayList<>();
 
@@ -277,31 +277,36 @@ public class SectionIdentifier {
             }
         }
         for (Map.Entry<Integer, List<Lap>> entry : lapsGroupedBySections.entrySet()) {
-            if (entry.getKey() != rightKey) {
-                for (Lap lap : entry.getValue()) {
-                    lap.setValid(false);
+            setWrongKeyEntriesInvalid(rightKey, entry);
+            checkCorrectEntrySetLapListForInvalidLaps(lapNumber, rightKey, entry);
+        }
+        return mLaps;
+    }
+
+    private static void checkCorrectEntrySetLapListForInvalidLaps(int lapNumber, int rightKey, Map.Entry<Integer, List<Lap>> entry) {
+        if (entry.getKey() == rightKey) {
+            List<Section> correctSections = new ArrayList<>();
+            for (Lap lap : entry.getValue()) {
+                if (lap.getNumber() == lapNumber) {
+                    correctSections = lap.getSections();
                 }
             }
-            if (entry.getKey() == rightKey) {
-                List<Section> correctSections = new ArrayList<>();
-                for (Lap lap : entry.getValue()) {
-                    if (lap.getNumber() == lapNumber) {
-                        correctSections = lap.getSections();
-                    }
-                }
-                for (Lap lap : entry.getValue()) {
-                    for (int i = 0; i < correctSections.size(); i++) {
-                        if (correctSections.get(i).getType() != lap.getSections().get(i).getType()) {
-                            lap.setValid(false);
-                        }
+            for (Lap lap : entry.getValue()) {
+                for (int i = 0; i < correctSections.size(); i++) {
+                    if (correctSections.get(i).getType() != lap.getSections().get(i).getType()) {
+                        lap.setValid(false);
                     }
                 }
             }
         }
+    }
 
-
-        return mLaps;
-
+    private static void setWrongKeyEntriesInvalid(int rightKey, Map.Entry<Integer, List<Lap>> entry) {
+        if (entry.getKey() != rightKey) {
+            for (Lap lap : entry.getValue()) {
+                lap.setValid(false);
+            }
+        }
     }
 
     private static Section mergeSection(Section start, Section end) {

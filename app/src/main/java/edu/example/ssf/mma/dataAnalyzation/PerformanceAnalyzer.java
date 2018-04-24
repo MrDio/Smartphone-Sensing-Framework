@@ -5,14 +5,10 @@ package edu.example.ssf.mma.dataAnalyzation;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import javax.annotation.Nullable;
-
-import edu.example.ssf.mma.data.DataModification;
-import edu.example.ssf.mma.model.CurveGrade;
+import edu.example.ssf.mma.config.ConfigApp;
 import edu.example.ssf.mma.model.Lap;
 import edu.example.ssf.mma.model.Section;
 import edu.example.ssf.mma.model.SectionData;
@@ -21,6 +17,10 @@ import edu.example.ssf.mma.model.SectionSpeed;
 import edu.example.ssf.mma.model.SectionType;
 
 public class PerformanceAnalyzer {
+
+    private final static int MAXFORCETHRESHOLD = ConfigApp.forceThresholdUpperBound;
+    private final static int MINFORCETHRESHOLD = ConfigApp.forceThresholdLowerBound;
+    private final static float CURVETHRESHOLD = ConfigApp.curveThreshold;
 
     public static void calculatePerformanceIndicator(ArrayList<Lap> mLaps){
         Lap fastestLap = null;
@@ -67,7 +67,6 @@ public class PerformanceAnalyzer {
                         currentSection.setSectionSpeed(calculateSpeedStraight(fastestSectionData,currentSectionData));
                     } else{
                         currentSection.setSectionSpeed(calculateSpeedCurve(fastestSectionData,currentSectionData));
-                        currentSection.setCurveGrade(calculateCurveGrade(fastestSectionData,currentSectionData));
                     }
                     currentSection.setSectionPerformance(determineSectionPerformance(currentSection.getSectionSpeed()));
                 }
@@ -123,30 +122,6 @@ public class PerformanceAnalyzer {
         return SectionSpeed.NOTAVAILABLE;
     }
 
-    private static CurveGrade calculateCurveGrade(SectionData fastestSection, SectionData currentSection){
-        if(fastestSection.getNextSectionTime()!= null && currentSection.getNextSectionTime() != null){
-            if(currentSection.getSectionTime() > fastestSection.getSectionTime() && currentSection.getSectionForces() > fastestSection.getSectionForces() && currentSection.getNextSectionTime()>fastestSection.getNextSectionTime()){
-                return CurveGrade.BAD;
-            }
-            if(currentSection.getSectionTime() < fastestSection.getSectionTime() && currentSection.getNextSectionTime() < fastestSection.getNextSectionTime() && currentSection.getSectionForces() > fastestSection.getSectionForces()){
-                return CurveGrade.PERFECT;
-            }
-            if(currentSection.getSectionTime() > fastestSection.getSectionTime() && currentSection.getNextSectionTime() > fastestSection.getNextSectionTime() && currentSection.getSectionForces() < fastestSection.getSectionForces()){
-                return CurveGrade.BAD;
-            }
-            if(currentSection.getSectionTime() > fastestSection.getSectionTime() && currentSection.getNextSectionTime() < fastestSection.getNextSectionTime()){
-                return CurveGrade.GOOD;
-            }
-        } else{
-            if(currentSection.getSectionForces() > fastestSection.getSectionForces()){
-                return CurveGrade.GOOD;
-            } else if(currentSection.getSectionForces() < fastestSection.getSectionForces()){
-                return CurveGrade.BAD;
-            }
-        }
-        return CurveGrade.NEUTRAL;
-    }
-
     private static SectionPerformance determineSectionPerformance(SectionSpeed speed){
         switch (speed){
             case GOOD:
@@ -163,13 +138,10 @@ public class PerformanceAnalyzer {
     }
 
     public static void fitThreshold(ArrayList<Lap> laps){
-        Map<Integer,Float> BestThreshold = new HashMap<>();
+        Map<Integer,Float> bestThreshold = new HashMap<>();
         ArrayList<Float> thresholdCasesToTest = new ArrayList<>();
 
-        int maxThreshold = 2500;
-        int initThreshold = 900;
-
-        for (int i = initThreshold; i <= maxThreshold; i+=100) {
+        for (int i = MINFORCETHRESHOLD; i <= MAXFORCETHRESHOLD; i+=100) {
             thresholdCasesToTest.add((float)i);
         }
         for (float threshold: thresholdCasesToTest){
@@ -181,19 +153,19 @@ public class PerformanceAnalyzer {
                     validCount++;
                 }
             }
-
-            if(!BestThreshold.containsKey(validCount)){
-                BestThreshold.put(validCount, threshold);
+            if(!bestThreshold.containsKey(validCount)){
+                bestThreshold.put(validCount, threshold);
             }
 
         }
-        int maxKey = Collections.max(BestThreshold.keySet());
-        sectionIdentification(laps,BestThreshold.get(maxKey));
+        int maxKey = Collections.max(bestThreshold.keySet());
+        sectionIdentification(laps,bestThreshold.get(maxKey));
     }
 
     private static ArrayList<Lap> sectionIdentification(ArrayList<Lap> laps, float threshold) {
 
         SectionIdentifier.setFORCETHRESHOLD(threshold);
+        SectionIdentifier.setCURVETHRESHOLD(CURVETHRESHOLD);
 
         laps = SectionIdentifier.createSections(laps);
         laps = SectionIdentifier.classifySections(laps);

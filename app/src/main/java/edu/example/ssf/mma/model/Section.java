@@ -8,25 +8,14 @@ public class Section implements Serializable{
     private SectionType type;
     private SectionPerformance sectionPerformance;
     private SectionSpeed sectionSpeed;
-    private CurveGrade curveGrade;
-    private String optimizationTip;
-    private double performanceIndicator;
     private TickData start;
     private TickData end;
     private TickData median;
-    private double timeTaken;
     private double forceToVehicle;
 
     public Section() {
         type = SectionType.UNDEFINED;
-        curveGrade = CurveGrade.NOTAVAILABLE;
         sectionSpeed = SectionSpeed.NOTAVAILABLE;
-    }
-
-    public Section(SectionType sectionType, String optimizationTip, double performanceIndicator) {
-        this.performanceIndicator = performanceIndicator;
-        this.type = sectionType;
-        this.optimizationTip = optimizationTip;
     }
 
     public SectionType getType() {
@@ -78,10 +67,6 @@ public class Section implements Serializable{
         return tip;
     }
 
-//    public void setOptimizationTip(String optimizationTip) {
-//        this.optimizationTip = optimizationTip;
-//    }
-
     public TickData getStart() {
         return start;
     }
@@ -132,13 +117,5 @@ public class Section implements Serializable{
 
     public void setSectionSpeed(SectionSpeed sectionSpeed) {
         this.sectionSpeed = sectionSpeed;
-    }
-
-    public CurveGrade getCurveGrade() {
-        return curveGrade;
-    }
-
-    public void setCurveGrade(CurveGrade curveGrade) {
-        this.curveGrade = curveGrade;
     }
 }

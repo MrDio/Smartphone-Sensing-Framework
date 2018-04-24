@@ -48,7 +48,8 @@ public class ConfigApp {
 
 	public static Float curveThreshold = 5f;
 
-	public static Float forceThreshold = 900f;
+	public static int forceThresholdLowerBound = 900;
+	public static int forceThresholdUpperBound = 2500;
 
 
 
