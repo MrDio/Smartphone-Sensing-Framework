@@ -1,0 +1,23 @@
+% ------------------------------------------------------------------------
+% LaTeX - (Preambel) *****************************************************
+% ------------------------------------------------------------------------
+% Table Settings
+% ------------------------------------------------------------------------
+% basiernd auf www.matthiaspospiech.de/latex/vorlagen Diplomarbeit kompakt
+% ========================================================================
+% Einstellungen für Tabellen
+
+\renewcommand\tablestylecommon{%
+  \renewcommand{\arraystretch}{1.4} % Groessere Abstaende zwischen Zeilen
+  \normalfont\normalsize            %
+  \sffamily\tablefontsize           % Serifenlose und kleine Schrift
+  \centering%                       % Tabelle zentrieren
+}
+
+\renewcommand{\tablestyle}{%
+   \tablestylecommon%
+}
+
+\renewcommand\tablebody{%
+   \tablefontsize\sffamily\upshape%
+}

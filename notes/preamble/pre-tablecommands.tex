@@ -1,0 +1,99 @@
+% ------------------------------------------------------------------------
+% LaTeX - Preambel ******************************************************
+% ------------------------------------------------------------------------
+% Table Commands
+% ------------------------------------------------------------------------
+% basiernd auf www.matthiaspospiech.de/latex/vorlagen Diplomarbeit kompakt
+% ========================================================================
+%% Kommandos fuer Tabellen. Entnommen aus The LateX Companion, tabsatz.ps und diversen Dokus
+
+%%% ---| Farben fuer Tabellen |-------------------
+\colorlet{tablesubheadcolor}{gray!30}
+\colorlet{tableheadcolor}{gray!25}
+\colorlet{tableblackheadcolor}{black!100}
+\colorlet{tablerowcolor}{gray!10.0}
+%%% ---------------------------------------------
+
+% um Tabellenspalten mit Flattersatz zu setzen, muss \\ vor
+% (z.B.) \raggedright geschuetzt werden:
+\newcommand{\PreserveBackslash}[1]{\let\temp=\\#1\let\\=\temp}
+
+% Linksbuendig:
+\newcolumntype{v}[1]{>{\PreserveBackslash\RaggedRight\hspace{0pt}}p{#1}}
+\newcolumntype{M}[1]{>{\PreserveBackslash\RaggedRight\hspace{0pt}}m{#1}}
+\newcolumntype{Y}{>{\PreserveBackslash\RaggedLeft\hspace{0pt}}X}
+
+\newcolumntype{Z}{>{\PreserveBackslash\RaggedRight\hspace{0pt}}X}
+
+%%% ---|Layout der Tabellen |-------------------
+
+
+% Groesse der Schrift in Tabellen
+\newcommand{\tablefontsize}{ \footnotesize}
+\newcommand{\tableheadfontsize}{\footnotesize}
+
+% Layout der Tabelle: Ausrichtung, Schrift, Zeilenabstand
+\newcommand\tablestylecommon{%
+  \renewcommand{\arraystretch}{1.4} % Groessere Abstaende zwischen Zeilen
+  \normalfont\normalsize            %
+  \sffamily\tablefontsize           % Serifenlose und kleine Schrift
+  \centering%                       % Tabelle zentrieren
+}
+
+\newcommand{\tablestyle}{
+	\tablestylecommon
+	%\tablealtcolored
+}
+
+% Ruecksetzten der Aenderungen
+\newcommand\tablerestoresettings{%
+  \renewcommand{\arraystretch}{1}% Abstaende wieder zuruecksetzen
+  \normalsize\rmfamily % Schrift wieder zuruecksetzen
+}
+
+% Tabellenkopf: Serifenlos+fett+schraeg+Schriftfarbe
+\newcommand\tablehead{%
+  \tableheadfontsize%
+  \sffamily\bfseries%
+  %\slshape
+  %\color{white}
+}
+
+\newcommand\tablesubheadfont{%
+  \tableheadfontsize%
+  \sffamily\bfseries%
+  \slshape
+  %\color{white}
+}
+
+
+\newcommand\tableheadcolor{%
+	%\rowcolor{tablesubheadcolor}
+	%\rowcolor{tableblackheadcolor}
+	\rowcolor{tableheadcolor}%
+}
+
+\newcommand\tablesubheadcolor{%
+	\rowcolor{tablesubheadcolor}
+	%\rowcolor{tableblackheadcolor}
+}
+
+\newcommand{\tableend}{\arrayrulecolor{black}\hline}
+
+
+\newcommand{\tablesubhead}[2]{%
+  \multicolumn{#1}{>{\columncolor{tablesubheadcolor}}l}{\tablesubheadfont #2}%
+}
+
+% Tabellenbody (=Inhalt)
+\newcommand\tablebody{%
+\tablefontsize\sffamily\upshape%
+}
+
+\newcommand\tableheadshaded{%
+	\rowcolor{tableheadcolor}%
+}
+\newcommand\tablealtcolored{%
+	\rowcolors{1}{tablerowcolor}{white!100}%
+}
+%%% --------------------------------------------
