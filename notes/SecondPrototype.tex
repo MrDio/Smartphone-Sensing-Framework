@@ -49,10 +49,16 @@ clap and to keep the delay of the detection small.
 \section{Implementation}
 \label{sec:org7c927b3}
 \subsection{Clap Detector}
-\label{sec:orgaf5a63b}
-\begin{itemize}
-\item Tarsos library ( for FFT )
-\end{itemize}
+
+The ClapDetector creates a new AudioDispatcher with a buffer size of 1024 bytes and a sample rate of 20kh and registers itself as AudioProcessor.
+Thus, the AudioDispatcher calls the AudioProcessor Process Handler with 1024 amplitude values every 0.02 seconds.
+For each time period, a Fast Fourier transformation is created using the Tarsos library. The number of peaks is counted for each new frequency spectrum.
+The peaks are detected by iterating over each frequency and calculating the decibel values for each magnitude. The decibel value is then compared with a fixed threshold.
+All decibel values that exceed the threshold are counted. The ClapDetector stores only the last two PeakCounter values.
+To detect a clap, the second last peak counter must be smaller than the last and the current one smaller than the last.
+If this is the case, an increase and decrease has been detected in several frequency ranges and the handler is called.
+
+
 \subsection{State-machine}
 \label{sec:orgd3a5b2d}
 A state machine was implemented to represent the different states of the app.
