@@ -2,9 +2,13 @@ package edu.example.ssf.mma.dataAnalyzation;
 
 
 
+import android.util.Pair;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -20,6 +24,8 @@ public class PerformanceAnalyzer {
 
     private final static int MAXFORCETHRESHOLD = ConfigApp.forceThresholdUpperBound;
     private final static int MINFORCETHRESHOLD = ConfigApp.forceThresholdLowerBound;
+    private final static float MINCURVETHRESHOLD = ConfigApp.curveThresholdLowerBound;
+    private final static float MAXCURVETHRESHOLD = ConfigApp.curveThresholdUpperBound;
     private final static float CURVETHRESHOLD = ConfigApp.curveThreshold;
 
     public static void calculatePerformanceIndicator(ArrayList<Lap> mLaps){
@@ -138,28 +144,39 @@ public class PerformanceAnalyzer {
     }
 
     public static void fitThreshold(ArrayList<Lap> laps){
-        Map<Integer,Float> bestThreshold = new HashMap<>();
+        Map<Integer,Pair<Float,Float>> bestThreshold = new HashMap<>();
+        Map<Float,ArrayList<Float>> thresholdsCasesToTest = new HashMap<>();
         ArrayList<Float> thresholdCasesToTest = new ArrayList<>();
 
-        for (int i = MINFORCETHRESHOLD; i <= MAXFORCETHRESHOLD; i+=100) {
-            thresholdCasesToTest.add((float)i);
+        for (float i = MINCURVETHRESHOLD; i <= MAXCURVETHRESHOLD ; i+=0.5) {
+            ArrayList<Float> forceThresholds = new ArrayList<>();
+            for (int f = MINFORCETHRESHOLD; f <= MAXFORCETHRESHOLD; f+=100) {
+                forceThresholds.add((float)f);
+            }
+            thresholdsCasesToTest.put(i,forceThresholds);
         }
-        for (float threshold: thresholdCasesToTest){
-            sectionIdentification(laps, threshold,CURVETHRESHOLD);
+        for (Map.Entry<Float,ArrayList<Float>> entry : thresholdsCasesToTest.entrySet())
+        {
+            for (float threshold: entry.getValue()){
+                sectionIdentification(laps, threshold, entry.getKey());
 
-            int validCount = 0;
-            for (Lap lap : laps){
-                if(lap.isValid()){
-                    validCount++;
+                int validCount = 0;
+                for (Lap lap : laps){
+                    if(lap.isValid()){
+                        validCount++;
+                    }
                 }
-            }
-            if(!bestThreshold.containsKey(validCount)){
-                bestThreshold.put(validCount, threshold);
-            }
+                if(!bestThreshold.containsKey(validCount)){
 
+                    bestThreshold.put(validCount, new Pair<>(entry.getKey(),threshold));
+                }
+
+            }
         }
+
+
         int maxKey = Collections.max(bestThreshold.keySet());
-        sectionIdentification(laps,bestThreshold.get(maxKey),CURVETHRESHOLD);
+        sectionIdentification(laps,bestThreshold.get(maxKey).second,bestThreshold.get(maxKey).first);
     }
 
     private static ArrayList<Lap> sectionIdentification(ArrayList<Lap> laps, float forceThreshold, float curveThreshold) {
