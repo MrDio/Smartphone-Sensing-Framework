@@ -93,7 +93,28 @@ The identification is split into three parts that will be executed serial. After
 After separating the datasets with the threshold, the points above the \code{CURVETHRESHOLD} are considered as curves. Therefore it is cleaned in a second step. Because a curve cannot be created with only one point above the \code{CURVETHRESHOLD}, single points will be put back into the dataset in between the \code{CURVETHRESHOLD}. The last step is grouping the points into sections. The points in between are created as new sections with ten points. A section, that is above the threshold will be created with the first point above and the last point above. After creation of the section, the sections will be passed to the classification.
 
 \subsection{Classification}\label{classification}
+The classification works in multiple steps described in this section. At first each section in each lap is looked at closer. The following step needs three points of a section:
+\begin{itemize}
+	\item The x coordinate of the start ($s$)
+	\item The x coordinate of the start ($e$)
+	\item The y coordinate of the virtual median (acceleration on x-axis)
+\end{itemize}
 
+This is needed to determine a parabola for the section. A parabola can be represented by a function and therefore be integrated. The integral of the section is a significant help in identifying a section type. To specify the function of the parabola following equation is applied:
+
+\begin{equation}
+	f(x) = a (x-V)^2 + M
+\end{equation}
+
+where $V$ is the vertex of the parabola, or in this case the x-coordinate of the median, and $M$ is the y-coordinate of the median. The remaining unknown variable $a$ is calculated by:
+
+\begin{equation}
+a = \frac{M}{(s\cdot e) - \frac{(s+e)}{2}^2 }
+\end{equation}
+
+These equations are derived from the basic vertex form of parabolas by transformation of the equations. When the parabola function is established it is integrated to get the area enclosed by the parabola and the x-axis. This area is now used to classify sections. 
+
+There is a range of thresholds to determine if an area is a curve or a straight section. The range of thresholds lies from 900 to 2500 and is iterated in steps of 100. When the area lies over the threshold, the section is identified as a right curve. If it is below the negative threshold the section identifies as a left curve. When the area is below the threshold the section is marked to be merged. The merging of sections is done until another curve is found. This way straight sections are not split into multiple parts.
 \subsection{Validation and threshold fitting}
 This section explains the applications process to validate the correct lap layout with the help of threshold fitting.
 
