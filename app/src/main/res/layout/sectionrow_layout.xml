@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:layout_height="fill_parent">
 
 
     <ImageView
         android:id="@+id/sectionrow_pi"
-        android:layout_width="107dp"
-        android:layout_height="122dp"
+        android:layout_width="59dp"
+        android:layout_height="44dp"
         app:srcCompat="@mipmap/lightoff" />
 
     <LinearLayout
@@ -18,16 +18,17 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/sectionrow_hint"
-            android:layout_width="match_parent"
-            android:layout_height="49dp"
-            android:layout_weight="1" />
-
-        <TextView
             android:id="@+id/sectionrow_type"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:textSize="16dip" />
+
+        <TextView
+            android:id="@+id/sectionrow_hint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16dip" />
+
     </LinearLayout>
 
 </LinearLayout>
