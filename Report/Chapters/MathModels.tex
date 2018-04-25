@@ -90,7 +90,7 @@ The identification is split into three parts that will be executed serial. After
 	\caption{Visualization of the thresholds for the upper and lower dataset}
 	\label{upperlowerBound}
 \end{figure}
-After separating the datasets with the threshold, the points above the \code{CURVETHRESHOLD} are considered as curves. Therefore it is cleaned in a second step. Because a curve cannot be created with only one point above the \code{CURVETHRESHOLD}, single points will be put back into the dataset in between the \code{CURVETHRESHOLD}. The last step is grouping the points into sections. The points in between are created as new sections with ten points. A section, that is above the threshold will be created with the first point above and the last point above. After creation of the section, the sections will be passed to the classification.
+After separating the datasets with the threshold, the points above the \code{CURVETHRESHOLD} are considered as curves. Therefore it is cleaned in a second step. Because a curve cannot be created with only one point above the \code{CURVETHRESHOLD}, single points will be put back into the dataset in between the \code{CURVETHRESHOLD}. The last step is grouping the points into sections. The points in between are created as new sections with a maximum of ten points. A section, that is above the threshold will be created with the first point above and the last point above the \code{CURVETHRESHOLD}. After creation of the section, the sections will be passed to the classification.
 
 \subsection{Classification}\label{classification}
 The classification works in multiple steps described in this section. At first each section in each lap is looked at closer. The following step needs three points of a section:
@@ -119,23 +119,24 @@ There is a range of thresholds to determine if an area is a curve or a straight 
 This section explains the applications process to validate the correct lap layout with the help of threshold fitting.
 
 \subsubsection{Validation}
-After the classification process, the resulting sections need to be validated, therefore a validation process is implemented. First, the lap needs to be chosen. This happens with considering all laps. The valid lap is the lap, with the most matching sections inside a lap. The process can be better described with the table visible in figure \ref{validation}
+After the classification process, the resulting sections need to be validated, therefore a validation process is implemented. The validation process tries to find the most amount of laps, that contain exactly the same sections in the same order. This process can be better described with the table visible in figure \ref{validation}
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale= 0.5]{Pictures/validation.png}
 	\caption{Table showcasing the validation process}
 	\label{validation}
 \end{figure}
-Column one and four display exactly the same lap, while column two and three differ heavily from the first and fourth. Therefore we have two valid laps and two invalid laps, that will not receive a performance rating. These things can happen, if the driver takes the curve to hard and to long and needs to counter steer heavily outside the track. Therefore, an additional right curve is added inside the lap. We need to invalidate such laps, to provide a consistent result.
+This table represents a recorded racing session with four laps. Column one and four display exactly the same lap, while column two and three differ from the first and fourth. Therefore we have two valid laps and two invalid laps. These things can happen, if the driver takes the curve to hard and needs to counter steer heavily outside the track. Therefore, an additional right curve is added inside the lap. We need to invalidate such laps, to provide a consistent result.
 \newpage
 \subsubsection{Threshold fitting}
-To provide the best possible result, the \code{CURVETHRESHOLD} and the  \code{FORCETHRESHOLD} will be chosen in the analysis of the recorded laps. To provide the best result. The values that will be run are visible in Figure \ref{ThresholdValues}.
+To provide the best possible result, the \code{CURVETHRESHOLD} and the  \code{FORCETHRESHOLD} will fitted with the dataset to provide the best result. The values that will be run are visible in Figure \ref{ThresholdValues}.
 \begin{figure}[H]
 \centering
 	\begin{tabular}[c]{ l | l }
 		Threshold & Values \\ \hline
-		\code{CURVETHRESHOLD} & 900-2500 in 100 ticks \\
-		\code{FORCETHRESHOLD} & 3-5 in 0.5 ticks \\
+		\code{CURVETHRESHOLD} & 3-5 in 0.5 ticks \\
+		\code{FORCETHRESHOLD} & 900-2500 in 100 ticks \\
+		
 	\end{tabular}
 \caption{Table for the threshold values}
 \label{ThresholdValues}
@@ -147,10 +148,10 @@ This fitting is needed, depending on the dataset. If the driver is rather cautio
 	\caption{Showing the difference of maximum values for the force in a curve, considering aggressive and cautious driving}
 	\label{agressiveDriv}
 \end{figure}
-With this defined, it is clearly not possible to define a single threshold for all datasets. Therefeore the fitting takes place. Each of the values visible in figure \ref{ThresholdValues} will be executed, therefore the identification from section \ref{identification} and the classification explained in section \ref{classification} will be executed eighty five times for each of the possible \code{CURVETHRESHOLD} and \code{FORCETHRESHOLD} combinations. After running each of them, the validation will be done. It is determined and saved how many valid laps the dataset contains with the chosen thresholds. The threshold pair with the most valid laps, is then chosen as the best and displayed on the result screen.
+With this observation it is clearly not possible to define a single threshold for all datasets. Therefeore the fitting takes place. Each of the values visible in figure \ref{ThresholdValues} will be executed, therefore the identification from section \ref{identification} and the classification explained in section \ref{classification} will be executed eighty five times for each of the possible \code{CURVETHRESHOLD} and \code{FORCETHRESHOLD} combinations. After running each of them, the validation will be done. It is determined and saved how many valid laps the dataset contains with the chosen thresholds. The threshold pair with the most valid laps inside the session, is then chosen as the best and displayed on the result screen.
 
 \section{Section Rating}
-Because the focus of our project was the identification of sections, the section rating part contains a simple implementation. The core principle is determining the fastest lap and comparing the time footprint of the other sections to the sections of the fastest lap. Because in our model, a straight is following on a curve and vice versa, the following mappings are created. Figure \ref{StraightResultMapping} shows the mapping for a straight and the timestamp configurations while figure \ref{CurveResultMapping} shows the same for the curve. The green and red markings are showing, if the current lap is faster(green) or slower(red) on the current section than the fastest lap, that is chosen as reference.
+Because the focus of our project was the identification of sections, the section rating part contains a simple implementation. The core principle is determining the fastest lap and comparing the time footprint of the other sections to the sections of the fastest lap. Because in our model, a straight is following on a curve and vice versa, the following mappings are created. Figure \ref{StraightResultMapping} shows the mapping for a straight and the timestamp configurations while figure \ref{CurveResultMapping} shows the same for the curve. The green and red markings signal if the current lap is faster(green) or slower(red) on the current section than the fastest lap.
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale= 0.9]{Pictures/StraightResultMapping.png}
