@@ -25,4 +25,17 @@ After separating the datasets with the threshold, the points above the threshold
 \subsection{Classification}
 
 \section{Section Rating}
-Because the focus of our project was the identification of sections, the section rating part contains a simple implementation. The core principle is determining the fastest lap and comparing the time footprint of the other sections to the sections of the fastest lap.
+Because the focus of our project was the identification of sections, the section rating part contains a simple implementation. The core principle is determining the fastest lap and comparing the time footprint of the other sections to the sections of the fastest lap. Because in our model, a straight is following on a curve and vice versa, the following mappings are created. Figure \ref{StraightResultMapping} shows the mapping for a straight and the timestamp configurations while figure \ref{CurveResultMapping} shows the same for the curve. The green and red markings are showing, if the current lap is faster(green) or slower(red) on the current section than the fastest lap, that is chosen as reference.
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale= 0.9]{Pictures/StraightResultMapping.png}
+	\caption{Mapping of the timestamps to the tips for a section, that is a straight}
+	\label{StraightResultMapping}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale= 0.9]{Pictures/CurveResultMapping.png}
+	\caption{Mapping of the timestamps to the tips for a section, that is a curve}
+	\label{CurveResultMapping}
+\end{figure}

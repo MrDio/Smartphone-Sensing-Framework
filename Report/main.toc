@@ -12,6 +12,8 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.1}Use Cases}{3}
 \defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.2}State Machine}{3}
+\defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {3}Mathematical Models of Identifying Sections}{4}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3.1}DataModification}{4}
