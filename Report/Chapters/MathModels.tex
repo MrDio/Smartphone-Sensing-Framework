@@ -1,12 +1,44 @@
 \chapter{Mathematical Models of Identifying Sections}
 
-\section{DataModification}
+\section{Data Analysis}
+The following section describes the data used. To ensure that the data recorded via the accelerometer can be evaluated, modifications such as smoothing and noise filtering had to be made. These are described below. But first the used data model is shown.
 
-\subsection{DataModel}
+\subsection{Data Model}
+The used Model consists of four parameters:
+\begin{itemize}
+	\item \textbf{Round}: represents the current lap
+	\item \textbf{Time Stamp}: represents the current time stamp for each step
+	\item \textbf{X-Acceleration}: represents the force that indicates curves
+	\item \textbf{Y-Acceleration}: represents the force that indicates the acceleration of the vehicle
+\end{itemize}
+The reason, why only the forces in x- and y-directions are used, is that the device lies flat on the vehicle. In this case the z-acceleration only indicates the force of gravity, which is not necessary for this work.\\
+The round is not altered, therefore it will not be mentioned any further. 
+
+For the initial data one entry containing the four parameters is taken every 10 milliseconds. Figure \ref{fig:origFor} shows the forces for one lap in the original data.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale= 0.6]{Pictures/originalForces.png}
+	\caption{Visualization of the forces in the original data}
+	\label{fig:origFor}
+\end{figure}
+
+This figure shows clearly that a analysis on base of the unfiltered data is simply impossible. Therefore as a first step data smoothing is used which is described in the following.
 
 \subsection{Smoothing}
+One problem that was identified is that there are to many measured points over time. So at first every four to five measured points were summed up and the average was used. This resulted in a better graph, which is shown in figure \ref{fig:smoFor}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale= 0.6]{Pictures/smoothedForces.png}
+	\caption{Visualization of the forces of the smoothed data}
+	\label{fig:smoFor}
+\end{figure}
+
+In this figure it is possible for the human eye to distinguish between sections like left and right curves. But because of the noise, it would still be difficult for a computer. So a noise filter had to be used. It is described in the following section.
 
 \subsection{Savitzky-Golay Filtering}
+
 
 \newpage
 \section{Section Identification}
