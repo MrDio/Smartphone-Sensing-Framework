@@ -33,4 +33,4 @@ The aim of this framework is to provide a quick way to develop context aware app
 [Intro](https://github.com/MrDio/Smartphone-Sensing-Framework/wiki/Execute-Example)
 
 
-This is the Master Branch for the Smartphone Sensing Framework 2.0
+This is the Branch for the DigitalLifeTracker using the Smartphone Sensing Framework 2.0
