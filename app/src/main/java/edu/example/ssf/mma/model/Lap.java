@@ -38,7 +38,7 @@ public class Lap implements Serializable {
     }
 
     public String getNumberAsString() {
-        return "Lap: "+number;
+        return "Lap: "+(number+1);
     }
 
     public int getNumber() {
