@@ -18,7 +18,7 @@ For the initial data one entry containing the four parameters is taken every 10 
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale= 0.6]{Pictures/originalForces.png}
+	\includegraphics[scale= 0.42]{Pictures/originalForces.png}
 	\caption{Visualization of the forces in the original data}
 	\label{fig:origFor}
 \end{figure}
@@ -30,7 +30,7 @@ One problem that was identified is that there are to many measured points over t
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[scale= 0.6]{Pictures/smoothedForces.png}
+	\includegraphics[scale= 0.45]{Pictures/smoothedForces.png}
 	\caption{Visualization of the forces of the smoothed data}
 	\label{fig:smoFor}
 \end{figure}
@@ -38,7 +38,45 @@ One problem that was identified is that there are to many measured points over t
 In this figure it is possible for the human eye to distinguish between sections like left and right curves. But because of the noise, it would still be difficult for a computer. So a noise filter had to be used. It is described in the following section.
 
 \subsection{Savitzky-Golay Filtering}
+This filter is used to increase the signal-to-noise-ratio of a digital data set\cite{sg}. Therefore it would perfectly fit the requirement. It requires a data set consisting of $n$ points $(x,y)$ where x is an independent variable and y is the observed value. In this case $x$ is the time stamp, while $y$ is the force in x-/y- direction. In addition a set of $m$ convolution coefficients $C_i$ are needed which results in following equation:
+\begin{equation*}
+	Y_j = \sum_{i=-\frac{m-1}{2}}^{\frac{m-1}{2}}\dfrac{C_i\cdot y_{j+i}}{h},~~~~~~~ \dfrac{m-1}{2}\leq j \leq n-\dfrac{m-1}{2}
+\end{equation*}
+Because of the high sample rate in this project a relatively high value for $m=9$ was used. Therefore 9 convolution coefficients were used:
+\begin{equation*}
+	\begin{split}
+	C_{-4} & = -21\\
+	C_{-3} & = 14\\
+	C_{-2} & = 39\\
+	C_{-1} & = 54\\
+	C_{0} & = 59   \\
+	C_{1} & = 54     \\
+	C_{2} & = 39     \\
+	C_{3} & = 14     \\
+	C_{4} & = -21    \\
+	\end{split}
+\end{equation*}
+The sum of these coefficients is used for the normalisation $h=231$.
 
+Applying this filter on the not smoothed original data results in a graph shown in figure \ref{fig:sgoriFor}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale= 0.45]{Pictures/sgoriForces.png}
+	\caption{Visualization of the forces of the applied filter on the original data}
+	\label{fig:sgoriFor}
+\end{figure}
+
+This proves, that a pre-smoothing might be needed to get a less noisy graph. Therefore figure \ref{fig:sgFor} shows the graph that is accomplished after applying both methods.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[scale= 0.45]{Pictures/sgForces.png}
+	\caption{Visualization of the forces of the applied filter on the smoothed data}
+	\label{fig:sgFor}
+\end{figure}
+
+With all this smoothing and filtering it is now possible for a computer to identify sections, which is described in the next section.
 
 \newpage
 \section{Section Identification}
