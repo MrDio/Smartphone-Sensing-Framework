@@ -90,4 +90,10 @@ public class LapListAdapter extends BaseAdapter {
     public CharSequence[] getAutofillOptions() {
         return new CharSequence[0];
     }
+
+    public void refreshData(ArrayList<Lap> laps) {
+        this.data.clear();
+        this.data.addAll(laps);
+        notifyDataSetChanged();
+    }
 }

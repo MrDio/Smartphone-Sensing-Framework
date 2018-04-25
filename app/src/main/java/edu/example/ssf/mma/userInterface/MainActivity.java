@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
     public static boolean isMeasuring = false;
     public static boolean carOnStart = false;
     public static boolean isRacing = false;
-    public static ProgressDialog dialog;
+
     // Init HW-Factory
     HardwareFactory hw;
 
@@ -325,7 +325,7 @@ public class MainActivity extends AppCompatActivity {
         isRacing = false;
 
 
-        dialog = ProgressDialog.show(this, "Analyzing Data", "Please wait");
+
 
         setInitialState();
         Intent intent = new Intent(this, LapListActivity.class);

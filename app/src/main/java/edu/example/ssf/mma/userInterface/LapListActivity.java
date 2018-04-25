@@ -3,6 +3,7 @@ package edu.example.ssf.mma.userInterface;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Pair;
 import android.view.View;
@@ -30,6 +31,7 @@ public class LapListActivity extends ListActivity {
 
     private ArrayList<Lap> data;
     private LapListAdapter adapter;
+    public static ProgressDialog dialog;
 
 
     @Override
@@ -38,9 +40,9 @@ public class LapListActivity extends ListActivity {
 
         super.onCreate(savedInstanceState);
         data = new ArrayList<>();
-        initiateData();
         adapter = new LapListAdapter(this, data);
-        MainActivity.dialog.dismiss();
+        new DataAnalyzerTask().execute();
+
         this.setListAdapter(adapter);
 
 
@@ -76,5 +78,22 @@ public class LapListActivity extends ListActivity {
 
 
 
+    }
+
+    public class DataAnalyzerTask extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... params) {
+            initiateData();
+            return null;
+        }
+        @Override
+        protected void onPostExecute(Void result) {
+            dialog.dismiss();
+            adapter.refreshData(data);
+        }
+        @Override
+        protected void onPreExecute() {
+            dialog = ProgressDialog.show(LapListActivity.this, "Analyzing Data", "Please wait");
+        }
     }
 }
