@@ -19,13 +19,18 @@ public class DataModification {
         for (Lap lap : mLaps) {
             List<List<TickData>> paritionedTicks = Lists.partition(lap.getRawData(),SMOOTHINGPOINTAMOUNT);
             ArrayList<TickData> newTickDataList = new ArrayList();
+            CsvFileWriter.crtFile("SM_" + lap.getNumber() + "_" + new SimpleDateFormat("yyyy-MM-dd_hh_mm_ss'.csv'").format(new Date()));
             newTickDataList.add(lap.getRawData().get(0));
             for (List<TickData> data : paritionedTicks) {
                 TickData smoothedData = combineTickDatas(data);
                 newTickDataList.add(smoothedData);
             }
             newTickDataList.add(lap.getRawData().get(lap.getRawData().size()-1));
+            for (TickData x : newTickDataList) {
+                CsvFileWriter.writeLine(""+lap.getNumber(),""+x.getTimeStamp(),""+x.getAccX(),""+x.getAccY());
+            }
             lap.setRawData(newTickDataList);
+            CsvFileWriter.closeFile();
         }
 
     }
@@ -33,6 +38,7 @@ public class DataModification {
     public static void applySavitzkyGolay(List<Lap> mLaps){
         for (Lap lap : mLaps) {
             ArrayList<TickData> newTickDataList = new ArrayList();
+            CsvFileWriter.crtFile("SG_" + lap.getNumber() + "_" + new SimpleDateFormat("yyyy-MM-dd_hh_mm_ss'.csv'").format(new Date()));
             newTickDataList.add(lap.getRawData().get(0));
             newTickDataList.add(lap.getRawData().get(1));
             newTickDataList.add(lap.getRawData().get(2));
@@ -51,7 +57,11 @@ public class DataModification {
             newTickDataList.add(lap.getRawData().get(lap.getRawData().size()-3));
             newTickDataList.add(lap.getRawData().get(lap.getRawData().size()-2));
             newTickDataList.add(lap.getRawData().get(lap.getRawData().size()-1));
+            for (TickData x : newTickDataList) {
+                CsvFileWriter.writeLine(""+lap.getNumber(),""+x.getTimeStamp(),""+x.getAccX(),""+x.getAccY());
+            }
             lap.setRawData(newTickDataList);
+            CsvFileWriter.closeFile();
         }
     }
 
