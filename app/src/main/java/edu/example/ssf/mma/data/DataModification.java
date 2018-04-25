@@ -19,7 +19,7 @@ public class DataModification {
         for (Lap lap : mLaps) {
             List<List<TickData>> paritionedTicks = Lists.partition(lap.getRawData(),SMOOTHINGPOINTAMOUNT);
             ArrayList<TickData> newTickDataList = new ArrayList();
-            CsvFileWriter.crtFile("S_" + lap.getNumber() + "_" + new SimpleDateFormat("yyyy-MM-dd_hh_mm_ss'.csv'").format(new Date()));
+            CsvFileWriter.crtFile("SM_" + lap.getNumber() + "_" + new SimpleDateFormat("yyyy-MM-dd_hh_mm_ss'.csv'").format(new Date()));
             newTickDataList.add(lap.getRawData().get(0));
             for (List<TickData> data : paritionedTicks) {
                 TickData smoothedData = combineTickDatas(data);

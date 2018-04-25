@@ -258,7 +258,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void onClickStartMeasurements(View v){
         carOnStart = false;
-        String fileName = new SimpleDateFormat("yyyy-MM-dd_hh_mm_ss'.csv'").format(new Date());
+        String fileName = "S_" + new SimpleDateFormat("yyyy-MM-dd_hh_mm_ss'.csv'").format(new Date());
         CsvFileWriter.crtFile(fileName);
         ConfigApp.currentLapFile = fileName;
         light1.setImageResource(R.mipmap.lightred);

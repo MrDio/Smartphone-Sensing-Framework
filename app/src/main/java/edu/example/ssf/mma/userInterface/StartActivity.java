@@ -31,5 +31,11 @@ public class StartActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void onClickSessions(View v) {
+
+        Intent intent = new Intent(this, SessionListActivity.class);
+        startActivity(intent);
+    }
+
 }
 

@@ -27,6 +27,7 @@
         <activity android:name=".userInterface.MainActivity"> </activity>
         <activity android:name=".userInterface.LapListActivity"> </activity>
         <activity android:name=".userInterface.ReportActivity"> </activity>
+        <activity android:name=".userInterface.SessionListActivity"> </activity>
     </application>
 
 </manifest>
