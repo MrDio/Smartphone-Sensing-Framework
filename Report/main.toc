@@ -30,16 +30,26 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.2.2}Classification}{6}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.3}Section Rating}{6}
+\contentsline {subsection}{\numberline {3.2.3}Validation and threshold fitting}{6}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}LapOps Application}{7}
+\contentsline {subsubsection}{\nonumberline Validation}{6}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.1}LapOps Manual}{7}
+\contentsline {subsubsection}{\nonumberline Threshold fitting}{7}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.1}Preparation}{7}
+\contentsline {section}{\numberline {3.3}Section Rating}{8}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.2}LapOps workflow for lap optimizations}{8}
+\contentsline {chapter}{\numberline {4}LapOps Application}{9}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.2}Additional Information}{9}
+\contentsline {section}{\numberline {4.1}LapOps Manual}{9}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Conclusion}{10}
+\contentsline {subsection}{\numberline {4.1.1}Preparation}{9}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.1.2}LapOps workflow for lap optimizations}{10}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {4.2}Additional information}{12}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.2.1}Issues with provided smartphone}{12}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {4.2.2}Login for the different social channels}{12}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {5}Conclusion}{13}
