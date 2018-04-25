@@ -39,7 +39,7 @@ import edu.example.ssf.mma.hardwareAdapter.IAccelerometer;
  * @version 2.0
  */
 
-public class accelerometer implements SensorEventListener, IAccelerometer {
+public class Accelerometer implements SensorEventListener, IAccelerometer {
 
     private SensorManager sensorManager;
     private Sensor acc;
@@ -50,10 +50,10 @@ public class accelerometer implements SensorEventListener, IAccelerometer {
     private Double accelerationSquareRoot = 0.0d;
     private float[] gravity = {0, 0, 9.81f};
 
-    public accelerometer() {
+    public Accelerometer() {
     }
 
-    public accelerometer(Context context) {
+    public Accelerometer(Context context) {
         initAccelerometer(context);
     }
 

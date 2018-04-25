@@ -39,7 +39,7 @@ import edu.example.ssf.mma.userInterface.MainActivity;
  * @version 2.0
  */
 
-public class proximity implements SensorEventListener, IProximity {
+public class ProximitySensor implements SensorEventListener, IProximity {
 
     private SensorManager sensorManager;
     private Sensor proxi;
@@ -49,9 +49,9 @@ public class proximity implements SensorEventListener, IProximity {
     private Float x = 0.0f;
     private boolean proxState = false;
 
-    public proximity(){}
+    public ProximitySensor(){}
 
-    public proximity(Context context) {
+    public ProximitySensor(Context context) {
         initProximity(context);
     }
 

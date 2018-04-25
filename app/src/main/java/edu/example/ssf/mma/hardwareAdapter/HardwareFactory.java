@@ -21,9 +21,9 @@ package edu.example.ssf.mma.hardwareAdapter;
 import android.content.Context;
 import android.util.Log;
 
-import edu.example.ssf.mma.hardwareAdapter.accelerometer.accelerometer;
+import edu.example.ssf.mma.hardwareAdapter.accelerometer.Accelerometer;
 import edu.example.ssf.mma.hardwareAdapter.lightsensor.LightSensor;
-import edu.example.ssf.mma.hardwareAdapter.proximity.proximity;
+import edu.example.ssf.mma.hardwareAdapter.proximity.ProximitySensor;
 
 
 // TODO: Auto-generated Javadoc
@@ -72,7 +72,7 @@ public class HardwareFactory {
 	 */
 	public static IAccelerometer getAccelerometer(Context context) {
 
-		hwAcc = new accelerometer(context);
+		hwAcc = new Accelerometer(context);
 
 		return hwAcc;
 	}
@@ -85,7 +85,7 @@ public class HardwareFactory {
 	 */
 	public static IProximity getProximity(Context context) {
 
-		hwProxi = new proximity(context);
+		hwProxi = new ProximitySensor(context);
 
 		return hwProxi;
 	}

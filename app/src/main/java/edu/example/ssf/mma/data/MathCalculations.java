@@ -31,11 +31,4 @@ public class MathCalculations {
     public static double calculatePythagoras(float x, float y, float z){
         return Math.sqrt(x*x+y*y+z*z);
     }
-    public static double pow(double x, int exp){
-        return Math.pow(x,exp);
-    }
-    public static String convertDate(long dateInMilliseconds, String dateFormat) {
-        SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
-        return sdf.format(dateInMilliseconds);
-    }
 }

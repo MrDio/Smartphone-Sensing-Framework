@@ -31,8 +31,6 @@ import edu.example.ssf.mma.data.CsvFileWriter;
 import edu.example.ssf.mma.data.CurrentTickData;
 import edu.example.ssf.mma.hardwareAdapter.HardwareFactory;
 import edu.example.ssf.mma.hardwareAdapter.IAccelerometer;
-import edu.example.ssf.mma.hardwareAdapter.IGPS;
-import edu.example.ssf.mma.hardwareAdapter.IGyroscope;
 import edu.example.ssf.mma.hardwareAdapter.IProximity;
 
 
