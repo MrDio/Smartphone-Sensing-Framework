@@ -44,7 +44,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {4.1.1}Preparation}{12}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {4.1.2}LapOps workflow for lap optimizations}{13}
+\contentsline {subsection}{\numberline {4.1.2}LapOps usage}{13}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {4.2}Additional information}{15}
 \defcounter {refsection}{0}\relax 

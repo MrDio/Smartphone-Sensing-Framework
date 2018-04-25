@@ -80,10 +80,10 @@ With all this smoothing and filtering it is now possible for a computer to ident
 
 \newpage
 \section{Section Identification}
-The following section will describe the solution for the identification of sections. And is split into two parts. The first explains the rough identification of sections. These sections will then be given to a classification method that clearly identifies the type of section, be it a curve or a straight line. 
+The following section will describe the used solution for the identification and validation of sections. And is split into four parts. The first explains the rough identification of sections. These sections will then be given to a classification method that clearly identifies the type of section, be it a curve or a straight line. Afterwards the fitting of thresholds and lap validation will be explained. The last part contains the definition for the performance tips.
 
 \subsection{Identification}\label{identification}
-The identification is split into three parts that will be executed serial. After smoothing and filtering of the dataset. The x-axis acceleration values will be split into two groups. This split is happening with a singular x value representing a threshold called \code{CURVETHRESHOLD}. In the positive and negative acceleration range. A visual representation of the \code{CURVETHRESHOLD} can be seen in figure \ref{upperlowerBound}. in this case, the threshold is set to 3.5. All points below the lower bound and above the upper bound will be grouped inside a dataset, while all the points in between are grouped in another.
+The identification is split into three parts that will be executed serial. After smoothing and filtering of the dataset. The x-axis acceleration values will be split into two groups. This split is happening with a singular x value representing a threshold called \code{CURVETHRESHOLD}. This threshold will be applied in the positive and negative acceleration range. A visual representation of the \code{CURVETHRESHOLD} can be seen in figure \ref{upperlowerBound}. In this graph, the threshold is set to 3.5. All points below the lower bound and above the upper bound will be grouped inside a dataset, while all the points in between are grouped in another.
 \begin{figure}[H]
 	\centering
 	\includegraphics[scale= 0.6]{Pictures/upperandlowerbound.png}
