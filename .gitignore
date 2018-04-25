@@ -8,3 +8,8 @@
 /captures
 .externalNativeBuild
 Report/main.pdf
+Report/main.run.xml
+Report/main.aux
+Report/main.toc
+Report/main.synctex.gz
+Report/main.lof
