@@ -17,17 +17,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".userInterface.StartActivity">
+        <activity
+            android:name=".userInterface.StartActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".userInterface.MainActivity"> </activity>
-        <activity android:name=".userInterface.LapListActivity"> </activity>
-        <activity android:name=".userInterface.ReportActivity"> </activity>
-        <activity android:name=".userInterface.SessionListActivity"> </activity>
+        <activity android:name=".userInterface.MainActivity"
+                  android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".userInterface.LapListActivity"
+                  android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".userInterface.ReportActivity"
+                  android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".userInterface.SessionListActivity"
+                  android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>
