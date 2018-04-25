@@ -56,7 +56,21 @@ public class Lap implements Serializable {
         roundTime -= seconds*1000;
         int minutes = seconds/60;
         seconds -= minutes*60;
-        return minutes + ":" + seconds + ":" + (int)roundTime;
+
+        String secondString = Integer.toString(seconds);
+        int milliseconds = (int)roundTime;
+        String millisecondString = Integer.toString(milliseconds);
+
+        if(seconds < 10){
+            secondString = "0"+seconds;
+        }
+        if(milliseconds < 100){
+            millisecondString = "0"+milliseconds;
+        }
+        if(milliseconds < 10){
+            millisecondString = "00"+milliseconds;
+        }
+        return minutes + ":" + secondString + ":" + millisecondString;
     }
 
     public double getRoundTime() {
