@@ -67,9 +67,9 @@ plainfootsepline]{scrreprt} % Defines the font size and the paper format
 \newcommand{\thestudentidtwo}{1744874}
 \newcommand{\thestudentthree}{Roland \textsc{Flat}}
 \newcommand{\thestudentidthree}{1744872}
-\newcommand{\thesupervisor}{Satikidis Dionysis}
+\newcommand{\thesupervisor}{Dionysios Satikidis}
 \newcommand{\theyear}{2018}
-\newcommand{\thetitle}{Embedded Systems}
+\newcommand{\thetitle}{Embedded Systems Engineering}
 \newcommand{\code}[1]{\texttt{#1}}
 
 
@@ -160,7 +160,8 @@ plainfootsepline]{scrreprt} % Defines the font size and the paper format
 	% Project title
 	\rule{\linewidth}{0.5mm} \\[0.5cm]
 	{ \huge\textbf{ \thetitle } } \\
-	\rule{\linewidth}{0.5mm} \\[5cm]
+	\rule{\linewidth}{0.5mm} \\[2cm]
+	{ \large\textbf{ Team D: LapOps } } \\[2cm]
 	
 	% Student name, student number and supervisor
 	\begin{minipage}{0.4\textwidth}
@@ -187,7 +188,7 @@ plainfootsepline]{scrreprt} % Defines the font size and the paper format
 	\vfill % Fill the rest of the page with whitespace
 \end{titlepage}
 \newpage
-
+\input{Chapters/Abstract.tex}
 %---------------------------------------------------------------------
 %--- Front matter
 %---------------------------------------------------------------------
@@ -204,7 +205,7 @@ plainfootsepline]{scrreprt} % Defines the font size and the paper format
 
 \pagenumbering{arabic}
 
-\input{Chapters/Abstract.tex}
+
 \input{Chapters/Introduction.tex}
 \input{Chapters/SystemAnalysis.tex}
 \input{Chapters/MathModels.tex}
@@ -215,7 +216,7 @@ plainfootsepline]{scrreprt} % Defines the font size and the paper format
 %--- Bibliography and appendices
 %---------------------------------------------------------------------
 
-\printbibliography
+
 
 		
 \end{document}
