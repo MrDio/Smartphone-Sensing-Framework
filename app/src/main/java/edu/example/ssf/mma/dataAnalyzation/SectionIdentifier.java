@@ -161,13 +161,12 @@ public class SectionIdentifier {
     }
 
     public static ArrayList<Lap> createSections(ArrayList<Lap> mLaps) {
-        System.out.println("<<<<AFTER IDENTIFYING>>>>>");
+
         for (Lap lap : mLaps) {
 
             ArrayList<Section> sections = SectionIdentifier.identifySections(lap.getRawData());
-            System.out.println("Lap " + lap.getNumber() + " Sections: " + sections.size());
+
             for (Section section : sections) {
-                System.out.println("Section: Start: " + section.getStart().getTimeStamp() + " | End: " + section.getEnd().getTimeStamp());
                 double start = section.getStart().getTimeStamp();
                 double end = section.getEnd().getTimeStamp();
                 double vertex = start + ((end - start) / 2);
@@ -191,16 +190,13 @@ public class SectionIdentifier {
     }
 
     public static ArrayList<Lap> classifySections(ArrayList<Lap> mLaps) {
-        System.out.println("<<<<SECTIONS WITH AREA ATTACHED>>>>>");
         for (Lap lap : mLaps) {
-            System.out.println("Lap " + lap.getNumber() + " Sections: " + lap.getSections().size());
             ArrayList<Section> sections = lap.getSections();
             ArrayList<Section> newSections = new ArrayList<>();
             boolean possibleMerge = false;
             Section sectionToMerge = null;
 
             for (int i = 0; i < sections.size(); i++) {
-                System.out.println("Section: Start: " + sections.get(i).getStart().getTimeStamp() + " | End: " + sections.get(i).getEnd().getTimeStamp() + " | Area: " + sections.get(i).getForceToVehicle());
                 if (Math.abs(sections.get(i).getForceToVehicle()) < FORCETHRESHOLD) {
                     if (possibleMerge == true) {
                         sectionToMerge = mergeSection(sectionToMerge, sections.get(i));

@@ -26,7 +26,6 @@ public class PerformanceAnalyzer {
     private final static int MINFORCETHRESHOLD = ConfigApp.forceThresholdLowerBound;
     private final static float MINCURVETHRESHOLD = ConfigApp.curveThresholdLowerBound;
     private final static float MAXCURVETHRESHOLD = ConfigApp.curveThresholdUpperBound;
-    private final static float CURVETHRESHOLD = ConfigApp.curveThreshold;
 
     public static void calculatePerformanceIndicator(ArrayList<Lap> mLaps){
         Lap fastestLap = null;
@@ -146,7 +145,6 @@ public class PerformanceAnalyzer {
     public static void fitThreshold(ArrayList<Lap> laps){
         Map<Integer,Pair<Float,Float>> bestThreshold = new HashMap<>();
         Map<Float,ArrayList<Float>> thresholdsCasesToTest = new HashMap<>();
-        ArrayList<Float> thresholdCasesToTest = new ArrayList<>();
 
         for (float i = MINCURVETHRESHOLD; i <= MAXCURVETHRESHOLD ; i+=0.5) {
             ArrayList<Float> forceThresholds = new ArrayList<>();
