@@ -16,5 +16,29 @@
   {}
 \endgroup
 
-\sortlist[entry]{nty/global/}\endsortlist
+\sortlist[entry]{nty/global/}
+  \entry{sg}{book}{}
+    \name{author}{1}{}{%
+      {{hash=eaWP}{%
+         prefix={et},
+         prefixi={e\bibinitperiod},
+         family={al.},
+         familyi={a\bibinitperiod},
+         given={W.\bibnamedelima Press},
+         giveni={W\bibinitperiod\bibinitdelim P\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Cambridge University Press New York}%
+    }
+    \strng{namehash}{aWPe1}
+    \strng{fullhash}{aWPe1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{A}
+    \field{sortinithash}{A}
+    \field{title}{Numerical recipes in C: the art of scientific computing}
+    \field{year}{1992}
+  \endentry
+\endsortlist
 \endinput
