@@ -18,13 +18,12 @@
 
 package edu.example.ssf.mma.userInterface;
 
+/*
+  This class provides the Main Activity of the application
+  Its only activ responsibility is the management of the UI.
+  Everything else is a passiv responsibility and is management by typical OOP or callbacks
 
-/**
- * This class provides the Main Activity of the application
- * Its only activ responsibility is the management of the UI.
- * Everything else is a passiv responsibility and is management by typical OOP or callbacks
- *
- * @author D. Lagamtzis
+  @author D. Lagamtzis
  * @version 2.0
  */
 
@@ -39,7 +38,6 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -50,10 +48,10 @@ import be.tarsos.dsp.AudioProcessor;
 import be.tarsos.dsp.io.android.AudioDispatcherFactory;
 import be.tarsos.dsp.util.fft.FFT;
 import edu.example.ssf.mma.R;
+import edu.example.ssf.mma.Tracker.Trackings;
 import edu.example.ssf.mma.data.CsvFileWriter;
 import edu.example.ssf.mma.statemachine.IStateMachine;
 import edu.example.ssf.mma.statemachine.StateMachine;
-import edu.example.ssf.mma.Tracker.Trackings;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -92,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
         runOnUiThread(() -> {
             CharSequence text = textViewLogs.getText();
 
-            textViewLogs.setText(text + info + "\n");
+            textViewLogs.setText(String.format("%s%s\n", text, info));
             scrollViewLog.smoothScrollTo(0, 99999);
 
 

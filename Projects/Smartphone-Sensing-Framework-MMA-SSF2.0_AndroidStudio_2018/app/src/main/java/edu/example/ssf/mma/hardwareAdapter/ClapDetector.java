@@ -1,15 +1,10 @@
 package edu.example.ssf.mma.hardwareAdapter;
 
-import android.util.Log;
-
 import be.tarsos.dsp.AudioDispatcher;
 import be.tarsos.dsp.io.android.AudioDispatcherFactory;
 import be.tarsos.dsp.onsets.OnsetHandler;
 import be.tarsos.dsp.onsets.PercussionOnsetDetector;
 
-/**
- * Created by dennismuller on 22.04.18.
- */
 
 public class ClapDetector {
 
