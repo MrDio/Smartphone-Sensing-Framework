@@ -73,14 +73,14 @@ public class ClapDetector implements AudioProcessor, OnsetDetector {
                 double decibel = 10.0D * Math.log10((double) (this.currentMagnitudes[i] / this.priorMagnitudes[i]));
 
                 if (decibel >= this.threshold) {
-                    Log.d("Sound", "Frequ: " + hz + " decibel:" + decibel);
+                   //Log.d("Sound", "Frequ: " + hz + " decibel:" + decibel);
                     ++peakCounter;
                 }
             }
             this.priorMagnitudes[i] = this.currentMagnitudes[i];
         }
 
-        Log.d("Sound", "Peakcounter: " + peakCounter);
+        //Log.d("Sound", "Peakcounter: " + peakCounter);
 
         double peakCountThreshold = (100.0D - this.sensitivity) * (double) audioInputFloats.length / 200.0D;
         peakCountThreshold = 10;
