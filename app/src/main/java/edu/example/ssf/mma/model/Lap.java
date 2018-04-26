@@ -52,13 +52,13 @@ public class Lap implements Serializable {
     public String getRoundTimeAsString() {
 
 
-        int seconds = (int)roundTime/1000;
-        roundTime -= seconds*1000;
+        int milliseconds = (int)roundTime;
+        int seconds = milliseconds/1000;
+        milliseconds -= seconds*1000;
         int minutes = seconds/60;
         seconds -= minutes*60;
 
         String secondString = Integer.toString(seconds);
-        int milliseconds = (int)roundTime;
         String millisecondString = Integer.toString(milliseconds);
 
         if(seconds < 10){

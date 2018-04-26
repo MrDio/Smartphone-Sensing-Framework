@@ -26,7 +26,7 @@ For the initial data one entry containing the four parameters is taken every 10 
 This figure shows clearly that a analysis on base of the unfiltered data is simply impossible. Therefore as a first step data smoothing is used which is described in the following.
 
 \subsection{Smoothing}
-One problem that was identified is that there are to many measured points over time. So at first every four to five measured points were summed up and the average was used. This resulted in a better graph, which is shown in figure \ref{fig:smoFor}.
+One problem that was identified is that there are too many measured points over time. So at first every four to five measured points were summed up and the average was used. This resulted in a better graph, which is shown in figure \ref{fig:smoFor}.
 
 \begin{figure}[H]
 	\centering
@@ -115,7 +115,7 @@ a = \frac{M}{(s\cdot e) - \frac{(s+e)}{2}^2 }
 These equations are derived from the basic vertex form of parabolas by transformation of the equations. When the parabola function is established it is integrated to get the area enclosed by the parabola and the x-axis. This area is now used to classify sections. 
 
 There is a range of thresholds to determine if an area is a curve or a straight section. The range of thresholds lies from 900 to 2500 and is iterated in steps of 100. When the area lies over the threshold, the section is identified as a right curve. If it is below the negative threshold the section identifies as a left curve. When the area is below the threshold the section is marked to be merged. The merging of sections is done until another curve is found. This way straight sections are not split into multiple parts.
-\subsection{Validation and threshold fitting}
+\subsection{Validation and Threshold Fitting}
 This section explains the applications process to validate the correct lap layout with the help of threshold fitting.
 
 \subsubsection{Validation}
@@ -128,7 +128,7 @@ After the classification process, the resulting sections need to be validated, t
 \end{figure}
 This table represents a recorded racing session with four laps. Row one and four display exactly the same lap, while row two and three differ from the first and fourth. Therefore we have two valid laps and two invalid laps. These things can happen, if the driver takes the curve to hard and needs to counter steer heavily outside the track. Therefore, an additional right curve is added inside the lap. We need to invalidate such laps, to provide a consistent result.
 \newpage
-\subsubsection{Threshold fitting}
+\subsubsection{Threshold Fitting}
 To provide the best possible result, the \code{CURVETHRESHOLD} and the  \code{FORCETHRESHOLD} will be fitted with the dataset to provide the best result. The values that will be run are visible in Figure \ref{ThresholdValues}.
 \begin{figure}[H]
 \centering
