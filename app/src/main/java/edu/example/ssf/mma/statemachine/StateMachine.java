@@ -80,36 +80,36 @@ public class StateMachine implements IStateMachine, IParentStateMachine{
 		CurrentTickData.accVecA= MathCalculations.calculatePythagoras(CurrentTickData.accX,
 				CurrentTickData.accY,CurrentTickData.accZ);
 		
-		if (this.actState instanceof StateUnknown) {
-			Log.d("STATE_MACHINE", "UNKNOWN");
-			if (CurrentTickData.accVecA >= 9.81-1.91 && CurrentTickData.accVecA <= 9.81+0.69) {
-				this.nextState=this.driving;
-			}else if (CurrentTickData.accVecA > 9.81-4.31 && CurrentTickData.accVecA <= 9.81+5.19 ) {
-				this.nextState=this.walking;
-			}else {
-				this.nextState=this.unknown;
-			}
-		}else if (this.actState instanceof StateDriving) {
-			Log.d("STATE_MACHINE", "DRIVING");
-			/*PushToLosant ptl = new PushToLosant();
-			ptl.pushtoLosant();*/
-			if (CurrentTickData.accVecA >= 9.81-1.91 && CurrentTickData.accVecA <= 9.81+0.69) {
-				this.nextState=this.driving;
-			}else if (CurrentTickData.accVecA > 9.81-4.31 && CurrentTickData.accVecA <= 9.81+5.19 ) {
-				this.nextState=this.walking;
-			}else {
-				this.nextState=this.unknown;
-			}
-		}else if (this.actState instanceof StateWalking) {
-			Log.d("STATE_MACHINE", "WALKING");
-			if (CurrentTickData.accVecA >= 9.81-1.91 && CurrentTickData.accVecA <= 9.81+0.69) {
-				this.nextState=this.driving;
-			}else if (CurrentTickData.accVecA > 9.81-4.31 && CurrentTickData.accVecA <= 9.81+5.19 ) {
-				this.nextState=this.walking;
-			}else {
-				this.nextState=this.unknown;
-			}
-		}
+//		if (this.actState instanceof StateUnknown) {
+//			Log.d("STATE_MACHINE", "UNKNOWN");
+//			if (CurrentTickData.accVecA >= 9.81-1.91 && CurrentTickData.accVecA <= 9.81+0.69) {
+//				this.nextState=this.driving;
+//			}else if (CurrentTickData.accVecA > 9.81-4.31 && CurrentTickData.accVecA <= 9.81+5.19 ) {
+//				this.nextState=this.walking;
+//			}else {
+//				this.nextState=this.unknown;
+//			}
+//		}else if (this.actState instanceof StateDriving) {
+//			Log.d("STATE_MACHINE", "DRIVING");
+//			/*PushToLosant ptl = new PushToLosant();
+//			ptl.pushtoLosant();*/
+//			if (CurrentTickData.accVecA >= 9.81-1.91 && CurrentTickData.accVecA <= 9.81+0.69) {
+//				this.nextState=this.driving;
+//			}else if (CurrentTickData.accVecA > 9.81-4.31 && CurrentTickData.accVecA <= 9.81+5.19 ) {
+//				this.nextState=this.walking;
+//			}else {
+//				this.nextState=this.unknown;
+//			}
+//		}else if (this.actState instanceof StateWalking) {
+//			Log.d("STATE_MACHINE", "WALKING");
+//			if (CurrentTickData.accVecA >= 9.81-1.91 && CurrentTickData.accVecA <= 9.81+0.69) {
+//				this.nextState=this.driving;
+//			}else if (CurrentTickData.accVecA > 9.81-4.31 && CurrentTickData.accVecA <= 9.81+5.19 ) {
+//				this.nextState=this.walking;
+//			}else {
+//				this.nextState=this.unknown;
+//			}
+//		}
 	}
 
 	/**

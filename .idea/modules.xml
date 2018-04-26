@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Smartphone-Sensing-Framework.iml" filepath="$PROJECT_DIR$/Smartphone-Sensing-Framework.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MasterEmbededSSF.iml" filepath="$PROJECT_DIR$/MasterEmbededSSF.iml" />
+      <module fileurl="file://C:\Users\MatzeG\Documents\MasterEmbeded\Code\Smartphone-Sensing-Framework.iml" filepath="C:\Users\MatzeG\Documents\MasterEmbeded\Code\Smartphone-Sensing-Framework.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

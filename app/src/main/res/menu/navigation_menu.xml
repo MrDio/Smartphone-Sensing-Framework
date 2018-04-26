@@ -1,27 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
-        android:id="@+id/nav_acc"
-        android:clickable="true"
-        android:icon="@mipmap/nav_acc"
-        android:title="Acceleration" />
-    <item android:id="@+id/nav_gyro"
-        android:icon="@mipmap/nav_gyro"
-        android:title="Gyroscope" />
-    <item android:id="@+id/nav_magn"
-        android:icon="@mipmap/nav_magn"
-        android:title="Magnetic Field" />
-    <item android:id="@+id/nav_mic"
-        android:icon="@mipmap/nav_mic"
-        android:title="Microphone" />
-    <item android:id="@+id/nav_gps"
-        android:icon="@mipmap/nav_gps"
-        android:title="GPS" />
-    <item android:id="@+id/nav_proximity"
-        android:icon="@mipmap/nav_proximity"
-        android:title="Proximity" />
+    <group android:id="@+id/grp0">
+        <item
+            android:id="@+id/nav_home"
+            android:clickable="true"
+            android:title="Home" />
+    </group>
+    <group android:id="@+id/grp1">
+        <item
+            android:id="@+id/nav_acc"
+            android:clickable="true"
+            android:icon="@mipmap/nav_acc"
+            android:title="Learn" />
+        <item
+            android:id="@+id/nav_freestyle"
+            android:clickable="true"
+            android:icon="@mipmap/nav_acc"
+            android:title="Freestyle" />
+    </group>
+    <group android:id="@+id/grp2">
+        <item
+            android:id="@+id/nav_credit"
+            android:clickable="true"
+            android:title="Credits" />
+    </group>
 
 
 </menu>

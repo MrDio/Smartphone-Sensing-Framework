@@ -45,7 +45,7 @@ public class ConfigApp {
 	public static boolean isSimulation = false;
 
 	/** The string of the target storage direction. */
-	public static String targetStorageDir = "/RapidDisruption/Data";
+	public static String targetStorageDir = "/ABC-Buddy/Data";
 	
 	/** The string for the csv reader stimuli. */
 	public static String csvReaderStimuli = "S01.csv";

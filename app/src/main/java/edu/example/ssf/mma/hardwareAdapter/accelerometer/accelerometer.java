@@ -57,13 +57,11 @@ public class accelerometer implements SensorEventListener, IAccelerometer {
     @Override
     public void start() {
         sensorManager.registerListener(this, acc, SensorManager.SENSOR_DELAY_NORMAL);
-        //CsvFileWriter.crtFile();
     }
 
     @Override
     public void stop() {
         sensorManager.unregisterListener(this);
-       // CsvFileWriter.closeFile();
     }
 
     @Override
@@ -88,10 +86,6 @@ public class accelerometer implements SensorEventListener, IAccelerometer {
         CurrentTickData.accY = y;
         CurrentTickData.accZ = z;
         CurrentTickData.accVecA = accelationSquareRoot;
-
-        //Log.d("AccValues",CurrentTickData.accVecA +"");
-
-
     }
 
     @Override
