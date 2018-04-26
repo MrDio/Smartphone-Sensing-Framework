@@ -4,7 +4,7 @@
 \section{Research for clap detection in android}
 \label{sec:orgc78ecb4}
 Java is known to have many open source libraries. For the processing of audio
-signals, the Tarsos library was a good choice. Among other things, this offers a
+signals, the open source library Tarsos\footnote{https://github.com/JorenSix/TarsosDSP} was a good choice. Among other things, this offers a
 ready-made percussion detection which enables to detect sudden peaks in a
 frequency. However, Tarsos also offers more basic functionalities, such as
 transforming an audio signal into the frequency domain using Fast Fourier
@@ -98,7 +98,7 @@ of the app and switches back and forth between states when registering the corre
 The Statemachine class is the center of the package of the same name and performs the tasks described in the previous chapter.
 It holds instances of all four states and a configuration of all possible transitions between the individual states.
 Each transition in the configuration is also linked to an action that determines the event that triggers 
-the transition. Each transaction also defines the previous state and the next state.
+the transition. Each transition also defines the previous state and the next state.
 When a transition is triggered, other operations are also executed that either adapt UI elements to the new 
 state or execute other functions that are important for parts of the business logic.
 
@@ -112,7 +112,7 @@ This is illustrated in figure \ref{statemachine}.
 \subsubsection{Tracker}
 \label{sec:orgd2cdde2}
 
-One of the operations triggered by the investments in the state machine is to start or stop the tracker, 
+One of the operations triggered by the transitions in the state machine is to start or stop the tracker, 
 which stores the activities of the user together with the measured times in a list.
 
 \subsubsection{User Interface}
@@ -128,7 +128,7 @@ request to the user, which the user must give in order for the apps to work prop
 \label{sec:org3d3dca0}
 This package contains the GoogleAccessor class, which was initially designed to upload the test data stored on the 
 smartphone via the CSVWriter class to the Google Cloud. Once enough data has been collected, this functionality has 
-been disabled for the release of the app. The reason for this was that access to the cloud required signed apk, 
+been disabled for the release of the app. The reason for this was that access to the cloud required signed APK, 
 which had nothing to do with the pure functionality of the app. Commenting out the code of this feature should 
 avoid unnecessary problems when starting the app.
 
