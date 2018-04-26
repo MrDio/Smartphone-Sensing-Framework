@@ -8,8 +8,8 @@ The basic idea is simple, by repeated movements of the mobile phone the spelling
 ## Features of the Application
 The application has two different modes:
 
-Learn-Mode: In this mode, the user can learn a specific letter by selecting it. The user is then shown a video for drawing the letter. After the user has drawn the letter, the application evaluates the recording and displays to the user whether he has written the letter correctly or not.\\
-Recognize-Mode: In this mode the user can write any letter in the air. The application compares the record with all letters and shows the user which letter he has written.
+⋅⋅* Learn-Mode: In this mode, the user can learn a specific letter by selecting it. The user is then shown a video for drawing the letter. After the user has drawn the letter, the application evaluates the recording and displays to the user whether he has written the letter correctly or not.\\
+⋅⋅* Recognize-Mode: In this mode the user can write any letter in the air. The application compares the record with all letters and shows the user which letter he has written.
 
 ## State Machine
 The figure below illustrates the states of the application:
