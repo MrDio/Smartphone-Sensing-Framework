@@ -1,0 +1,2 @@
+# Digital Life Tracker App
+The app should allow a user to divide his daily routine into categories of activities and to measure the time required for each activity. This enables him to get an overview of his time invested in various activities.
