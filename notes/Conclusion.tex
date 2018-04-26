@@ -1,25 +1,23 @@
 \chapter{Conclusion}
-\label{sec:org9a10a6c}
-\section{Current State}
-\label{sec:org4afd87a}
-\subsection{Evalutation}
-\label{sec:org350e527}
-\begin{itemize}
-\item How reliable can our implementation detect clap.
-\item Benchmark
-\begin{itemize}
-\item How many time false positives where detected ( 20x husten, 20x schnipsen, 20 klatschen)
-\item Show statistics by trying it out (maybe in different environments (loud,
-silent rooms, outdoors)
-\end{itemize}
-\end{itemize}
 
-Refer to to evalution part above. State how difficult this was and the time
-needed to try out more advanced solutions (AI) was not enough.
+\section{Current State}
+
+
+The current state of clap detection causes some false positives. 
+Often voices are also recognized as clapping, or flicking with fingers or coughing.
+Since there was not enough time to implement pattern recognition using a neural network, the app recognizes every pitch in a frequency range as a clap.
+
+Frequently it happens to the user that when trying to clap twice, one of the claps is not loud enough because he has not hit his hands properly and therefore just
+a single clap is detected.
+
+If one examines the current state of the app for its usability, it is obvious that it would probably be quite unfavorable for the user experience if false positives ended the timer unintentionally, since the user would be currently busy with an activity and not immediately notice it.
+
+
 
 \section{Project Outlook}
 \label{sec:orgfa9fd4b}
-Maybe add more debug functionallity inside the App, be able to not only tweak
-parameters inside the code, but also with UI Controls inside the app.
 
-Whistling detection instead of clapping.
+
+To work on the problem further, some debugging functionality within the app would be good, so it would be faster to try different parameters instead of rebuilding the app over and over again.
+
+Data analysis has shown that clapping is very difficult to detect. Compared to clapping, a clear pattern can be seen in the frequencies of a whistle sound. For the future of the app it might be better to detect a whistle instead of a clap to toggle the time tracking.
