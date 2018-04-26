@@ -12,8 +12,6 @@ The application has two different modes:
 - Recognize-Mode: In this mode the user can write any letter in the air. The application compares the record with all letters and shows the user which letter he has written.
 
 ## State Machine
-The figure below illustrates the states of the application:
-![alt text](https://www.hackster.io/dcse-team-b/abc-buddy-a54c31)
 The application consists of three states. The default-state is the idle-state. If the user starts the recording, the application changes to the recording-state. After 4 seconds, the application switches to the analysis-state. In this state the mathematical calculation are done. Finally, the application prints the result and changes to the idle-state.
 
 ## Implementation
@@ -23,10 +21,8 @@ When the application is put into recording mode, the user has one second to prep
 
 ### Analysis
 
-As already mentioned, the Mean Squared Error method was used for the analysis. In this procedure, as explained in a, the deviation of an input data set from the data sets stored for the characters is calculated. The input data set in this case is the acceleration captured during the recording phase. While the comparison data sets are optimal accelerations of motion sequences created by the developers. Each character has 40 comparison data sets, with ten data sets from each developer. The following equation is used for the calculation itself.
+As already mentioned, the Mean Squared Error method was used for the analysis. In this procedure, as explained in a, the deviation of an input data set from the data sets stored for the characters is calculated. The input data set in this case is the acceleration captured during the recording phase. While the comparison data sets are optimal accelerations of motion sequences created by the developers. Each character has 40 comparison data sets, with ten data sets from each developer.
 
-In this context, n corresponds to the number of values in both data sets, which is set to 40 by the recording of four seconds. Furthermore, the values x and y describe the individual values at the position I in the respective data set. For this, x corresponds to the input and y to the comparison data set. Since this is a deviation respectively an error calculation, the result should be relatively small. For this reason, the lowest value of each character is stored.
-
-If the learning function is selected, the calculated value belonging to the character selected is compared with a threshold value. This threshold value was created individually for each character by trial and error tests. The letter was correctly drawn into the air if the calculated value is smaller than the threshold. The table shows the thresholds for the different characters.
+If the learning function is selected, the calculated value belonging to the character selected is compared with a threshold value. This threshold value was created individually for each character by trial and error tests. The letter was correctly drawn into the air if the calculated value is smaller than the threshold.
 
 Team B
