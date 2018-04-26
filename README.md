@@ -13,7 +13,7 @@ The application has two different modes:
 
 ## State Machine
 The figure below illustrates the states of the application:
-
+[alt text](https://www.hackster.io/dcse-team-b/abc-buddy-a54c31)
 The application consists of three states. The default-state is the idle-state. If the user starts the recording, the application changes to the recording-state. After 4 seconds, the application switches to the analysis-state. In this state the mathematical calculation are done. Finally, the application prints the result and changes to the idle-state.
 
 ## Implementation
