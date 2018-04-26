@@ -30,6 +30,7 @@ package edu.example.ssf.mma.userInterface;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -177,16 +178,27 @@ public class MainActivity extends AppCompatActivity {
         initView();
 
 
-        Trackings.onNewDelta = this::onTrackingActivityStopped;
-        Trackings.onStartNewTracking = this::onActivityStarted;
-
-        this.stateMachine = new StateMachine();
-        this.stateMachine.setLogger(this::inAppLog);
-
 //       setupAudioToCsv();
 //       GoogleAccessor = new GoogleAccessor(this);
 //       GoogleAccessor.signIn();
 
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[]grantResults) {
+        switch (requestCode) {
+            case PERMISSIONS_MULTIPLE_REQUEST:
+                //
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Trackings.onNewDelta = this::onTrackingActivityStopped;
+                    Trackings.onStartNewTracking = this::onActivityStarted;
+
+                    this.stateMachine = new StateMachine();
+                    this.stateMachine.setLogger(this::inAppLog);
+                } else {
+                    // Do Nothing
+                }
+        }
     }
 
     private void initView() {
