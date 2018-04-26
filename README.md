@@ -24,5 +24,3 @@ When the application is put into recording mode, the user has one second to prep
 As already mentioned, the Mean Squared Error method was used for the analysis. In this procedure, as explained in a, the deviation of an input data set from the data sets stored for the characters is calculated. The input data set in this case is the acceleration captured during the recording phase. While the comparison data sets are optimal accelerations of motion sequences created by the developers. Each character has 40 comparison data sets, with ten data sets from each developer.
 
 If the learning function is selected, the calculated value belonging to the character selected is compared with a threshold value. This threshold value was created individually for each character by trial and error tests. The letter was correctly drawn into the air if the calculated value is smaller than the threshold.
-
-### Team B
