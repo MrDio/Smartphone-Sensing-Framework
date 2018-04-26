@@ -30,7 +30,7 @@ public class ClapDetector implements AudioProcessor, OnsetDetector {
         AudioDispatcher mDispatcher = AudioDispatcherFactory.fromDefaultMicrophone(22050, 1024, 0);
         this.lowPassFilter = 0;
         this.highPassFilter = 22000;
-        this.threshold = 30;
+        this.threshold = 8;
         this.sensitivity = 40;
         this.sampleRate = 22050;
         this.handler = claphandler;
@@ -83,7 +83,6 @@ public class ClapDetector implements AudioProcessor, OnsetDetector {
         //Log.d("Sound", "Peakcounter: " + peakCounter);
 
         double peakCountThreshold = (100.0D - this.sensitivity) * (double) audioInputFloats.length / 200.0D;
-        peakCountThreshold = 10;
         if (this.peakCounter2 < this.peakCounter1
                 && this.peakCounter1 >= (float) peakCounter
                 && (double) this.peakCounter1 > peakCountThreshold) {
