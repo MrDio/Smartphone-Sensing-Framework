@@ -25,4 +25,4 @@ As already mentioned, the Mean Squared Error method was used for the analysis. I
 
 If the learning function is selected, the calculated value belonging to the character selected is compared with a threshold value. This threshold value was created individually for each character by trial and error tests. The letter was correctly drawn into the air if the calculated value is smaller than the threshold.
 
-Team B
+### Team B
