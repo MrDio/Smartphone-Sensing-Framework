@@ -1,4 +1,3 @@
-
 ## Here some of the past projects:
 
 2017<br>
