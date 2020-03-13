@@ -1,6 +1,6 @@
-# Smartphone-Sensing-Framework
+# Smartphone-Sensing-Framework 
 
-Smartphone Sensing Framework for android smartphones developed by D. Satikidis (since 2012) and D. Lagamtzis (since 2017) used for academic lectures. Since 2018 A. Georgiadis entered the core Dev team with the focus on extending the SSF with a Machine Learning module and workprocess.
+artphone Sensing Framework for android smartphones developed by D. Satikidis (since 2012) and D. Lagamtzis (since 2017) used for academic lectures. Since 2018 A. Georgiadis entered the core Dev team with the focus on extending the SSF with a Machine Learning module and workprocess.
 
 The aim of this framework is to provide a quick way to develop context aware apps on android in an experimetal way.
 
