@@ -1,0 +1,46 @@
+% % Neue Befehle
+\newcommand{\HRule}[2]{\noindent\rule[#1]{\linewidth}{#2}} % Horiz. Linie
+\newcommand{\vlinespace}[1]{\vspace*{#1\baselineskip}} % Abstand
+\newcommand{\titleemph}[1]{\textbf{#1}} % Hervorheben
+
+\begin{titlepage}
+ \sffamily % Titelseite in seriefenloser Schrift
+      % Logo Hochschule Esslingen
+      
+     % \includegraphics[width=2cm]{../../tae-logo}\hfill \includegraphics[width=5cm]{../../Brunel-University-Logo}
+      \HRule{13pt}{1pt} 
+   \centering
+      \Large
+      \vlinespace{3}\\
+      \workTyp\\
+      \vspace{2cm}
+      \Huge
+      \workTitel\\
+%
+      \Large
+      \vlinespace{2}
+%          im Studiengang \workStudiengang\\
+%          der Fakultät Informationstechnik\\
+%      
+      \vlinespace{2}
+      Student: \workNameStudent\\
+      ID: 1744867
+%      \workSemester\\
+%
+   \vfill
+   \raggedright
+%   
+   \large
+%   \titleemph{Zeitraum:} \workZeitraum \\ % Nur bei Abschluss-Arbeiten
+%   \titleemph{Datum:} \workDatum \\ % Nur bei Studien-Arbeiten
+   \titleemph{Brunel University:} {\normalsize \workPruefer} \\
+%   \titleemph{Supervised by:} \workZweitPruefer \\ % Nur bei Abschluss-Arbeiten
+
+ % Folgenden Abschnitt nur bei Industrie-Arbeiten darstellen
+   \vlinespace{1}
+   \HRule{13pt}{1pt} \\
+%   \titleemph{Firma:} \workFirma \\
+   \titleemph{Workshop supervised by:} {\normalsize \workZweitPruefer}
+%   \titleemph{Betreuer:} \workBetreuer 
+%
+\end{titlepage}

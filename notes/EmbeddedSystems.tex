@@ -1,0 +1,97 @@
+% % Preamble BEGINN %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% Preamble (Dokumentenklasse)
+\input{preamble/pre-class}
+
+%%% Alle Namen usw. im Titel und im hyperref-Paket
+\input{preamble/pre-work}
+
+%%% Preamble (Pakete)
+\input{preamble/pre-packages}
+
+%%% Neue Befehle
+\input{preamble/pre-newcommands}
+\input{preamble/pre-tablecommands} % Fuer Tabellen
+
+%%% Silbentrennung
+\input{preamble/pre-hyphenation}
+
+% % Nur diese Kapitel (Dateien) einbinden
+%\includeonly{
+%chapters/ch-aa-titel,
+%chapters/ch-aa-vorspiel,
+%chapters/ch-einleitung,
+%chapters/ch-hauptteil,
+%chapters/ch-schluss,
+%chapters/ch-zz-anhang
+%}
+% % Preamble ENDE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% % Inhalt BEGINN %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+% Tabellen-Einstellungen
+\input{preamble/pre-tablesettings}
+
+% % %%%%%% Vorspiel
+\begin{spacing}{1} % Vorspiel immer mit Standard-Zeilenabstand setzen
+	\frontmatter
+	% % Titelblatt
+	%\include{preamble/ch-aa-titel}
+	
+	\includepdf{Deckblatt-Assignment}
+	\includepdf{submission}
+	\includepdf{submission}
+	\includepdf{submission}
+	%\include{chapters/ch-aa-vorspiel}
+	%\include{chapters/ch-aa-zusfasg}
+	% % Verzeichnisse
+	\ihead[]{\leftmark} % links: Kapitel
+	%\chead[\pagemark]{\pagemark} % mitte:
+	\ohead[]{} % rechts: Section
+	\automark[]{chapter}
+	\tableofcontents
+	\listoffigures
+	\listoftables
+	
+	\ihead[]{\leftmark} % links: Kapitel
+	%\chead[\pagemark]{\pagemark} % mitte:
+	\ohead[]{} % rechts: Section
+	\automark[]{chapter}
+	
+%	\input{abk-verzeichnis/abk}
+	\clearpage
+	%\lstlistoflistings % Verzeichnis für Code-Listing
+\end{spacing}
+% % %%%%%% Textteil (Eigentliche Arbeit)
+\mainmatter
+%
+\ofoot[\pagemark\, \textbf{of \pageref*{LastPage}}]{\pagemark\, \textbf{of \pageref*{LastPage}}}
+
+
+\input{abstract}
+\input{credentials}
+\input{Introduction}
+\input{FirstPrototype}
+\input{SecondPrototype}
+\input{Conclusion}
+% % %%%%%% Literaturverzeichnis (darf im deutschen nicht in den Anhang!)
+% Einfaches Literaturverzeichnis
+%\input{chapters/ch-zz-bibEinfach}
+% Literaturverzeichnis mit Bibtex
+%\Urlmuskip=0mu plus 1mu\relax
+%\ihead[]{\leftmark} % links: Kapitel
+%\chead[\pagemark]{\pagemark} % mitte:
+%\ohead[]{} % rechts: Section
+%\automark[]{chapter}
+%\raggedright
+%\sloppy
+%\ihead[]{}
+%\bibliographystyle{unsrt}
+%\bibliography{bib/bib}
+
+% % %%%%%% Anhang
+%\appendix
+%\include{chapters/ch-zz-anhang}
+
+% %  Inhalt ENDE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}

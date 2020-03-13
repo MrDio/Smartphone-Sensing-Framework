@@ -1,0 +1,49 @@
+% ------------------------------------------------------------------------
+% LaTeX - Preambel ******************************************************
+% ------------------------------------------------------------------------
+% pre-work
+% ========================================================================
+% % ToDo kennzeichnen
+\newcommand{\workTodo}[1]{\textcolor{red}{todo: #1}}
+
+% % Für Datum und Zeit in Fusszeile
+% % !!!Inhalt bei Fertigstellung der Arbeit löschen
+\newcommand{\workMarkDateTime}{\workTodo{\today{} - \thistime\ Uhr}}
+
+% % Alle Namen werden im Titel und im hyperref-Paket eingetragen
+% % !!! Ueberall für <Wert> das Entsprechende eintragen
+
+ % <Typ> Studienarbeit, Dipolmarbeit, Studienarbeit oder Bachlor-Abschlussarbeit
+\newcommand{\workTyp}{Assignment\xspace}
+
+ % <Titel> der Arbeit
+\newcommand{\workTitel}{PCM}
+
+ % <Studiengang> z.B. Kommunikationstechnik
+\newcommand{\workStudiengang}{Technische Informatik\xspace}
+
+% <Semester> mit Jahr z.B. Sommersemester 2008  
+\newcommand{\workSemester}{Sommersemester 2017\xspace}
+
+% <Name> des Studenten
+\newcommand{\workNameStudent}{Antonio Parrotta\xspace}
+
+% <Pruefer> Name des prüfenden (betreuenden) Professor an der Hochschule
+\newcommand{\workPruefer}{Dr. x\xspace} 
+
+
+% %%% Nur bei Abschluss-Arbeiten
+
+% <Datum> der Abgabe der Arbeit (Eidesstatliche Erklärung)
+\newcommand{\workDatum}{\today\xspace}
+
+% <Zweitprüfer>
+\newcommand{\workZweitPruefer}{Dipl.-Ing. xy \xspace}
+
+% %%% Nur bei Industrie-Arbeiten:
+
+% <Firma>
+\newcommand{\workFirma}{IT-Designers GmbH\xspace}
+
+% Firmenlogo Name hier anpassen, Größe (wenn möglich) nicht ändern
+%\newcommand{\workFirmenLogo}{\includegraphics[width=5cm]{fig/aa-titel/Bosch_4C_S}} 

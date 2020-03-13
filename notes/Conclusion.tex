@@ -1,0 +1,23 @@
+\chapter{Conclusion}
+
+\section{Current State}
+
+
+The current state of clap detection causes some false positives. 
+Often voices are also recognized as clapping, or flicking with fingers or coughing.
+Since there was not enough time to implement pattern recognition using a neural network, the app recognizes every pitch in a frequency range as a clap.
+
+Frequently it happens to the user that when trying to clap twice, one of the claps is not loud enough because he has not hit his hands properly and therefore just
+a single clap is detected.
+
+If one examines the current state of the app for its usability, it is obvious that it would probably be quite unfavorable for the user experience if false positives ended the timer unintentionally, since the user would be currently busy with an activity and not immediately notice it.
+
+
+
+\section{Project Outlook}
+\label{sec:orgfa9fd4b}
+
+
+To work on the problem further, some debugging functionality within the app would be good, so it would be faster to try different parameters instead of rebuilding the app over and over again.
+
+Data analysis has shown that clapping is very difficult to detect. Compared to clapping, a clear pattern can be seen in the frequencies of a whistle sound. For the future of the app it might be better to detect a whistle instead of a clap to toggle the time tracking.

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawerLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorPrimaryDark"
+
+    tools:context="edu.example.ssf.mma.userInterface.MainActivity">
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/recordToCsvButton"
+                android:layout_width="186dp"
+                android:layout_height="63dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/colorPrimary"
+                android:elevation="0dp"
+                android:text="record to csv"
+                android:textColor="@color/colorStroke"
+                android:textSize="14sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/startButton2"
+                android:layout_width="194dp"
+                android:layout_height="114dp"
+                android:layout_marginTop="20dp"
+                android:background="#FF00CD90"
+                android:lineSpacingExtra="12sp"
+                android:text="Clap to start\nActivity"
+                android:textColor="@color/colorStroke"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="301dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Logs:"
+                android:textColor="@color/colorStroke"
+                android:textSize="14sp" />
+
+            <ScrollView
+                android:id="@+id/scrollViewLog"
+                android:layout_width="300dp"
+                android:layout_height="269dp"
+                android:layout_marginTop="12dp"
+                android:background="#FF1B2669"
+                android:elevation="0dp"
+                android:fadeScrollbars="false"
+                android:padding="6dp"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="231dp">
+
+                <TextView
+                    android:id="@+id/textviewLogs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="600"
+                    android:scrollbars="vertical"
+                    android:textColor="@color/colorStroke"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/startButton2" />
+
+            </ScrollView>
+
+            <Button
+                android:id="@+id/clearLogButton"
+                android:layout_width="133dp"
+                android:layout_height="34dp"
+                android:layout_marginTop="12dp"
+                android:background="@color/colorPrimary"
+                android:text="clear"
+                android:textColor="@color/colorStroke"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </LinearLayout>
+
+
+    </android.support.constraint.ConstraintLayout>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/navigation_header"
+        app:menu="@menu/navigation_menu">
+
+    </android.support.design.widget.NavigationView>
+</android.support.v4.widget.DrawerLayout>

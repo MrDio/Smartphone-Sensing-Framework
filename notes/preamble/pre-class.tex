@@ -1,0 +1,37 @@
+% ------------------------------------------------------------------------
+% LaTeX - Preambel ******************************************************
+% ------------------------------------------------------------------------
+% Dokumentklasse (Koma Script)
+% ------------------------------------------------------------------------
+% basiernd auf www.matthiaspospiech.de/latex/vorlagen Diplomarbeit kompakt
+% ========================================================================
+\documentclass[%
+   %draft,            % Entwurfsstadium
+   final,             % fertiges Dokument
+   12pt,              % Schriftgroesse der Grundschrift
+   bigheadings,       % große Überschriften
+   ngerman,           % wird an andere Pakete weitergereicht
+   a4paper,           % Papierformat
+   BCOR5mm,          % Bindekorrektur: Zusätzlicher Rand auf der Innenseite
+   DIV14,            % Seitengröße (siehe Koma Skript Dokumentation !)
+   1.1headlines,     % Zeilenanzahl der Kopfzeilen
+   pagesize,         % Schreibt die Papiergroesse in die Datei.
+   oneside,          % Einseitiges Layout
+%   twoside,          % Zweiseitiges Layout
+   openright,        % Kapitel beginnen immer auf der rechten Seite
+   titlepage,        % Titel als einzelne Seite ('titlepage' Umgebung)  
+   headsepline,      % Linie unter Kolumnentitel ()
+   footsepline,		 % Linie über Seitenzahl
+%   plainheadsepline, % Linie unter Kolumnentitel () plain Seitenstil
+   nochapterprefix,  % keine Ausgabe von 'Kapitel:'
+   bibtotoc,         % Bibliographie ins TOC
+%	bibtotocnumbered, % Bibliographie ins TOC mit Kapitelnummer
+   tocindent,        % eingereuckte Gliederung
+   listsindent,      % eingereuckte LOT, LOF
+   pointlessnumbers, % Überschriftnummerierung ohne Punkt, siehe DUDEN !
+   cleardoubleempty, % Leere linke Seite bei Zweiseitenlayout vor Kapitel
+   fleqn,            % Formeln werden linksbuendig angezeigt
+%   parindent,        % Absatz mit Einzug (Standard)
+   halfparskip,      % Absatz halbe Zeile Abstand
+%   parskip,          % Absatz ganze Zeile Abstand
+]{scrbook}%     Klassen: scrartcl, scrreprt, scrbook

@@ -1,0 +1,462 @@
+% ------------------------------------------------------------------------
+% LaTeX - Preambel ******************************************************
+% ------------------------------------------------------------------------
+% Packages
+% ------------------------------------------------------------------------
+% basiernd auf www.matthiaspospiech.de/latex/vorlagen Diplomarbeit kompakt
+% ========================================================================
+
+% Inhalt:
+% 1. Einige Pakete muessen unbedingt vor allen anderen geladen werden
+% 2. Fonts Fonts Fonts
+% 3. Math Packages
+% 4. Symbole
+% 5. text related packages
+% 6. Pakete zum Zitieren
+% 7. PDF related packages
+% 8. Tables (Tabular)
+% 9. figures and placement
+% 10. verbatim packages
+% 11. science packages
+% 12. layout packages
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% Encoding der Dateien (sonst funktionieren Umlaute nicht)
+% Empfohlen latin1, da einige Pakete mit utf8 Zeichen nicht
+% funktionieren, z.B: listings, soul.
+
+\usepackage[latin1]{inputenx} % ISO-8859-1
+%\usepackage[ansinew]{inputenx} % Windows-Standard (CP1252) (baut auf ISO 8859-1 und ISO 8859-15 auf)
+%\usepackage[utf8]{inputenc}
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% 1. Einige Pakete muessen unbedingt vor allen anderen geladen werden
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+%
+\usepackage{xspace} % Define commands that don't eat spaces.
+\usepackage{ifpdf} % Fuer Pakete/Paketoptionen, die nur fuer pdf benoetigt werden \ifpdf \else \fi
+\usepackage{calc} % Calculation with LaTeX
+\usepackage[english, ngerman]{babel} % Languagesetting
+\usepackage[table]{xcolor} % Farben
+\usepackage[]{graphicx} % Bilder
+\usepackage{subfig}
+%\usepackage{epstopdf} % If an eps image is detected, epstopdf is automatically called to convert it to pdf format.
+\usepackage[]{amsmath} % Amsmath - Mathematik Basispaket
+\usepackage{ragged2e} % Besserer Flatternsatz (Linksbuendig, statt Blocksatz)
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% 2. Fonts Fonts Fonts
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\usepackage[T1]{fontenc} % T1 Schrift Encoding (notwendig für die meisten Type 1 Schriften)
+\usepackage{textcomp}	 % Zusatzliche Symbole (Text Companion font extension)
+
+% Alle Schriften die hier angegeben sind sehen im PDF richtig aus.
+% Die LaTeX Standardschrift ist die Latin Modern (lmodern Paket).
+% If Latin Modern is not available for your distribution you must install the
+% package cm-super instead. Otherwise your fonts will look horrible in the PDF
+
+% DO NOT LOAD ae-Package for the font !
+
+%% - Latin Modern
+\usepackage{lmodern}
+%% -------------------
+%
+% % - Times, Helvetica, Courier (Word Standard...)
+%\usepackage{mathptmx}
+%\usepackage[scaled=.90]{helvet}
+%\usepackage{courier}
+% % -------------------
+%%
+%% - Palantino , Helvetica, Courier
+%\usepackage{mathpazo}
+%\usepackage[scaled=.95]{helvet}
+%\usepackage{courier}
+%% -------------------
+%
+%% - Bera Schriften
+%\usepackage{bera}
+%% -------------------
+%
+%% - Charter, Bera Sans
+%\usepackage{charter}\linespread{1.05}
+%\renewcommand{\sfdefault}{fvs}
+
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% 3. Math Packages
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\usepackage[fixamsmath,disallowspaces]{mathtools} % Erweitert amsmath und behebt einige Bugs
+\usepackage{fixmath}
+\usepackage[all,warning]{onlyamsmath} % Warnt bei Benutzung von Befehlen die mit amsmath inkompatibel sind.
+\usepackage{icomma} % Erlaubt die Benutzung von Kommas im Mathematikmodus
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% 4. Symbole
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+\usepackage{amssymb}
+\usepackage{eurosym}
+%\usepackage{wasysym}
+%\usepackage{marvosym}
+%\usepackage{pifont}
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% 5. text related packages
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\usepackage{url} % Setzen von URLs. In Verbindung mit hyperref sind diese auch aktive Links.
+\usepackage[stable,perpage, ragged,  multiple]{footmisc} % Fussnoten
+\usepackage[ngerman]{varioref} % Intelligente Querverweise
+\usepackage{enumitem} % Listen
+\usepackage{framed}
+\usepackage{lscape}
+\usepackage{geometry}
+
+\def\UrlBreaks{\do\/\do-}
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% 6. Pakete zum Zitieren
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\usepackage[babel, german=quotes, english=british, french=guillemets]{csquotes} % clever quotations
+\SetBlockThreshold{2} % Anzahl von Zeilen
+\newenvironment{myquote}%
+          {\begin{quote}\small}%
+          {\end{quote}}%
+\SetBlockEnvironment{myquote}
+\usepackage{nameref}
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% 7. PDF related packages
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\ifpdf % Wenn als PDF ausgegeben wird
+\usepackage{pdfpages} % pdf-Seiten einbinden
+\usepackage[pdftex]{hyperref} % PDF Option in Hyperref
+\else
+\usepackage[dvipdfm]{hyperref}
+\fi
+
+%%% Doc: ftp://tug.ctan.org/pub/tex-archive/macros/latex/contrib/pdfpages/pdfpages.pdf
+%\usepackage{pdfpages} % Include pages from external PDF documents in LaTeX documents
+
+%%% Doc: ftp://tug.ctan.org/pub/tex-archive/macros/latex/contrib/hyperref/doc/manual.pdf
+\hypersetup{
+          pdfhighlight = /O,	         % Visualisierung beim anklicken von Links
+% Farben fuer die Links
+   colorlinks=true,	        % Links erhalten Farben statt Kaestchen
+   urlcolor=darkblue,    % \href{...}{...} external (URL)
+   filecolor=darkblue,  % \href{...} local file
+   linkcolor=darkblue,  % \ref{...} and \pageref{...}
+          citecolor =darkblue,    % Literaturverzeichnis
+   % Links
+   raiselinks=true,			 % calculate real height of the link
+   breaklinks=true,	        % Links bestehen bei Zeilenumbruch
+%   backref=page,	         % Backlinks im Literaturverzeichnis (section, slide, page, none)
+%   pagebackref=true,        % Backlinks im Literaturverzeichnis mit Seitenangabe
+   verbose,
+%   hyperindex=true,         % backlinkex index
+   linktocpage=true,        % Inhaltsverzeichnis verlinkt Seiten
+%   hyperfootnotes=false,	% Keine Links auf Fussnoten
+   % Bookmarks
+%   bookmarks=true,	         % Erzeugung von Bookmarks fuer PDF-Viewer
+   bookmarksopenlevel=1,    % Gliederungstiefe der Bookmarks
+   bookmarksopen=true,      % Expandierte Untermenues in Bookmarks
+   bookmarksnumbered=true,  % Nummerierung der Bookmarks
+   bookmarkstype=toc,       % Art der Verzeichnisses
+   % Anchors
+   plainpages=false,        % % Make page anchors using the formatted form of the page number. With this option, hyperref writes different anchors for pages ‘ii’ and ‘2’. (If the option is set ‘true’ — the default — hyperref writes page anchors as the arabic form of the absolute page number, rather than the formatted form.)
+   % hypertexnames=false,
+   pageanchor=true,	        % Pages are linkable
+   % PDF Informationen
+   pdftitle={\workTyp: \workTitel},	        % Titel
+   pdfauthor={\workNameStudent},	    % Autor
+   pdfcreator={LaTeX, hyperref, KOMA-Script}, % Ersteller
+   %pdfproducer={pdfeTeX 1.10b-2.1} %Produzent
+   pdfstartview=FitH,       % Dokument wird Fit Width geaefnet
+   pdfpagemode=UseOutlines, % Bookmarks im Viewer anzeigen
+%   pdfpagelabels=true,      % set PDF page labels
+}
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% 8. Tables (Tabular)
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\usepackage{booktabs}
+\usepackage{tabularx} % tabularx nach hyperref laden
+\usepackage{multirow}
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% 9. figures and placement
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+%% Bilder und Graphiken ==================================================
+
+\usepackage{float}	% Stellt die Option [H] fuer Floats zur Verfgung
+\usepackage{flafter} % Floats immer erst nach der Referenz setzen
+\usepackage{subfig} % Layout wird weiter unten festgelegt !
+\usepackage{wrapfig} % Bilder von Text Umfliessen lassen
+
+\usepackage{placeins} % Alle Floats bis \FloatBarrier ausgeben
+
+% Make float placement easier
+\renewcommand{\floatpagefraction}{.75} % vorher: .5
+\renewcommand{\textfraction}{.1}       % vorher: .2
+\renewcommand{\topfraction}{.8}        % vorher: .7
+\renewcommand{\bottomfraction}{.5}     % vorher: .3
+\setcounter{topnumber}{3}	         % vorher: 2
+\setcounter{bottomnumber}{2}	         % vorher: 1
+\setcounter{totalnumber}{5}	         % vorher: 3
+
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% 10. verbatim packages
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+%%% Doc: ftp://tug.ctan.org/pub/tex-archive/macros/latex/contrib/upquote/upquote.sty
+\usepackage{upquote} % Setzt "richtige" Quotes in verbatim-Umgebung
+
+%%% Doc: No Documentation
+% \usepackage{verbatim} % Reimplemntation of the original verbatim
+
+%%% Doc: http://www.cs.brown.edu/system/software/latex/doc/fancyvrb.pdf
+% \usepackage{fancyvrb} % Superior Verbatim Class
+
+%% Listings Paket ------------------------------------------------------
+%%% Doc: ftp://tug.ctan.org/pub/tex-archive/macros/latex/contrib/listings/listings-1.3.pdf
+\usepackage{listings}
+
+\lstset{
+basicstyle =\ttfamily\color{black}\small, % Standardschrift
+keywordstyle =, % \bfseries\color{blue}	  % Schlüsselwort-Style
+%identifierstyle =\underbar,
+commentstyle =\color{teal},
+stringstyle =\itshape,
+numbers = left,			  % Ort der Zeilennummern
+numberstyle =\tiny\color{black},	   % Stil der Zeilennummern
+numbers = left,			  % Ort der Zeilennummern
+tabsize=2,			  % Groesse von Tabs
+breaklines,			  % Zeilen werden Umgebrochen
+breakatwhitespace,			  % An Leerzeichen umbrechen
+%showspaces=true,			  % Leerzeichen anzeigen
+backgroundcolor=\color{white},	  % % Hintergrundfarbe der Listings
+}
+
+\lstdefinestyle{xml}{
+	language=xml,
+	tabsize=3,
+	%frame=lines,
+	caption=Test,
+	label=code:sample,
+	frame=shadowbox,
+	escapeinside={(*@}{@*)},
+	rulesepcolor=\color{gray},
+	xleftmargin=20pt,
+	framexleftmargin=15pt,
+	keywordstyle=\color{blue}\bf,
+	commentstyle=\color{OliveGreen},
+	stringstyle=\color{blue},
+	numbers=left,
+	numberstyle=\tiny,
+	numbersep=5pt,
+	breaklines=true,
+	showstringspaces=false,
+	basicstyle=\footnotesize,
+	emph={ContentPage,StackLayout,Button,Label, Slider, ListView, ItemTemplate, DataTemplate, ViewCell},emphstyle={\color{brown}}
+}
+
+\lstdefinestyle{CSharp}{
+	language=[Sharp]C,
+	captionpos=b,
+	%numbers=left, %Nummerierung
+	%numberstyle=\tiny, % kleine Zeilennummern
+	frame=lines, % Oberhalb und unterhalb des Listings ist eine Linie
+	showspaces=false,
+	showtabs=false,
+	breaklines=true,
+	showstringspaces=false,
+	breakatwhitespace=true,
+	escapeinside={(*@}{@*)},
+	commentstyle=\color{greencomments},
+	morekeywords={partial, var, value, get, set, async, await},
+	keywordstyle=\color{blue},
+	stringstyle=\color{redstrings},
+	basicstyle=\ttfamily\small,
+	emph={EventArgs},emphstyle={\color{cyan}}
+}
+
+ \lstloadlanguages{% Check Dokumentation for further languages ...
+%	[Visual]Basic
+         [AlLaTeX]TeX,
+         %Pascal
+         %C
+         %C++
+         %XML
+         %HTML
+ }
+
+%%% Doc: ftp://tug.ctan.org/pub/tex-archive/macros/latex/contrib/examplep/eurotex_2005_examplep.pdf
+% LaTeX Code und Ergebnis nebeneinander darstellen
+%\usepackage{examplep}
+
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% 11. science packages
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+\usepackage[squaren]{SIunits}
+
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+% 12. layout packages
+% ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+%% Zeilenabstand =========================================================
+%
+%%% Doc: ftp://tug.ctan.org/pub/tex-archive/macros/latex/contrib/setspace/setspace.sty
+\usepackage{setspace}
+%\doublespace	        % 2-facher Abstand
+%\onehalfspace	  % 1,5-facher Abstand
+% hereafter load 'typearea' again
+
+%% Seitenlayout ==========================================================
+%
+% Layout mit 'typearea'
+\typearea[current]{last}
+\raggedbottom     % Variable Seitenhoehen zulassen
+
+
+%% Kopf und Fusszeilen====================================================
+%%% Doc: ftp://tug.ctan.org/pub/tex-archive/macros/latex/contrib/koma-script/scrguide.pdf
+\usepackage[%
+   automark,	 % automatische Aktualisierung der Kolumnentitel
+   nouppercase,	 % Grossbuchstaben verhindern
+]{scrpage2}
+
+\usepackage{scrtime} % Zeit
+%\usepackage{scrdate} % Datum
+
+\pagestyle{scrheadings} % Seite mit Headern
+%\pagestyle{scrplain} % Seiten ohne Header
+%\pagestyle{empty} % Seiten ohne Header
+
+% loescht voreingestellte Stile
+\clearscrheadings
+\clearscrplain
+%
+% [scrplain]{scrheadings}
+
+% %%% Kopfzeile
+% einseitig: Bei einseitigem Layout, nur folgende Zeilen verwenden !!!
+\ihead[]{\leftmark} % links: Kapitel
+ %\chead[\pagemark]{\pagemark} % mitte:
+\ohead[]{\rightmark} % rechts: Section
+
+% %zweiseitig: Bei zweiseitigem Layout, nur folgende Zeilen verwenden !!!
+%\ihead[]{} % innen
+% % \chead[\pagemark]{\pagemark} % mitte:
+%\ohead[]{\headmark} % aussen: Kapitel (linke Seite) und Section (rechte Seite)
+%
+\usepackage{lastpage}
+% %%% Fusszeile
+%\ifoot[\workMarkDateTime]{\workMarkDateTime} % innen:
+%\cfoot[\pagemark]{\pagemark} % mitte:
+\ofoot[\pagemark]{\pagemark} % aussen: Seitenzahl
+
+% Angezeigte Abschnitte im Header
+\automark[section]{chapter} % Inhalt von [\rightmark]{\leftmark}
+%
+% Linie zwischen Kopf und Textkörper
+\setheadsepline{.4pt}[\color{black}]
+
+%% Fussnoten =============================================================
+% Keine hochgestellten Ziffern in der Fussnote (KOMA-Script-spezifisch):
+\deffootnote{1.5em}{1em}{\makebox[1.5em][l]{\thefootnotemark}}
+\addtolength{\skip\footins}{\baselineskip} % Abstand Text <-> Fussnote
+\setlength{\dimen\footins}{10\baselineskip} % Beschraenkt den Platz von Fussnoten auf 10 Zeilen
+\interfootnotelinepenalty=10000 % Verhindert das Fortsetzen von
+                                % Fussnoten auf der gegenüberligenden Seite
+
+%% Schriften (Sections )==================================================
+
+% -- Koma Schriften --
+\newcommand\SectionFontStyle{\sffamily}
+
+\setkomafont{chapter}{\huge\SectionFontStyle}    % Chapter
+\setkomafont{sectioning}{\SectionFontStyle} %  % Titelzeilen % \bfseries
+
+\setkomafont{pagenumber}{\bfseries\SectionFontStyle} % Seitenzahl
+\setkomafont{pagehead}{\small\sffamily}	       % Kopfzeile
+
+\setkomafont{descriptionlabel}{\itshape}        % Stichwortliste
+%
+\renewcommand*{\raggedsection}{\raggedright} % Titelzeile linksbuendig, haengend
+%
+
+%% Captions (Schrift, Aussehen) ==========================================
+
+%%% Doc: ftp://tug.ctan.org/pub/tex-archive/macros/latex/contrib/caption/caption.pdf
+\usepackage{caption}
+% Aussehen der Captions
+\captionsetup{
+   margin = 10pt,
+   font = {small,rm},
+   labelfont = {small,bf},
+   format = plain, % oder 'hang'
+   indention = 0em,	 % Einruecken der Beschriftung
+   labelsep = colon, %period, space, quad, newline
+   justification = RaggedRight, % justified, centering
+   singlelinecheck = true, % false (true=bei einer Zeile immer zentrieren)
+   position = bottom %top
+}
+%%% Bugfix Workaround
+\DeclareCaptionOption{parskip}[]{}
+\DeclareCaptionOption{parindent}[]{}
+
+% Aussehen der Captions fuer subfigures (subfig-Paket)
+\captionsetup[subfloat]{%
+   margin = 10pt,
+   font = {small,rm},
+   labelfont = {small,bf},
+   format = plain, % oder 'hang'
+   indention = 0em,	 % Einruecken der Beschriftung
+   labelsep = space, %period, space, quad, newline
+   justification = RaggedRight, % justified, centering
+   singlelinecheck = true, % false (true=bei einer Zeile immer zentrieren)
+   position = bottom, %top
+   labelformat = parens % simple, empty % Wie die Bezeichnung gesetzt wird
+ }
+
+%% Inhaltsverzeichnis (Schrift, Aussehen) sowie weitere Verzeichnisse ====
+
+\setcounter{secnumdepth}{2}	 % Abbildungsnummerierung mit groesserer Tiefe
+\setcounter{tocdepth}{2}		 % Inhaltsverzeichnis mit groesserer Tiefe
+%
+
+% Farben ================================================================
+% Farben fuer die Links im PDF
+
+\definecolor{green}{rgb}{0,0.5,0} % grün
+\definecolor{brown}{rgb}{0.6,0,0} % braun
+\definecolor{darkblue}{rgb}{0,0,.5} % dunkelblau
+\definecolor{lightblue}{rgb}{0.8,0.85,1} % hellblau
+\definecolor{bluekeywords}{rgb}{0,0,1}
+\definecolor{greencomments}{rgb}{0,0.5,0}
+\definecolor{redstrings}{rgb}{0.64,0.08,0.08}
+\definecolor{xmlcomments}{rgb}{0.5,0.5,0.5}
+\definecolor{types}{rgb}{0.17,0.57,0.68}
+
+\definecolor{klassendiagrammInterface}{rgb}{1,0.89,0.769} % hellrot
+\definecolor{klassendiagrammControl}{rgb}{0.847,0.749,0.847} % flieder
+\definecolor{klassendiagrammEntity}{rgb}{0.863,0.863,0.863} % hellblau
+\definecolor{klassendiagrammTextdatei}{rgb}{0.831,1,0.627} % hellgrün
+% Farben fuer Listings
+\colorlet{stringcolor}{green!40!black!100}
+\colorlet{commencolor}{blue!0!black!100}
+
+
+
+
+% Auszufuehrende Befehle  ------------------------------------------------
+
+%\listfiles
+%------------------------------------------------------------------------

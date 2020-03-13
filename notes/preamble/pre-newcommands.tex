@@ -1,0 +1,118 @@
+% ------------------------------------------------------------------------
+% LaTeX - Preambel ******************************************************
+% ------------------------------------------------------------------------
+% pre-newcommands
+% ========================================================================
+% ---- Hervorhebungen
+% demo.tex Hervorhebungen
+\newcommand{\env}[1]{\texttt{#1}}
+\newcommand{\command}[1]{\texttt{#1}}
+\newcommand{\package}[1]{\texttt{\itshape#1}}
+\newcommand{\engl}[1]{(engl: \textit{#1})\xspace}
+
+% todo
+\newcommand{\todo}[1]{{\color{red}#1}\xspace}
+\newcommand{\bv}{\todo{BV}} % Begriffsverzeichnis
+\newcommand{\kap}{\todo{Kp}} % Kapitel
+
+% TeX
+\newcommand{\latex}{\LaTeX\xspace}
+\newcommand{\tex}{\TeX\xspace}
+\newcommand{\miktex}{MiK\TeX\xspace}
+\newcommand{\bibtex}{Bib\TeX\xspace}
+
+\newcommand{\led}{LEd\xspace}
+
+\newcommand{\koma}{KOMA-Script\xspace}
+
+% Internetseite
+\newcommand{\www}[1]{\href{http://#1}{#1}}
+\newcommand{\wwwhttp}[1]{\href{#1}{#1}}
+\newcommand{\wwwlink}[1]{\footnote{\www{#1}}}
+
+% Textauszeichnungen
+\newcommand{\textemph}[1]{\textit{#1}} % Hervorheben
+\newcommand{\textemphs}[1]{\textbf{#1}} % Hervorheben fett
+\newcommand{\textqu}[1]{\enquote{#1}} % Anführungszeichen
+\newcommand{\tshortcut}[1]{\textit{#1}}
+\newcommand{\textbutton}[1]{\textit{#1}}
+\newcommand{\textmenu}[1]{\textit{#1}}
+\newcommand{\textlst}[1]{\texttt{#1}} % Listings im Text
+\newcommand{\requirements}[1]{\vspace{.1cm}\textbf{\sffamily#1}\\\noindent}
+\newcommand{\usecase}[1]{\vspace{.1cm}\textbf{\sffamily Use Case \glqq #1\grqq}\\\noindent}
+\newcommand{\langbeschreiubngusecase}[1]{\textbf{\sffamily Langbeschreibung für den Ablauf \glqq #1\grqq}\hfill\vspace{.4cm}}
+\newcommand{\kommunikationsdiagramm}[1]{\textbf{\sffamily Kommunikationsdiagramm für den Ablauf \glqq #1\grqq}\hfill\vspace{.4cm}}
+\newcommand{\kommunikationsdiagrammSchichten}[1]{\textbf{\sffamily Kommunikationsdiagramm mit Schichten für \glqq #1\grqq}\hfill\vspace{.4cm}}
+%\newcommand{\textcode}[1]{\texttt{#1}\xspace} % 
+%\newcommand{\texttask}[1]{\textit{#1}}
+\newcommand\crule[3][black]{\textcolor{#1}{\rule{#2}{#3}}}
+
+% ---- Abkuerzungen
+\newcommand{\zB}{\mbox{z.\,B.}\xspace}
+\newcommand{\ua}{\mbox{u.\,a.}\xspace}
+\newcommand{\dah}{\mbox{d.\,h.}\xspace}
+\newcommand{\uAe}{\mbox{u.\,Ä.}\xspace}
+
+% ---- Listings
+\newcommand{\lst}[1]{\lstinline$#1$} % geht nicht
+
+\newcommand{\lstergibt}[1]{Ergibt:\newline{}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ---- Querverweise
+\newcommand{\refs}[1]{\mbox{(s.~\autoref{#1})}\xspace}
+\newcommand{\refsauch}[1]{(s. auch \autoref{#1})\xspace}
+\newcommand{\refn}[1]{\mbox{\autoref{#1}\xspace}} % normal
+
+\newcommand{\refnp}[1]{\mbox{(\autopageref{#1})}\xspace}
+\newcommand{\refp}[1]{Seite~\pageref{#1}\xspace}
+%
+\newcommand{\refk}[1]{Kapitel~\ref{#1}\xspace}
+\newcommand{\refa}[1]{Abbildung~\ref{#1}\xspace}
+\newcommand{\reft}[1]{Tabelle~\ref{#1}\xspace}
+\newcommand{\reflst}[1]{Listing~\ref{#1}\xspace}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % ---- Literatur
+% Verweise
+\newcommand{\cites}[2]{(s. \cite[#1]{#2})\xspace}
+
+% Bild aus Literaturv.
+\newcommand{\cbild}[1]{(Bild~\cite{#1})\xspace}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % Escape innerhalb der Listings
+\newcommand{\escapeBrown}[1]{\textcolor{brown}{#1}}
+\newcommand{\escapeRed}[1]{\textcolor{red}{#1}}
+\newcommand{\escapeCyan}[1]{\textcolor{cyan}{#1}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ---- Namen der Links im Dokument
+% ngerman (Babel-Paket) Namen umbenennen
+\addto\captionsngerman{\renewcommand\figurename{Abb.}}
+\addto\captionsngerman{\renewcommand\tablename{Tab.}}
+\addto\captionsngerman{\renewcommand\lstlistingname{List.}}
+%
+%\addto\captionsngerman{\renewcommand\contentsname{Inhalt}}
+%\addto\captionsngerman{\renewcommand\appendixname{Anhang}}
+%\addto\captionsngerman{\renewcommand\lstlistlistingname{Listings}}
+%
+%\addto\extrasngerman{\def\partautorefname{Teil}}
+\addto\extrasngerman{\def\chapterautorefname{Kap.}}
+\addto\extrasngerman{\def\sectionautorefname{Kap.}}
+\addto\extrasngerman{\def\subsectionautorefname{Kap.}}
+\addto\extrasngerman{\def\subsubsectionautorefname{Kap.}}
+\addto\extrasngerman{\def\subsectionautorefname{Kap.}}
+\addto\extrasngerman{\def\paragraphautorefname{Kap.}}
+\addto\extrasngerman{\def\subparagraphautorefname{Kap.}}
+\addto\extrasngerman{\def\appendixautorefname{Kap.}}
+%
+\addto\extrasngerman{\def\figureautorefname{Abb.}}
+\addto\extrasngerman{\def\tableautorefname{Tab.}}
+\addto\extrasngerman{\def\equationautorefname{Gl.}}
+\addto\extrasngerman{\def\theoremautorefname{Gl.}}
+\addto\extrasngerman{\def\AMSnameautorefname{Gl.}}
+\addto\extrasngerman{\def\pageautorefname{S.}}
+%
+%\addto\extrasngerman{\def\itemautorefname{Pkt.}}
+%\addto\extrasngerman{\def\Hfootnoteautorefname{Fußnote}}
+\addto\extrasngerman{\def\lstlistingautorefname{List.}}
+
+\linespread{1.5}
