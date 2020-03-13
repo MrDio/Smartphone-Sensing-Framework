@@ -15,39 +15,44 @@
 
 
         <Button
-            android:id="@+id/bt_learn"
+            android:id="@+id/bt_start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="64dp"
-            android:text="@string/learn"
+            android:layout_marginTop="160dp"
+            android:background="@drawable/button_bg_round"
+            android:text="start"
+            android:textOff="Start"
+            android:textOn="Stop"
+            android:textSize="40sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/bt_recognize"
+        <TextView
+            android:id="@+id/txt_recognize"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="52dp"
-            android:text="@string/recognize"
+            android:layout_marginTop="8dp"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/bt_start"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.501"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bt_learn" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 
     <!--<android.support.design.widget.NavigationView-->
-        <!--android:id="@+id/nav_view"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_gravity="start"-->
-        <!--app:headerLayout="@layout/navigation_header"-->
-        <!--app:menu="@menu/navigation_menu">-->
+    <!--android:id="@+id/nav_view"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_gravity="start"-->
+    <!--app:headerLayout="@layout/navigation_header"-->
+    <!--app:menu="@menu/navigation_menu">-->
 
     <!--</android.support.design.widget.NavigationView>-->
 

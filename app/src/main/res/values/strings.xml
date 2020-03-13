@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RapidDisruption</string>
+    <string name="app_name">ABC-Buddy</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
     <string name="button">Start</string>
@@ -10,7 +10,13 @@
     <string name="mic">Microphone</string>
     <string name="gps">GPS</string>
     <string name="proximity">Proximity</string>
-
-
-
+    <string name="show">Show</string>
+    <string name="recognize">Recognise</string>
+    <string name="learn">Learn</string>
+    <string-array name="characters">
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+        <item>O</item>
+    </string-array>
 </resources>

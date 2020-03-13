@@ -1,70 +1,26 @@
-# Smartphone-Sensing-Framework
+# ABC-Buddy 1.0
+ABC-Buddy was developed by Kristin Findeis, Matthias Gebert, Christian Holder & Büsra Yagbasan as part of the Embedded Systems Engineering course.
 
-Smartphone Sensing Framework for android smartphones developed by D. Satikidis (since 2012) and D. Lagamtzis (since 2017) used for academic lectures. Since 2018 A. Georgiadis entered the core Dev team with the focus on extending the SSF with a Machine Learning module and workprocess.
-
-The aim of this framework is to provide a quick way to develop context aware apps on android in an experimetal way.
-
-## Here some of the past projects:
-Brunel Univ. | Embedded Systems IoT Applications Prototyping 2019<br>
-[Banana Ripening State Classifier](https://www.hackster.io/bananaco-teamd/banana-ripening-state-classifier-26f303)<br>
-[FishFang](https://www.hackster.io/fishfang/fishfang-8f979e)<br>
-[D3S – Distributed Disaster Detection System](https://www.hackster.io/153563/d3s-distributed-disaster-detection-system-221886)
-
-Brunel Univ. | Embedded Systems IoT Applications Prototyping 2018<br>
-[ABC Buddy](https://www.hackster.io/dcse-team-b/abc-buddy-a54c31)<br>
-[Digital Live Tracking](https://www.hackster.io/dcse-team-c/digital-life-tracking-87e03f)<br>
-[LapOps](https://www.hackster.io/dcse-team-d/lapops-638e1e)
-
-Brunel Univ. | Embedded Systems IoT Applications Prototyping 2017<br>
-[SmartphoneReminder](https://www.hackster.io/43563/smartphone-reminder-5fb580)<br>
-[SmartCart](https://www.hackster.io/dcse-team-b/smart-cart-09155f)
-
----
-
-## SSF 2.2 Experimental TensorFlow | Applied Artificial Intelligence 2019 Lecture 
-University of Applied Sciences Esslingen | Applied AI 2019<br>
-
-<img src="https://user-images.githubusercontent.com/8537307/55835809-179f3600-5b1d-11e9-80a1-57241d57fca5.jpg" width="216" height="384"><img> 
-<img src="https://user-images.githubusercontent.com/8537307/55835812-1837cc80-5b1d-11e9-868b-edef313ecdfb.jpg" width="216" height="384"><img>
+## Idea
+The basic idea is simple, by repeated movements of the mobile phone the spelling of the individual letters is to be internalised. In this way children should learn the writting of the alphabet in a fun and playful way.
 
 
-## SSF 2.1 used with OpenCV to track lanes for autonomous driving RC Car by D. Lagamtzis & B. Grau:
-University of Applied Sciences Esslingen | AI Applied 2019<br>
-[Android AI Car ](https://github.com/umadbro96/androidAICar)<br>
+## Features of the Application
+The application has two different modes:
 
-<img src="https://github.com/DimiHMC/AndroidMachineVisionCar/blob/master/assets/video/track+smartphone.mp4.gif" width="400" height="200"><img>  <img src="https://github.com/DimiHMC/AndroidMachineVisionCar/blob/master/assets/video/video_sample1.mp4.gif" width="400" height="200"><img>
-<img><img src="https://github.com/DimiHMC/AndroidMachineVisionCar/blob/master/assets/video/video_sample2.gif" width="400" height="200"><img>  <img src="https://github.com/DimiHMC/AndroidMachineVisionCar/blob/master/assets/video/video_sample3.gif" width="400" height="200">
+- Learn-Mode: In this mode, the user can learn a specific letter by selecting it. The user is then shown a video for drawing the letter. After the user has drawn the letter, the application evaluates the recording and displays to the user whether he has written the letter correctly or not.
+- Recognize-Mode: In this mode the user can write any letter in the air. The application compares the record with all letters and shows the user which letter he has written.
 
-Special Thanks to the contributers [Hagen Hellinger](https://github.com/bollefreshavocado)
-and to [Benedikt Grau](https://github.com/supercrazyking)
+## State Machine
+The application consists of three states. The default-state is the idle-state. If the user starts the recording, the application changes to the recording-state. After 4 seconds, the application switches to the analysis-state. In this state the mathematical calculation are done. Finally, the application prints the result and changes to the idle-state.
 
---
+## Implementation
+### Recording
 
-## Respected projects
-[Walabot](https://www.youtube.com/watch?v=CoWdmFFnMi0#action=share)<br>
-[CO2GO](http://senseable.mit.edu/co2go/)
+When the application is put into recording mode, the user has one second to prepare for the movement. After one second a signal indicates that the movement can be started and from this moment on the recording will take place for four seconds. When the four seconds have elapsed, another signal appears indicating the end of the recording phase. The actual recording of the combined acceleration vector is done using the implementation of the Smartphone Sensing Framework. Ten data values are collected per second, whereby one data value is a so-called tick. For the analysis the data of the individual axes are collected in order to calculate the combined vector with which the Mean Squared Error is later calculated.
 
-## How to use?<br>
-  Ideate<br>
-  Capture-Sensor-Data<br>
-  Find patterns<br>
-  Create matcher and state-machine<br>
-  Dont found the killer App? -> Repeat<br>
- 
+### Analysis
 
- 
-## Documentation
-The following Wiki describes the architecture of the SSF. Furthermore you can learn how-to 
-create an own app on ssf.
-[Wiki](https://github.com/MrDio/Smartphone-Sensing-Framework/wiki/Systemoverview)
+As already mentioned, the Mean Squared Error method was used for the analysis. In this procedure, as explained in a, the deviation of an input data set from the data sets stored for the characters is calculated. The input data set in this case is the acceleration captured during the recording phase. While the comparison data sets are optimal accelerations of motion sequences created by the developers. Each character has 40 comparison data sets, with ten data sets from each developer.
 
-## Building on Android SDK
-Here you can learn how to fork the ssf and create your own branch.
-[Building](https://github.com/MrDio/Smartphone-Sensing-Framework/wiki/Building-with-Android-SDK)
-
-## Execute Examples
-How to execute examples on smartphone and ADB.
-[Intro](https://github.com/MrDio/Smartphone-Sensing-Framework/wiki/Execute-Example)
-
-
-This is the Master Branch for the Smartphone Sensing Framework 2.0
+If the learning function is selected, the calculated value belonging to the character selected is compared with a threshold value. This threshold value was created individually for each character by trial and error tests. The letter was correctly drawn into the air if the calculated value is smaller than the threshold.
