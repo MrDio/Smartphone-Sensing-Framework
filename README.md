@@ -67,4 +67,4 @@ How to execute examples on smartphone and ADB.
 [Intro](https://github.com/MrDio/Smartphone-Sensing-Framework/wiki/Execute-Example)
 
 
-This is the Master Branch for the Smartphone Sensing Framework 2.0
+This is the Master Branch for the Smartphone Sensing Framework 2.2
