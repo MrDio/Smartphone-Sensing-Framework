@@ -19,7 +19,6 @@ package edu.example.ssf.mma.hardwareAdapter;
 
 
 import android.content.Context;
-import android.widget.TextView;
 
 /**
  * Interface class to Instantiate the Accelerometer , get the x-/y-/z-axis value

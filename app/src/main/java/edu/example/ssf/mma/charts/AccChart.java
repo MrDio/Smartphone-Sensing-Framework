@@ -21,12 +21,13 @@ package edu.example.ssf.mma.charts;
 import android.app.Activity;
 import android.os.Bundle;
 
-import edu.example.ssf.mma.R;
-import edu.example.ssf.mma.data.CurrentTickData;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.Viewport;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
+
+import edu.example.ssf.mma.R;
+import edu.example.ssf.mma.data.CurrentTickData;
 
 
 /**

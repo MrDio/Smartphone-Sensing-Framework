@@ -17,22 +17,20 @@
  */
 package edu.example.ssf.mma.timer;
 
+import android.os.Bundle;
+import android.os.Message;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimerTask;
-
-
-
-import android.os.Bundle;
-import android.os.Message;
-import android.util.Log;
 
 import edu.example.ssf.mma.statemachine.IStateMachine;
 import edu.example.ssf.mma.statemachine.StateMachine;
 
 
 // TODO: Auto-generated Javadoc
+
 /**
  * This class is checks every tick if there was a transition or state change and also increases the count variable by one. 
  * It also sets the runStateMachine Variable either to true or to false.

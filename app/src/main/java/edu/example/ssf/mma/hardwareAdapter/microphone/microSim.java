@@ -23,7 +23,6 @@ package edu.example.ssf.mma.hardwareAdapter.microphone;
 // TODO: Auto-generated Javadoc
 
 import android.content.Context;
-import android.widget.TextView;
 
 import edu.example.ssf.mma.data.CsvFileReader;
 import edu.example.ssf.mma.hardwareAdapter.IMicrophone;

@@ -22,12 +22,10 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.util.Log;
-import android.widget.TextView;
 
 import edu.example.ssf.mma.data.CurrentTickData;
-import edu.example.ssf.mma.data.MathCalculations;
 import edu.example.ssf.mma.hardwareAdapter.IMagneto;
+
 /**
  * Initialising the MagneticField-Sensor of the Smartphone and get the data output form
  * the sensor.
