@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RapidDisruption</string>
+    <string name="app_name">CropTomato</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
     <string name="button">Start</string>
@@ -13,5 +13,4 @@
     <string name="machinevision">Machine Vision</string>
     <string name="imagedetection">Machine Vision</string>
     <string name="decisiontree">Show Decision</string>
-
 </resources>

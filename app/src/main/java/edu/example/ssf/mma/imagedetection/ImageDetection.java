@@ -9,13 +9,13 @@ package edu.example.ssf.mma.imagedetection;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.SparseIntArray;
+import android.view.Surface;
 import android.view.SurfaceView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.opencv.android.BaseLoaderCallback;
 import org.opencv.android.CameraBridgeViewBase;
@@ -26,16 +26,24 @@ import org.opencv.android.Utils;
 import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
-import org.opencv.core.Size;
 import org.opencv.imgproc.Imgproc;
 
 import java.util.List;
 
 import edu.example.ssf.mma.R;
 
-import static edu.example.ssf.mma.userInterface.MainActivity.navigationBool;
-
 public class ImageDetection extends Activity implements CameraBridgeViewBase.CvCameraViewListener2 {
+
+    public static boolean navigationBool = false;
+
+//    private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
+//
+//    static {
+//        ORIENTATIONS.append(Surface.ROTATION_0, 90);
+//        ORIENTATIONS.append(Surface.ROTATION_90, 0);
+//        ORIENTATIONS.append(Surface.ROTATION_180, 270);
+//        ORIENTATIONS.append(Surface.ROTATION_270, 180);
+//    }
 
     private static final int INPUT_SIZE = 224;
     private static final int IMAGE_MEAN = 117;
@@ -70,11 +78,10 @@ public class ImageDetection extends Activity implements CameraBridgeViewBase.CvC
         }
     };
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_imagedetection);
+        setContentView(R.layout.activity_main);
         textView = findViewById(R.id.textView);
         //connect the camera
         javaCameraView = findViewById(R.id.jvc);
