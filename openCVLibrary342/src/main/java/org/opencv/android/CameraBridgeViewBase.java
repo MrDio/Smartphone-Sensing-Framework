@@ -430,7 +430,7 @@ public abstract class CameraBridgeViewBase extends SurfaceView implements Surfac
                 // Start of the fix
                 Matrix matrix = new Matrix();
                 matrix.preTranslate( ( canvas.getWidth() - mCacheBitmap.getWidth() ) / 2f, ( canvas.getHeight() - mCacheBitmap.getHeight() ) / 2f );
-                matrix.postRotate( 90f, ( canvas.getWidth()) / 2f, canvas.getHeight() / 2f );
+                matrix.postRotate( 270f, ( canvas.getWidth()) / 2f, canvas.getHeight() / 2f );
                 float scale = (float) canvas.getWidth() / (float) mCacheBitmap.getHeight();
                 matrix.postScale(scale, scale, canvas.getWidth() / 2f , canvas.getHeight() / 2f );
                 canvas.drawBitmap( mCacheBitmap, matrix, null );
