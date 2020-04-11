@@ -8,13 +8,13 @@
 package edu.example.ssf.mma.imagedetection;
 
 import android.app.Activity;
+import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.SparseIntArray;
-import android.view.Surface;
 import android.view.SurfaceView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import org.opencv.android.BaseLoaderCallback;
@@ -27,37 +27,37 @@ import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
+import org.tensorflow.lite.Interpreter;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;
 import java.util.List;
 
 import edu.example.ssf.mma.R;
 
 public class ImageDetection extends Activity implements CameraBridgeViewBase.CvCameraViewListener2 {
 
+    private TextView percentageUnripe;
+    private TextView percentageRipe;
+    private ProgressBar ripenessProgress;
+
     public static boolean navigationBool = false;
 
-//    private static final SparseIntArray ORIENTATIONS = new SparseIntArray();
-//
-//    static {
-//        ORIENTATIONS.append(Surface.ROTATION_0, 90);
-//        ORIENTATIONS.append(Surface.ROTATION_90, 0);
-//        ORIENTATIONS.append(Surface.ROTATION_180, 270);
-//        ORIENTATIONS.append(Surface.ROTATION_270, 180);
-//    }
+    private static final int INPUT_SIZE = 299;
+    private static final int IMAGE_MEAN = 0;
+    private static final float IMAGE_STD = 255;
 
-    private static final int INPUT_SIZE = 224;
-    private static final int IMAGE_MEAN = 117;
-    private static final float IMAGE_STD = 1;
-    private static final String INPUT_NAME = "input";
-    private static final String OUTPUT_NAME = "output";
-    private static final String MODEL_FILE = "file:///android_asset/tensorflow_inception_graph.pb";
-    private static final String LABEL_FILE = "file:///android_asset/imagenet_comp_graph_label_strings.txt";
+    private static final String INPUT_NAME = "Placeholder";
+    private static final String OUTPUT_NAME = "final_result";
+    private static final String MODEL_FILE = "file:///android_asset/retrained_graph.pb";
+    private static final String LABEL_FILE = "file:///android_asset/retrained_labels.txt";
 
     private Classifier classifier;
 
     private boolean isRunning = false;
-
-    private TextView textView;
 
     //java camera view
     private JavaCameraView javaCameraView;
@@ -82,7 +82,11 @@ public class ImageDetection extends Activity implements CameraBridgeViewBase.CvC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        textView = findViewById(R.id.textView);
+
+        this.percentageRipe = findViewById(R.id.percentageRipe);
+        this.percentageUnripe = findViewById(R.id.percentageUnripe);
+        this.ripenessProgress = findViewById(R.id.progressBar);
+
         //connect the camera
         javaCameraView = findViewById(R.id.jvc);
         //set visibility
@@ -161,7 +165,16 @@ public class ImageDetection extends Activity implements CameraBridgeViewBase.CvC
         return mRgba;
     }
 
-    class AsyncClassifier extends AsyncTask<Mat, Void, String> {
+    public void updatePercentages(float percentageUnripe, float percentageRipe) {
+
+        this.percentageUnripe.setText(String.format("%.2f%%", percentageUnripe * 100.0f));
+        this.percentageRipe.setText(String.format("%.2f%%", percentageRipe * 100.0f));
+
+        this.ripenessProgress.setProgress((int)(percentageRipe * 100.0f));
+        this.ripenessProgress.setMax(100);
+    }
+
+    class AsyncClassifier extends AsyncTask<Mat, Void, List<Classifier.Recognition>> {
 
         @Override
         protected void onPreExecute() {
@@ -170,22 +183,35 @@ public class ImageDetection extends Activity implements CameraBridgeViewBase.CvC
         }
 
         @Override
-        protected String doInBackground(Mat... images) {
+        protected List<Classifier.Recognition> doInBackground(Mat... images) {
             Mat image = images[0];
 
             Bitmap bitmap = Bitmap.createBitmap(image.cols(), image.rows(), Bitmap.Config.RGB_565);
             Utils.matToBitmap(image, bitmap);
             Bitmap newBitmap = Bitmap.createScaledBitmap(bitmap, INPUT_SIZE, INPUT_SIZE, true);
 
-            final List<Classifier.Recognition> results = classifier.recognizeImage(newBitmap);
-
-            return results.toString();
+            return classifier.recognizeImage(newBitmap);
         }
 
         @Override
-        protected void onPostExecute(String string) {
-            super.onPostExecute(string);
-            textView.setText(string);
+        protected void onPostExecute(List<Classifier.Recognition> results) {
+            super.onPostExecute(results);
+
+            float percentageUnripe = 0.0f;
+            float percentageRipe = 0.0f;
+            for (Classifier.Recognition result : results) {
+                switch (result.getTitle()) {
+                    case "unripe":
+                        percentageUnripe = result.getConfidence();
+                        break;
+                    case "ripe":
+                        percentageRipe = result.getConfidence();
+                        break;
+                }
+            }
+
+            ImageDetection.this.updatePercentages(percentageUnripe, percentageRipe);
+
             isRunning = false;
         }
     }
