@@ -37,8 +37,6 @@ public class ImageDetection extends Activity implements CameraBridgeViewBase.CvC
     private TextView percentageRipe;
     private ProgressBar ripenessProgress;
 
-    public static boolean navigationBool = false;
-
     private static final int INPUT_SIZE = 299;
     private static final int IMAGE_MEAN = 0;
     private static final float IMAGE_STD = 255;
@@ -49,7 +47,6 @@ public class ImageDetection extends Activity implements CameraBridgeViewBase.CvC
     private static final String LABEL_FILE = "file:///android_asset/croptomato_labels.txt";
 
     private Classifier classifier;
-
     private boolean isRunning = false;
 
     //java camera view
@@ -57,16 +54,13 @@ public class ImageDetection extends Activity implements CameraBridgeViewBase.CvC
     private Mat mRgba, mRgbaF, mRgbaT;
 
     //callback loader
-    BaseLoaderCallback mCallBackLoader = new BaseLoaderCallback(this) {
+    private BaseLoaderCallback mCallBackLoader = new BaseLoaderCallback(this) {
         @Override
         public void onManagerConnected(int status) {
-            switch (status) {
-                case BaseLoaderCallback.SUCCESS:
-                    javaCameraView.enableView();
-                    break;
-                default:
-                    super.onManagerConnected(status);
-                    break;
+            if (status == BaseLoaderCallback.SUCCESS) {
+                javaCameraView.enableView();
+            } else {
+                super.onManagerConnected(status);
             }
         }
     };
@@ -95,14 +89,12 @@ public class ImageDetection extends Activity implements CameraBridgeViewBase.CvC
 
     @Override
     public void onBackPressed() {
-        navigationBool = false;
         super.onBackPressed();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-
         if (javaCameraView != null) {
             javaCameraView.disableView();
         }
@@ -140,7 +132,6 @@ public class ImageDetection extends Activity implements CameraBridgeViewBase.CvC
 
     @Override
     public void onCameraViewStopped() {
-        //release
         mRgba.release();
     }
     @Override
@@ -153,18 +144,20 @@ public class ImageDetection extends Activity implements CameraBridgeViewBase.CvC
         Imgproc.resize(mRgbaT, mRgbaF, mRgbaF.size(), 0, 0, 1);
         Core.flip(mRgbaF, matForNetwork, 1);
 
-        if(!isRunning)
+        if (!isRunning)
             new AsyncClassifier().execute(matForNetwork);
         return mRgba;
     }
 
     public void updatePercentages(float percentageUnripe, float percentageRipe) {
-
         this.percentageUnripe.setText(String.format("%.2f%%", percentageUnripe * 100.0f));
         this.percentageRipe.setText(String.format("%.2f%%", percentageRipe * 100.0f));
-
         this.ripenessProgress.setProgress((int)(percentageRipe * 100.0f));
         this.ripenessProgress.setMax(100);
+    }
+
+    public void setRunning(boolean isRunning) {
+        this.isRunning = isRunning;
     }
 
     class AsyncClassifier extends AsyncTask<Mat, Void, List<Classifier.Recognition>> {
@@ -172,7 +165,7 @@ public class ImageDetection extends Activity implements CameraBridgeViewBase.CvC
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            isRunning = true;
+            setRunning(true);
         }
 
         @Override
@@ -203,9 +196,8 @@ public class ImageDetection extends Activity implements CameraBridgeViewBase.CvC
                 }
             }
 
-            ImageDetection.this.updatePercentages(percentageUnripe, percentageRipe);
-
-            isRunning = false;
+            updatePercentages(percentageUnripe, percentageRipe);
+            setRunning(false);
         }
     }
 
