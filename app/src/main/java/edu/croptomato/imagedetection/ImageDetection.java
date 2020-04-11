@@ -45,8 +45,8 @@ public class ImageDetection extends Activity implements CameraBridgeViewBase.CvC
 
     private static final String INPUT_NAME = "Placeholder";
     private static final String OUTPUT_NAME = "final_result";
-    private static final String MODEL_FILE = "file:///android_asset/retrained_graph.pb";
-    private static final String LABEL_FILE = "file:///android_asset/retrained_labels.txt";
+    private static final String MODEL_FILE = "file:///android_asset/croptomato_graph.pb";
+    private static final String LABEL_FILE = "file:///android_asset/croptomato_labels.txt";
 
     private Classifier classifier;
 
