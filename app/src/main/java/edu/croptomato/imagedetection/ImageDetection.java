@@ -5,10 +5,9 @@
  * @version 1.0
  */
 
-package edu.example.ssf.mma.imagedetection;
+package edu.croptomato.imagedetection;
 
 import android.app.Activity;
-import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -27,16 +26,10 @@ import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.imgproc.Imgproc;
-import org.tensorflow.lite.Interpreter;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.nio.MappedByteBuffer;
-import java.nio.channels.FileChannel;
 import java.util.List;
 
-import edu.example.ssf.mma.R;
+import edu.croptomato.R;
 
 public class ImageDetection extends Activity implements CameraBridgeViewBase.CvCameraViewListener2 {
 

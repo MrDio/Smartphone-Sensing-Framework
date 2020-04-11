@@ -1,4 +1,4 @@
-package edu.example.ssf.mma;
+package edu.croptomato;
 
 import org.junit.Test;
 

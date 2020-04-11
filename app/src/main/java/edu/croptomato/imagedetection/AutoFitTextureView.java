@@ -15,7 +15,7 @@
  */
 
 
-package edu.example.ssf.mma.imagedetection;
+package edu.croptomato.imagedetection;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.TextureView;

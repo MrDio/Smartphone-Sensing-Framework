@@ -10,7 +10,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ==============================================================================*/
 
-package edu.example.ssf.mma.imagedetection;
+package edu.croptomato.imagedetection;
 
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
