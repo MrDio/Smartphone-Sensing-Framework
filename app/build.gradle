@@ -38,5 +38,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation project(':openCVLibrary342')
     implementation 'com.jjoe64:graphview:4.2.1'
-    implementation 'org.tensorflow:tensorflow-android:1.6.0'
+    implementation 'org.tensorflow:tensorflow-android:1.13.1'
 }
