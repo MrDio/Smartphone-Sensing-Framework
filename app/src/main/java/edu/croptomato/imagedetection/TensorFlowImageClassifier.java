@@ -12,6 +12,7 @@ limitations under the License.
 
 package edu.croptomato.imagedetection;
 
+import android.annotation.SuppressLint;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.os.Trace;
@@ -35,7 +36,7 @@ public class TensorFlowImageClassifier implements Classifier {
 
     // Only return this many results with at least this confidence.
     private static final int MAX_RESULTS = 3;
-    private static final float THRESHOLD = 0.1f;
+    private static final float THRESHOLD = 0.1f/1000000;
 
     // Config values.
     private String inputName;
@@ -45,7 +46,7 @@ public class TensorFlowImageClassifier implements Classifier {
     private float imageStd;
 
     // Pre-allocated buffers.
-    private Vector<String> labels = new Vector<String>();
+    private Vector<String> labels = new Vector<>();
     private int[] intValues;
     private float[] floatValues;
     private float[] outputs;
@@ -68,8 +69,8 @@ public class TensorFlowImageClassifier implements Classifier {
      * @param imageStd The assumed std of the image values.
      * @param inputName The label of the image input node.
      * @param outputName The label of the output node.
-     * @throws IOException
      */
+    @SuppressLint("LongLogTag")
     public static Classifier create(
             AssetManager assetManager,
             String modelFilename,
@@ -79,48 +80,46 @@ public class TensorFlowImageClassifier implements Classifier {
             float imageStd,
             String inputName,
             String outputName) {
-        TensorFlowImageClassifier c = new TensorFlowImageClassifier();
-        c.inputName = inputName;
-        c.outputName = outputName;
+        TensorFlowImageClassifier classifier = new TensorFlowImageClassifier();
+        classifier.inputName = inputName;
+        classifier.outputName = outputName;
 
         // Read the label names into memory.
         // TODO(andrewharp): make this handle non-assets.
         String actualFilename = labelFilename.split("file:///android_asset/")[1];
         Log.i(TAG, "Reading labels from: " + actualFilename);
-        BufferedReader br = null;
-        try {
-            br = new BufferedReader(new InputStreamReader(assetManager.open(actualFilename)));
+
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(assetManager.open(actualFilename)))){
             String line;
             while ((line = br.readLine()) != null) {
-                c.labels.add(line);
+                classifier.labels.add(line);
             }
-            br.close();
         } catch (IOException e) {
             e.printStackTrace();
             throw new RuntimeException("Problem reading label file!" , e);
         }
 
-        c.inferenceInterface = new TensorFlowInferenceInterface(assetManager, modelFilename);
+        classifier.inferenceInterface = new TensorFlowInferenceInterface(assetManager, modelFilename);
 
         // The shape of the output is [N, NUM_CLASSES], where N is the batch size.
-        final Operation operation = c.inferenceInterface.graphOperation(outputName);
+        final Operation operation = classifier.inferenceInterface.graphOperation(outputName);
         final int numClasses = (int) operation.output(0).shape().size(1);
-        Log.i(TAG, "Read " + c.labels.size() + " labels, output layer size is " + numClasses);
+        Log.i(TAG, "Read " + classifier.labels.size() + " labels, output layer size is " + numClasses);
 
         // Ideally, inputSize could have been retrieved from the shape of the input operation.  Alas,
         // the placeholder node for input in the graphdef typically used does not specify a shape, so it
         // must be passed in as a parameter.
-        c.inputSize = inputSize;
-        c.imageMean = imageMean;
-        c.imageStd = imageStd;
+        classifier.inputSize = inputSize;
+        classifier.imageMean = imageMean;
+        classifier.imageStd = imageStd;
 
         // Pre-allocate buffers.
-        c.outputNames = new String[] {outputName};
-        c.intValues = new int[inputSize * inputSize];
-        c.floatValues = new float[inputSize * inputSize * 3];
-        c.outputs = new float[numClasses];
+        classifier.outputNames = new String[] {outputName};
+        classifier.intValues = new int[inputSize * inputSize];
+        classifier.floatValues = new float[inputSize * inputSize * 3];
+        classifier.outputs = new float[numClasses];
 
-        return c;
+        return classifier;
     }
 
     @Override
