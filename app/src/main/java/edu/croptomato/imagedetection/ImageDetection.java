@@ -30,21 +30,14 @@ import org.opencv.imgproc.Imgproc;
 import java.util.List;
 
 import edu.croptomato.R;
+import edu.croptomato.classifier.Classifier;
+import edu.croptomato.classifier.TensorFlowImageClassifier;
 
 public class ImageDetection extends Activity implements CameraBridgeViewBase.CvCameraViewListener2 {
 
     private TextView percentageUnripe;
     private TextView percentageRipe;
     private ProgressBar ripenessProgress;
-
-    private static final int INPUT_SIZE = 299;
-    private static final int IMAGE_MEAN = 0;
-    private static final float IMAGE_STD = 255;
-
-    private static final String INPUT_NAME = "Placeholder";
-    private static final String OUTPUT_NAME = "final_result";
-    private static final String MODEL_FILE = "file:///android_asset/croptomato_graph.pb";
-    private static final String LABEL_FILE = "file:///android_asset/croptomato_labels.txt";
 
     private Classifier classifier;
     private boolean isRunning = false;
@@ -83,7 +76,8 @@ public class ImageDetection extends Activity implements CameraBridgeViewBase.CvC
 
         if (classifier == null) {
             classifier = TensorFlowImageClassifier.create(ImageDetection.this.getAssets(),
-                    MODEL_FILE, LABEL_FILE, INPUT_SIZE, IMAGE_MEAN, IMAGE_STD, INPUT_NAME, OUTPUT_NAME);
+                    Constants.MODEL_FILE, Constants.LABEL_FILE, Constants.INPUT_SIZE, Constants.IMAGE_MEAN,
+                    Constants.IMAGE_STD, Constants.INPUT_NAME, Constants.OUTPUT_NAME);
         }
     }
 
@@ -174,7 +168,7 @@ public class ImageDetection extends Activity implements CameraBridgeViewBase.CvC
 
             Bitmap bitmap = Bitmap.createBitmap(image.cols(), image.rows(), Bitmap.Config.RGB_565);
             Utils.matToBitmap(image, bitmap);
-            Bitmap newBitmap = Bitmap.createScaledBitmap(bitmap, INPUT_SIZE, INPUT_SIZE, true);
+            Bitmap newBitmap = Bitmap.createScaledBitmap(bitmap, Constants.INPUT_SIZE, Constants.INPUT_SIZE, true);
 
             return classifier.recognizeImage(newBitmap);
         }

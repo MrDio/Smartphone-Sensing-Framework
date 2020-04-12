@@ -10,7 +10,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ==============================================================================*/
 
-package edu.croptomato.imagedetection;
+package edu.croptomato.classifier;
 
 import android.graphics.Bitmap;
 import android.graphics.RectF;

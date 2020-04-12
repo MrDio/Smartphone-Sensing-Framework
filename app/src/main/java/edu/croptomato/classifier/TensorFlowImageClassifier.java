@@ -10,9 +10,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ==============================================================================*/
 
-package edu.croptomato.imagedetection;
+package edu.croptomato.classifier;
 
-import android.annotation.SuppressLint;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.os.Trace;
@@ -32,7 +31,8 @@ import java.util.Vector;
 
 /** A classifier specialized to label images using TensorFlow. */
 public class TensorFlowImageClassifier implements Classifier {
-    private static final String TAG = "TensorFlowImageClassifier";
+
+    private static final String TAG = TensorFlowImageClassifier.class.getName();
 
     // Only return this many results with at least this confidence.
     private static final int MAX_RESULTS = 3;
@@ -70,7 +70,6 @@ public class TensorFlowImageClassifier implements Classifier {
      * @param inputName The label of the image input node.
      * @param outputName The label of the output node.
      */
-    @SuppressLint("LongLogTag")
     public static Classifier create(
             AssetManager assetManager,
             String modelFilename,
