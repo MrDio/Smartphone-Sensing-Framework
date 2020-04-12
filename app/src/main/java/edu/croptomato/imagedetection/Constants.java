@@ -3,15 +3,15 @@ package edu.croptomato.imagedetection;
 /**
  * Constant values used in the application.
  */
-class Constants {
+public class Constants {
 
-    static final int INPUT_SIZE = 299;
-    static final int IMAGE_MEAN = 0;
-    static final float IMAGE_STD = 255;
+    public static final int INPUT_SIZE = 299;
+    public static final int IMAGE_MEAN = 0;
+    public static final float IMAGE_STD = 255;
 
-    static final String INPUT_NAME = "Placeholder";
-    static final String OUTPUT_NAME = "final_result";
-    static final String MODEL_FILE = "file:///android_asset/croptomato_graph.pb";
-    static final String LABEL_FILE = "file:///android_asset/croptomato_labels.txt";
+    public static final String INPUT_NAME = "Placeholder";
+    public static final String OUTPUT_NAME = "final_result";
+    public static final String MODEL_FILE = "file:///android_asset/croptomato_graph.pb";
+    public static final String LABEL_FILE = "file:///android_asset/croptomato_labels.txt";
 
 }

@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package edu.croptomato.ui;
 
-
-package edu.croptomato.imagedetection;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.TextureView;
