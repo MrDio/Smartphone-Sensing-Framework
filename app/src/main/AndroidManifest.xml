@@ -18,7 +18,7 @@
         android:roundIcon="@drawable/tomato_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".imagedetection.ImageDetection" android:screenOrientation="portrait">
+        <activity android:name=".ui.MainActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

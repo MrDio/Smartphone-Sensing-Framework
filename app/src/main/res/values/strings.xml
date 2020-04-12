@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">CropTomato</string>
     <string name="unripe">Unripe</string>
+    <string name="semi_ripe">Semi-ripe</string>
     <string name="ripe">Ripe</string>
+    <string name="percentage_default">0.0</string>
 </resources>

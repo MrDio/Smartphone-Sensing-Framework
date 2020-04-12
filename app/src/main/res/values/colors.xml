@@ -5,4 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="colorREC">#363d47</color>
     <color name="colorStroke">#FFFFFF</color>
+    <color name="colorUnripe">#8BC34A</color>
+    <color name="colorSemiRipe">#FFC107</color>
+    <color name="colorRipe">#F43636</color>
 </resources>
