@@ -41,7 +41,8 @@ public class MainActivity extends Activity {
     private final SurfaceTextureListener surfaceTextureListener = new SurfaceTextureListener() {
         @Override
         public void onSurfaceTextureAvailable(SurfaceTexture texture, int width, int height) {
-            cameraProcessor.tryOpenCamera(width, height);
+            cameraProcessor.setSurfaceSize(width, height);
+            cameraProcessor.requestCameraPermissions();
         }
 
         @Override
@@ -80,7 +81,7 @@ public class MainActivity extends Activity {
     protected void onRestart() {
         super.onRestart();
         if (cameraProcessor.getSurfaceSize() != null) {
-            cameraProcessor.tryOpenCamera();
+            cameraProcessor.requestCameraPermissions();
         } else {
             Log.e(TAG, "Restart failed due to invalid surface.");
             this.finish();
