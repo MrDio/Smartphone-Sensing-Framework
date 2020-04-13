@@ -127,7 +127,7 @@ public class MainActivity extends Activity {
     }
 
     /**
-     * Loads a classifier instance.
+     * Loads the Tensorflow image classifier.
      *
      * @return Classifier instance
      */

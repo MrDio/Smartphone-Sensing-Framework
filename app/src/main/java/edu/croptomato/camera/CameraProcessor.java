@@ -119,15 +119,13 @@ public class CameraProcessor {
         }
     }
 
-    private void setUpCameraOutputs(@NonNull CameraManager manager, int width, int height) {
+    private void setUpCameraOutputs(@NonNull CameraManager manager, Size surfaceSize) {
         try {
-            CameraCharacteristics characteristics = manager.getCameraCharacteristics(CAMERA_ID);
-            StreamConfigurationMap map = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
+            StreamConfigurationMap map = manager.getCameraCharacteristics(CAMERA_ID)
+                                                .get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
 
             Size largest = Collections.max(Arrays.asList(map.getOutputSizes(ImageFormat.YUV_420_888)),
                     new CompareSizesByArea());
-
-            // Workaround for newer devices.
             largest = new Size(Math.min(largest.getWidth(), Constants.INPUT_SIZE * 2),
                     Math.min(largest.getHeight(), Constants.INPUT_SIZE * 2));
 
@@ -145,21 +143,20 @@ public class CameraProcessor {
                 }
             }, null);
 
-            previewSize = getPreviewSize(map.getOutputSizes(SurfaceTexture.class), width, height, largest);
+            previewSize = getPreviewSize(map.getOutputSizes(SurfaceTexture.class), surfaceSize, largest);
             activity.getTextureView().setAspectRatio(previewSize.getHeight(), previewSize.getWidth());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    private static Size getPreviewSize(Size[] choices, int width, int height, Size aspectRatio) {
+    private static Size getPreviewSize(final Size[] choices, final Size surfaceSize,
+                                       final Size aspectRatio) {
 
         List<Size> bigEnough = new ArrayList<>();
-        int w = aspectRatio.getWidth() / 10;
-        int h = aspectRatio.getHeight() / 10;
         for (Size option : choices) {
-            if (option.getHeight() == option.getWidth() * h / w
-                    && option.getWidth() <= width && option.getHeight() <= height) {
+            if (option.getHeight() == option.getWidth() * aspectRatio.getHeight() / aspectRatio.getWidth()
+                    && option.getWidth() <= surfaceSize.getWidth() && option.getHeight() <= surfaceSize.getHeight()) {
                 bigEnough.add(option);
             }
         }
@@ -167,7 +164,6 @@ public class CameraProcessor {
         if (bigEnough.size() > 0) {
             return Collections.min(bigEnough, new CompareSizesByArea());
         } else {
-            System.out.println("Size Error !!!");
             return choices[0];
         }
     }
@@ -180,7 +176,7 @@ public class CameraProcessor {
             CameraManager manager = (CameraManager) activity.getSystemService(Context.CAMERA_SERVICE);
             if (manager != null) {
                 try {
-                    setUpCameraOutputs(manager, surfaceSize.getWidth(), surfaceSize.getHeight());
+                    setUpCameraOutputs(manager, surfaceSize);
                     manager.openCamera(CAMERA_ID, stateCallback, null);
                 } catch (CameraAccessException e) {
                     Toast.makeText(activity, e.getMessage(), Toast.LENGTH_LONG).show();
@@ -218,7 +214,7 @@ public class CameraProcessor {
      *
      * @param cameraDevice Camera device
      */
-    private void setCameraDevice(CameraDevice cameraDevice) {
+    private void setCameraDevice(final CameraDevice cameraDevice) {
         this.cameraDevice = cameraDevice;
     }
 
@@ -246,7 +242,7 @@ public class CameraProcessor {
      * @param width  Surface width
      * @param height Surface height
      */
-    public void setSurfaceSize(int width, int height) {
+    public void setSurfaceSize(final int width, final int height) {
         this.surfaceSize = new Size(width, height);
     }
 
@@ -255,7 +251,7 @@ public class CameraProcessor {
      */
     public static class CompareSizesByArea implements Comparator<Size> {
         @Override
-        public int compare(Size lhs, Size rhs) {
+        public int compare(final Size lhs, final Size rhs) {
             return Long.signum((long) lhs.getWidth() * lhs.getHeight() - (long) rhs.getWidth() * rhs.getHeight());
         }
     }
