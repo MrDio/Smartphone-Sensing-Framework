@@ -64,7 +64,7 @@
                 android:progressTint="@color/colorSemiRipe" />
 
         <TextView
-                android:id="@+id/percentageHalfRipe"
+                android:id="@+id/percentageSemiRipe"
                 android:layout_width="91dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="fill_horizontal"

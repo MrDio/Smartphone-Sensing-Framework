@@ -16,6 +16,8 @@ import edu.croptomato.helper.ImageConverter;
  */
 public class ClassifierTask extends AsyncTask<Image, Void, List<Recognition>> {
 
+    private static boolean running = false;
+
     @SuppressLint("StaticFieldLeak")
     private MainActivity activity;
 
@@ -25,6 +27,7 @@ public class ClassifierTask extends AsyncTask<Image, Void, List<Recognition>> {
 
     @Override
     protected void onPreExecute() {
+        running = true;
         super.onPreExecute();
     }
 
@@ -59,7 +62,12 @@ public class ClassifierTask extends AsyncTask<Image, Void, List<Recognition>> {
         }
 
         // Update the GUI main activity.
-        activity.getNextUpdate().set(System.nanoTime());
         activity.updateGuiElements(percentageUnripe, percentageSemiRipe, percentageRipe);
+        running = false;
     }
+
+    public static boolean isRunning() {
+        return running;
+    }
+
 }

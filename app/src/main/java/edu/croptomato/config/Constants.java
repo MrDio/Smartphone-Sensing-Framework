@@ -1,4 +1,4 @@
-package edu.croptomato.imagedetection;
+package edu.croptomato.config;
 
 /**
  * Constant values used in the application.
