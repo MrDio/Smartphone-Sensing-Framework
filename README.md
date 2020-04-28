@@ -23,20 +23,13 @@ Brunel Univ. | Embedded Systems IoT Applications Prototyping 2017<br>
 
 ## SSF 2.2 Experimental TensorFlow | Applied Artificial Intelligence 2019 Lecture 
 University of Applied Sciences Esslingen | Applied AI 2019<br>
-
-<img src="https://user-images.githubusercontent.com/8537307/55835809-179f3600-5b1d-11e9-80a1-57241d57fca5.jpg" width="216" height="384"><img> 
-<img src="https://user-images.githubusercontent.com/8537307/55835812-1837cc80-5b1d-11e9-868b-edef313ecdfb.jpg" width="216" height="384"><img>
-
+Build upon SSF 2.1
 
 ## SSF 2.1 used with OpenCV to track lanes for autonomous driving RC Car by D. Lagamtzis & B. Grau:
 University of Applied Sciences Esslingen | AI Applied 2019<br>
-[Android AI Car ](https://github.com/umadbro96/androidAICar)<br>
-
-<img src="https://github.com/DimiHMC/AndroidMachineVisionCar/blob/master/assets/video/track+smartphone.mp4.gif" width="400" height="200"><img>  <img src="https://github.com/DimiHMC/AndroidMachineVisionCar/blob/master/assets/video/video_sample1.mp4.gif" width="400" height="200"><img>
-<img><img src="https://github.com/DimiHMC/AndroidMachineVisionCar/blob/master/assets/video/video_sample2.gif" width="400" height="200"><img>  <img src="https://github.com/DimiHMC/AndroidMachineVisionCar/blob/master/assets/video/video_sample3.gif" width="400" height="200">
 
 Special Thanks to the contributers [Hagen Hellinger](https://github.com/bollefreshavocado)
-and to [Benedikt Grau](https://github.com/supercrazyking)
+and to [Benedikt Grau](https://github.com/CrazyBene)
 
 --
 
@@ -67,4 +60,4 @@ How to execute examples on smartphone and ADB.
 [Intro](https://github.com/MrDio/Smartphone-Sensing-Framework/wiki/Execute-Example)
 
 
-This is the Master Branch for the Smartphone Sensing Framework 2.0
+This is the Master Branch for the Smartphone Sensing Framework 2.2

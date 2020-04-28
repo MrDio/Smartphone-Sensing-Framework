@@ -18,14 +18,13 @@
 
 package edu.example.ssf.mma.timer;
 
-import java.util.Timer;
-
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
-import edu.example.ssf.mma.userInterface.MainActivity;
+import java.util.Timer;
+
 import edu.example.ssf.mma.config.ConfigApp;
 import edu.example.ssf.mma.data.CsvFileWriter;
 import edu.example.ssf.mma.data.CurrentTickData;
@@ -36,6 +35,7 @@ import edu.example.ssf.mma.hardwareAdapter.IGyroscope;
 import edu.example.ssf.mma.hardwareAdapter.IMagneto;
 import edu.example.ssf.mma.hardwareAdapter.IMicrophone;
 import edu.example.ssf.mma.hardwareAdapter.IProximity;
+import edu.example.ssf.mma.userInterface.MainActivity;
 
 
 /**
@@ -135,7 +135,7 @@ public class StateMachineHandler extends Handler{
 
 
 		if(MainActivity.mmaCallBackBool) {
-			//Log.d("getAccX", "StateMachineHandler.MainActivity.mmaCallBackBool");
+			//Log.d("getAccX", "StateMachineHandler.ImageDetection.mmaCallBackBool");
 				if(ConfigApp.isSimulation){
 					//Fetch data from acceleration sensor
 
@@ -168,7 +168,7 @@ public class StateMachineHandler extends Handler{
 
 				}
 			else {
-					//Log.d("getAccX", "StateMachineHandler.MainActivity.mmaCallBackBool");
+					//Log.d("getAccX", "StateMachineHandler.ImageDetection.mmaCallBackBool");
 					// Try with direct usage of sensor data :)
 					CsvFileWriter.writeLine(CurrentTickData.curTick.toString(),
 							CurrentTickData.curTimestamp,
@@ -192,7 +192,7 @@ public class StateMachineHandler extends Handler{
 					//Log.d("Time", CurrentTickData.curTimestamp);
 				}
 		}
-		//Log.d("getAccX", "NOT StateMachineHandler.MainActivity.mmaCallBackBool");
+		//Log.d("getAccX", "NOT StateMachineHandler.ImageDetection.mmaCallBackBool");
     	//Call daddy and say everything is ok, by forwarding received message
     	//super.handleMessage(msg);
     }

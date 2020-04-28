@@ -20,7 +20,6 @@ package edu.example.ssf.mma.hardwareAdapter;
 // TODO: Auto-generated Javadoc
 
 import android.content.Context;
-import android.widget.TextView;
 
 /**
  * Interface class to initialise the GPS-sensor , get the altitude, longitude, latitude, bearing and speed.

@@ -23,7 +23,6 @@ package edu.example.ssf.mma.hardwareAdapter.accelerometer;
 
 import android.content.Context;
 import android.util.Log;
-import android.widget.TextView;
 
 import edu.example.ssf.mma.data.CsvFileReader;
 import edu.example.ssf.mma.hardwareAdapter.IAccelerometer;

@@ -26,8 +26,8 @@ import android.util.Log;
 import android.widget.TextView;
 
 import edu.example.ssf.mma.data.CurrentTickData;
-import edu.example.ssf.mma.data.MathCalculations;
 import edu.example.ssf.mma.hardwareAdapter.IProximity;
+
 /**
  * Initialising the Proximity-Sensor of the Smartphone and get the data output form
  * the sensor.

@@ -22,9 +22,6 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.util.Log;
-import android.widget.TextView;
-
 
 import edu.example.ssf.mma.data.CurrentTickData;
 import edu.example.ssf.mma.data.MathCalculations;

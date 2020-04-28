@@ -21,21 +21,19 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.media.MediaRecorder;
 import android.os.Environment;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
-import android.widget.TextView;
-
-import edu.example.ssf.mma.data.CurrentTickData;
-import edu.example.ssf.mma.data.MathCalculations;
-import edu.example.ssf.mma.hardwareAdapter.IMicrophone;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import android.media.MediaRecorder;
+import edu.example.ssf.mma.data.CurrentTickData;
+import edu.example.ssf.mma.data.MathCalculations;
+import edu.example.ssf.mma.hardwareAdapter.IMicrophone;
 
 /**
  * Initialising the Microphone of the Smartphone and get the data output form

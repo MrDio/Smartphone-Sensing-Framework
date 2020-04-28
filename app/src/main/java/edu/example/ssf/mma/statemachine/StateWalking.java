@@ -29,7 +29,7 @@ package edu.example.ssf.mma.statemachine;
  * @version 1.0
  */
 
-public class StateWalking extends AbstractState{
+public class StateWalking extends AbstractState {
 	
 	/**
 	 * Instantiates a new state walking.

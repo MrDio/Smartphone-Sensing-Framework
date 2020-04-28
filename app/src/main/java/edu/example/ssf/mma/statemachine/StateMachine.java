@@ -26,6 +26,7 @@ import edu.example.ssf.mma.data.MathCalculations;
 
 
 // TODO: Auto-generated Javadoc
+
 /**
  * Interprets the accelerometer-data and determines in which state the user is at the moment.
  *

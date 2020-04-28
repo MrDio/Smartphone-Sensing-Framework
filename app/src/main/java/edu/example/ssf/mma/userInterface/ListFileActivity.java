@@ -27,13 +27,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import edu.example.ssf.mma.R;
-import edu.example.ssf.mma.config.ConfigApp;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import edu.example.ssf.mma.R;
+import edu.example.ssf.mma.config.ConfigApp;
 
 /**
  * List File Activity that shall give internal access to the saved files,
