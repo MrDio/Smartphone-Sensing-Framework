@@ -1,16 +1,12 @@
 <resources>
-    <string name="app_name">RapidDisruption</string>
-    <string name="open">Open</string>
-    <string name="close">Close</string>
-    <string name="button">Start</string>
-    <string name="title_activity_accelerometer">accelerometer</string>
-    <string name="acce">Accelerometer</string>
-    <string name="gyro">Gyroscope</string>
-    <string name="magn">Magnetic Field Sensor</string>
-    <string name="mic">Microphone</string>
-    <string name="gps">GPS</string>
-    <string name="proximity">Proximity</string>
+    <string name="app_name">ViChro</string>
     <string name="machinevision">Machine Vision</string>
-    <string name="decisiontree">Show Decision</string>
-
+    <string name="samecolor">Find same colour</string>
+    <string name="complementarycolor">Find complementary colour</string>
+    <string name="colorlist">Colour list</string>
+    <string name="savecolor">Save colour</string>
+    <string name="date"></string>
+    <string name="hackster">Hackster</string>
+    <string name="infotext">ViChro is an Andoid App that helps people with limited colour perception in everyday life. Colours can be scanned and saved. Afterwards the user can load a colour and compare it with the currently scanned color, e.g. to find the same color or the complementary colour..</string>
+    <string name="brunel">This represents the implementation of a workshop of Brunel University</string>
 </resources>

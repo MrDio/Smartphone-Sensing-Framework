@@ -1,12 +1,21 @@
 package edu.example.ssf.mma.machinevision;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Environment;
+import android.support.constraint.solver.widgets.Rectangle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.SeekBar;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import org.opencv.android.BaseLoaderCallback;
@@ -18,20 +27,32 @@ import org.opencv.core.Core;
 import org.opencv.core.CvType;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
+import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
 import org.opencv.imgproc.Imgproc;
 
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 import edu.example.ssf.mma.R;
 import edu.example.ssf.mma.data.ImageProcessing;
-import static edu.example.ssf.mma.userInterface.MainActivity.navigationBool;
+import edu.example.ssf.mma.userInterface.ListColorActivity;
+import edu.example.ssf.mma.userInterface.ListFileActivity;
+
+
+import static org.opencv.core.Core.FILLED;
+import static org.opencv.core.CvType.CV_8UC4;
 
 /**
  * Machine Vision Prototype Class that works with opencv
  *
- * @author D. Lagamtzis, B. Grau
+ * @author D. Lagamtzis
  * @version 1.0
  */
 
@@ -40,8 +61,27 @@ public class MachineVision extends AppCompatActivity implements CameraBridgeView
 
     //java camera view
     JavaCameraView javaCameraView;
-    private Button machineVisionButton;
-    private boolean something;
+    private Button saveColorButton;
+    private Button colorListButton;
+    private EditText editText2;
+
+
+    private boolean saveColorFlag;
+
+
+    boolean colorSelected = false;
+    double rS = 0;
+    double gS = 0;
+    double bS = 0;
+
+    Boolean sameColorRadioButtonFlag = true;
+    Boolean complementaryColorRadioButtonFlag = false;
+
+    int LAUNCH_COLOR_LIST_ACTIVITY = 1;
+
+    private String path;
+
+
     private SeekBar seekBar;
     Mat mRgba, mRgbaF, mRgbaT;
     //callback loader
@@ -66,36 +106,81 @@ public class MachineVision extends AppCompatActivity implements CameraBridgeView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_machine_vision);
-        Toast.makeText(getApplicationContext(), "Regulate the sensitivity of the line-detection using the bar above", Toast.LENGTH_LONG).show();
-        Toast.makeText(getApplicationContext(), "Simply regulate by dragging it to a direction", Toast.LENGTH_LONG).show();
+
         //connect the camera
         javaCameraView = findViewById(R.id.jvc);
         //set visibility
         javaCameraView.setVisibility(SurfaceView.VISIBLE);
         //set callback function
         javaCameraView.setCvCameraViewListener(this);
-        seekBar = findViewById(R.id.seekbar);
 
-        //Buttons & Toggle Buttons
-        machineVisionButton = findViewById(R.id.machineButton);
-        machineVisionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(something)
-                    something=false;
-                else{
-                    something=true;
+
+        RadioGroup rg = (RadioGroup) findViewById(R.id.radioGroup);
+
+        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.complementaryColorRadioButton:
+                        complementaryColorRadioButtonFlag = true;
+                        sameColorRadioButtonFlag = false;
+                        break;
+                    case R.id.sameColorRadioButton:
+                        sameColorRadioButtonFlag = true;
+                        complementaryColorRadioButtonFlag = false;
+                        break;
                 }
             }
         });
+
+        editText2 = findViewById(R.id.editText2);
+
+        //Buttons & Toggle Buttons
+        saveColorButton = findViewById(R.id.saveColorButton);
+        saveColorButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (saveColorFlag)
+                    saveColorFlag = false;
+                else {
+                    saveColorFlag = true;
+                }
+            }
+        });
+
+        //Buttons & Toggle Buttons
+        colorListButton = findViewById(R.id.colorListButton);
+        colorListButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent activity2Intent = new Intent(MachineVision.this, ListColorActivity.class);
+                activity2Intent.putExtra("key1", "var1");
+                startActivityForResult(activity2Intent, LAUNCH_COLOR_LIST_ACTIVITY);
+            }
+        });
+
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == LAUNCH_COLOR_LIST_ACTIVITY) {
+            if (resultCode == ListColorActivity.RESULT_OK) {
+                String[] result = data.getStringArrayExtra("result");
+                rS = Double.valueOf(result[2]);
+                gS = Double.valueOf(result[3]);
+                bS = Double.valueOf(result[4]);
+                colorSelected = true;
+                Toast.makeText(this, result[0], Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
     @Override
     public void onBackPressed() {
-        navigationBool = false;
-
-
-            super.onBackPressed();
+        super.onBackPressed();
     }
+
     @Override
     protected void onPause() {
         super.onPause();
@@ -130,9 +215,9 @@ public class MachineVision extends AppCompatActivity implements CameraBridgeView
     @Override
     public void onCameraViewStarted(int width, int height) {
         //4 channel
-        mRgba = new Mat(height, width, CvType.CV_8UC4);
-        mRgbaF = new Mat(height, width, CvType.CV_8UC4);
-        mRgbaT = new Mat(width, width, CvType.CV_8UC4);
+        mRgba = new Mat(height, width, CV_8UC4);
+        mRgbaF = new Mat(height, width, CV_8UC4);
+        mRgbaT = new Mat(width, width, CV_8UC4);
 
     }
 
@@ -144,6 +229,9 @@ public class MachineVision extends AppCompatActivity implements CameraBridgeView
 
     @Override
     public Mat onCameraFrame(CameraBridgeViewBase.CvCameraViewFrame inputFrame) {
+        String path = "config.txt";
+
+
         //get each frame from camera
         mRgba = inputFrame.rgba();
 
@@ -152,49 +240,144 @@ public class MachineVision extends AppCompatActivity implements CameraBridgeView
         Imgproc.resize(mRgbaT, mRgbaF, mRgbaF.size(), 0, 0, 0);
         Core.flip(mRgbaF, mRgba, 1);
 
-        Mat lines = ImageProcessing.ProcessImage(mRgba);
-        List<Double> angles = new ArrayList<>();
 
-        for (int x = 0; x < lines.rows(); x++) {
-            double[] vec = lines.get(x, 0);
-            double x1 = vec[0], y1 = vec[1], x2 = vec[2], y2 = vec[3];
-            Point start = new Point(x1, y1);
-            Point end = new Point(x2, y2);
-            double dx = x1 - x2;
-            double dy = y1 - y2;
-            double dist = Math.sqrt(dx * dx + dy * dy);
-
-            if(dist>seekBar.getProgress())  // show those lines that have length greater than 300
-            Imgproc.line(mRgba, start, end, new Scalar(0, 255, 0, 255), 10);
+        int height_all = mRgba.height() / 2 - 75;
+        int width_all = mRgba.width() / 2 - 75;
 
 
-            double angle = Math.atan2(dx, dy);
-            angle = Math.toDegrees(angle);
-            if (angle < 0)
-                angle += 180;
-            if (angle > 180)
-                angle -= 180;
-            angle -= 90;
-            angles.add(angle);
+        int height = mRgba.height() / 2 - 25;
+        int width = mRgba.width() / 2 - 25;
+
+        Rect rectCrop = new Rect(height, width, 50, 50);
+        Mat croppedImage = new Mat(mRgba, rectCrop);
+
+        Scalar sum = Core.sumElems(croppedImage);
+
+        double r = sum.val[0] / 2500;
+        double g = sum.val[1] / 2500;
+        double b = sum.val[2] / 2500;
+
+        double rT = 0.0;
+        double gT = 0.0;
+        double bT = 0.0;
+
+
+        if (sameColorRadioButtonFlag && !complementaryColorRadioButtonFlag) {
+
+            rT = rS;
+            gT = gS;
+            bT = bS;
+        } else if (complementaryColorRadioButtonFlag && !sameColorRadioButtonFlag) {
+
+            rT = 255 - rS;
+            gT = 255 - gS;
+            bT = 255 - bS;
         }
 
-        double sum = 0;
-        for (Double angle : angles) {
-            Log.d("Angle", angle.toString());
-            sum += angle;
+
+        double rP = 100 - (Math.abs(rT - r) * 0.39);
+        double gP = 100 - (Math.abs(gT - g) * 0.39);
+        double bP = 100 - (Math.abs(bT - b) * 0.39);
+
+        String rgb = "";
+
+        rgb = Integer.toString((int) Math.round(0.333 * rP + 0.333 * gP + 0.333 * bP));
+
+        String all = rgb + "%";
+
+        if (!colorSelected) {
+            Imgproc.rectangle(
+                    mRgba,                    //Matrix obj of the image
+                    new Point(height_all, width_all),        //p1
+                    new Point(height_all + 150, width_all + 150),       //p2
+                    new Scalar(0, 0, 255),     //Scalar object for color
+                    5                          //Thickness of the line
+            );
+            Imgproc.rectangle(
+                    mRgba,                    //Matrix obj of the image
+                    new Point(height, width),        //p1
+                    new Point(height + 50, width + 50),       //p2
+                    new Scalar(0, 0, 255),     //Scalar object for color
+                    5                          //Thickness of the line
+            );
+        } else if (colorSelected) {
+            if(complementaryColorRadioButtonFlag){
+                Imgproc.rectangle(
+                        mRgba,                    //Matrix obj of the image
+                        new Point(height_all, width_all),        //p1
+                        new Point(height_all + 150, width_all + 150),       //p2
+                        new Scalar(rT, gT, bT),     //Scalar object for color
+                        FILLED                          //Thickness of the line
+                );
+            }else {
+                Imgproc.rectangle(
+                        mRgba,                    //Matrix obj of the image
+                        new Point(height_all, width_all),        //p1
+                        new Point(height_all + 150, width_all + 150),       //p2
+                        new Scalar(rS, gS, bS),     //Scalar object for color
+                        FILLED                          //Thickness of the line
+                );
+            }
+
+            Imgproc.rectangle(
+                    mRgba,                    //Matrix obj of the image
+                    new Point(height, width),        //p1
+                    new Point(height + 50, width + 50),       //p2
+                    new Scalar(r, g, b),     //Scalar object for color
+                    FILLED                          //Thickness of the line
+            );
         }
-        double avg = sum / angles.size();
 
-        Log.d("Angle Average", avg + "");
+        if (saveColorFlag) {
+            // save current color
+            LocalDate localDate = LocalDate.now();
 
-        if(something) {
-            Imgproc.putText(mRgba,
-                    avg < 0 ? "L" : "R",
+            String strValue = editText2.getText().toString();
+            if (strValue.indexOf(',') != -1) {
+                strValue = strValue.replace(',', ' ');
+            }
+            if (strValue.equals("")) {
+                strValue = localDate.toString();
+            }
+
+            File f = new File(path);
+
+            File root = new File(Environment.getExternalStorageDirectory(), "ColorData");
+            if (!root.exists()) {
+                root.mkdirs();
+            }
+            File savedFile = new File(root, path);
+            if (!(savedFile.exists())) {
+                FileWriter writer;
+                try {
+                    writer = new FileWriter(savedFile);
+                    String myString = strValue + "," + localDate + "," + Double.toString(r) + "," + Double.toString(g) + "," + Double.toString(b) + "\n";
+                    writer.write(myString);
+                    writer.close();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            } else {
+                FileWriter writer;
+                try {
+                    writer = new FileWriter(savedFile, true);
+                    String myString = strValue + "," + localDate + "," + Double.toString(r) + "," + Double.toString(g) + "," + Double.toString(b) + "\n";
+                    writer.write(myString);
+                    writer.close();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            }
+
+            saveColorFlag = false;
+        }
+        if (sameColorRadioButtonFlag || complementaryColorRadioButtonFlag) {
+            Imgproc.putText(mRgba, all,
                     new Point(50, mRgba.height() - 50),
                     Core.FONT_HERSHEY_SIMPLEX,
-                    2,
-                    new Scalar(0, 255, 0),
-                    10);
+                    1,
+                    new Scalar(0, 0, 255),
+                    5);
         }
         return mRgba;
     }
